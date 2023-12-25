@@ -41,6 +41,15 @@ const Player = (props:
   );
 }
 
+const Traditional = (props: 
+    { imageUrl: string; name: string; status: string; stats: Stats;}
+  ) => {
+  return (
+    <div className="trad-container">
+      <h2 className="text-header"> Traditional Stats</h2>
+    </div>
+  );
+}
 
 export default function Search() {
 
@@ -55,6 +64,17 @@ export default function Search() {
         </Menu>
 
         <div className='card_container'>
+          <Traditional
+              imageUrl="https://picsum.photos/250/250"
+              name="SGA"
+              status="active"
+              stats={{
+                fppg: 42.3,
+                legmScore: 54.3,
+                posRank: 16,
+                ovrRank: 54  
+              }}
+            />
           <Player
             imageUrl="https://picsum.photos/250/250"
             name="SGA"
@@ -66,6 +86,17 @@ export default function Search() {
               ovrRank: 54  
             }}
           />
+          <Traditional
+              imageUrl="https://picsum.photos/250/250"
+              name="SGA"
+              status="active"
+              stats={{
+                fppg: 42.3,
+                legmScore: 54.3,
+                posRank: 16,
+                ovrRank: 54  
+              }}
+            />
         </div>
       </div>
     );

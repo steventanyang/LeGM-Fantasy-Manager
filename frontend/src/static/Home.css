@@ -119,44 +119,21 @@ Note: Beware of modifying this element as it can break the animations - you shou
   margin-top: 15px;
 }
 
-.card_container {
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  margin-right: 2%;
-  margin-left: 2%;
-  width: auto;
-}
-
-/* traditional stats */
-
-.trad-container {
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: auto;
-  padding: 20px;
-  width: 500px;
-}
-
-.text-header {
-  color: #144458;
-  font-family: "Poppins";
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  margin-bottom: 10px;
-  text-align: center;
-}
 
 /* middle player card */
+
+.card_container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
 
 .player-card {
   background: #fff;
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: auto;
+  /* margin-top: 100px; */
   padding: 20px;
   width: 300px;
 }
@@ -244,3 +221,4 @@ Note: Beware of modifying this element as it can break the animations - you shou
   margin-right: 40px;
   padding: 5px 25px;
 }
+  
