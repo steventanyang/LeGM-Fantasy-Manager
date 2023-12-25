@@ -1,8 +1,9 @@
 import '../App.css';
 import { slide as Menu } from 'react-burger-menu'
+import "@fontsource/poppins";
 
 
-export default function Search() {
+export default function Home() {
 
   return (
       <Menu>

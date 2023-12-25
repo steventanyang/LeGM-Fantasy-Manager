@@ -2,7 +2,7 @@ import '../App.css';
 import { slide as Menu } from 'react-burger-menu'
 
 
-export default function Search() {
+export default function Team() {
 
   return (
       <Menu>
