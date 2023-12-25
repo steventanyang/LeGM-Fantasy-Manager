@@ -53,17 +53,20 @@ export default function Search() {
           <a id="waiver" className="menu-item" href="/waiver">Waiver</a>
           <a id="injuryreport" className="menu-item" href="/injuryreport">News</a>
         </Menu>
-        <Player
-          imageUrl="https://picsum.photos/250/250"
-          name="SGA"
-          status="active"
-          stats={{
-            fppg: 42.3,
-            legmScore: 54.3,
-            posRank: 16,
-            ovrRank: 54  
-          }}
-        />
+
+        <div className='card_container'>
+          <Player
+            imageUrl="https://picsum.photos/250/250"
+            name="SGA"
+            status="active"
+            stats={{
+              fppg: 42.3,
+              legmScore: 54.3,
+              posRank: 16,
+              ovrRank: 54  
+            }}
+          />
+        </div>
       </div>
     );
 }

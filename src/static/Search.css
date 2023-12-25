@@ -122,12 +122,18 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* middle player card */
 
+.card_container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
 .player-card {
   background: #fff;
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: auto;
-  margin-top: 100px;
+  /* margin-top: 100px; */
   padding: 20px;
   width: 300px;
 }
