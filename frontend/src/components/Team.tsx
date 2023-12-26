@@ -7,7 +7,7 @@ const PlayerStatus = (props:
   // Define a function to get the status class based on the status text
   const getStatusClass = () => {
     switch (props.status) {
-      case 'In':
+      case 'ACT':
         return 'status-in';
       case 'OUT':
         return 'status-out';
@@ -44,7 +44,7 @@ const scoreColor = (score: number) => {
 export default function Team() {
   // Sample data array
   const players = [
-    { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
+    { name: 'Lamelo Ball', score: 50.24, status: 'ACT' },
     { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
     { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
     { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },

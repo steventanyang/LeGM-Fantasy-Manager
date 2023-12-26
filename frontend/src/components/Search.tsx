@@ -41,72 +41,134 @@ const Player = (props:
   );
 }
 
-const Traditional = (props: 
-    { imageUrl: string; name: string; status: string; stats: Stats;}
-  ) => {
+const Traditional = (props: { trad:Trad; }) => {
+
+  const colorPts = (value: number) => {
+    if (value >= 30) {
+      return '#408416';
+    } else if (value >= 25) {
+      return '#86B16C';
+    } else if (value >= 20) {
+      return '#86B16C';
+    } else if (value >= 15) {
+      return '#DAC828';
+    } else if (value >= 10) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+  
+  const widthPts = (value: number) => {
+    if (value >= 30) {
+      return '300px';
+    } else if (value >= 25) {
+      return '250px';
+    } else if (value >= 20) {
+      return '200px';
+    } else if (value >= 15) {
+      return '150px';
+    } else if (value >= 10) {
+      return '100px';
+    } else {
+      return '50px';
+    }
+  };
+
   return (
     <>
       <div className="trad-container">
-        <h2 className="text-header">Traditional Stats</h2>
+        <h2 className="text-header">Per Game Stats</h2>
           <div className='search-stat-container'>
             <span className="stat-label">PTS</span>
-            <span className="search-variable-stat">30.7</span>
+            <span className="search-variable-stat" style={{ backgroundColor: colorPts(props.trad.pts), width: widthPts(props.trad.pts)}}>{props.trad.pts}</span>
           </div>
           <div className='search-stat-container'>
             <span className="stat-label">AST</span>
-            <span className="search-variable-stat">30.7</span>
+            <span className="search-variable-stat">{props.trad.ast}</span>
           </div>
           <div className='search-stat-container'>
             <span className="stat-label">REB</span>
-            <span className="search-variable-stat">30.7</span>
+            <span className="search-variable-stat">{props.trad.reb}</span>
           </div>
           <div className='search-stat-container'>
             <span className="stat-label">TOV</span>
-            <span className="search-variable-stat">30.7</span>
+            <span className="search-variable-stat">{props.trad.tov}</span>
           </div>
           <div className='search-stat-container'>
             <span className="stat-label">STL</span>
-            <span className="search-variable-stat">30.7</span>
+            <span className="search-variable-stat">{props.trad.stl}</span>
           </div>
           <div className='search-stat-container'>
             <span className="stat-label">BLK</span>
-            <span className="search-variable-stat">30.7</span>
+            <span className="search-variable-stat">{props.trad.blk}</span>
           </div>
       </div>
     </>
   );
 }
 
-const Advanced = (props: 
-  { imageUrl: string; name: string; status: string; stats: Stats;}
-) => {
+const Advanced = (props: { adv:Adv }) => {
+
+  const colorMin = (value: number) => {
+    if (value >= 30) {
+      return '#408416';
+    } else if (value >= 25) {
+      return '#86B16C';
+    } else if (value >= 20) {
+      return '#86B16C';
+    } else if (value >= 15) {
+      return '#DAC828';
+    } else if (value >= 10) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+  
+  const widthMin = (value: number) => {
+    if (value >= 30) {
+      return '300px';
+    } else if (value >= 25) {
+      return '250px';
+    } else if (value >= 20) {
+      return '200px';
+    } else if (value >= 15) {
+      return '150px';
+    } else if (value >= 10) {
+      return '100px';
+    } else {
+      return '50px';
+    }
+  };
+
 return (
   <>
     <div className="trad-container">
       <h2 className="text-header">Advanced Stats</h2>
         <div className='search-stat-container'>
           <span className="stat-label">MIN</span>
-          <span className="search-variable-stat">30.7</span>
+          <span className="search-variable-stat" style={{ backgroundColor: colorMin(props.adv.min), width: widthMin(props.adv.min)}}>{props.adv.min}</span>
         </div>
         <div className='search-stat-container'>
           <span className="stat-label">RTG</span>
-          <span className="search-variable-stat">30.7</span>
+          <span className="search-variable-stat">{props.adv.rtg}</span>
         </div>
         <div className='search-stat-container'>
           <span className="stat-label">EFG</span>
-          <span className="search-variable-stat">30.7</span>
+          <span className="search-variable-stat">{props.adv.efg}</span>
         </div>
         <div className='search-stat-container'>
           <span className="stat-label">TS%</span>
-          <span className="search-variable-stat">30.7</span>
+          <span className="search-variable-stat">{props.adv.ts}</span>
         </div>
         <div className='search-stat-container'>
           <span className="stat-label">USG</span>
-          <span className="search-variable-stat">30.7</span>
+          <span className="search-variable-stat">{props.adv.usg}</span>
         </div>
         <div className='search-stat-container'>
           <span className="stat-label">PIE</span>
-          <span className="search-variable-stat">30.7</span>
+          <span className="search-variable-stat">{props.adv.pie}</span>
         </div>
     </div>
   </>
@@ -128,14 +190,13 @@ export default function Search() {
 
         <div className='card_container'>
           <Traditional
-              imageUrl="https://picsum.photos/250/250"
-              name="SGA"
-              status="active"
-              stats={{
-                fppg: 42.3,
-                legmScore: 54.3,
-                posRank: 16,
-                ovrRank: 54  
+              trad={{
+                pts: 34.6,
+                ast: 6.6,
+                reb: 6.8,
+                tov: 2.2,
+                stl: 3.0,
+                blk: 0.4
               }}
             />
           <Player
@@ -143,21 +204,20 @@ export default function Search() {
             name="SGA"
             status="active"
             stats={{
-              fppg: 42.3,
+              fppg: 58.7,
               legmScore: 54.3,
-              posRank: 16,
-              ovrRank: 54  
+              posRank: 2,
+              ovrRank: 6 
             }}
           />
           <Advanced
-              imageUrl="https://picsum.photos/250/250"
-              name="SGA"
-              status="active"
-              stats={{
-                fppg: 42.3,
-                legmScore: 54.3,
-                posRank: 16,
-                ovrRank: 54  
+              adv={{
+                min: 34.7,
+                rtg: 12.7,
+                efg: 56.0,
+                ts: 63.1,
+                usg: 31.5,
+                pie: 20.1
               }}
             />
         </div>
