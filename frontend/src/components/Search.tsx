@@ -234,6 +234,130 @@ const Advanced = (props: { adv:Adv }) => {
     }
   };
 
+
+  const colorRtg = (value: number) => {
+    if (value >= 10) {
+      return '#408416';
+    } else if (value >= 6) {
+      return '#86B16C';
+    } else if (value >= 2) {
+      return '#86B16C';
+    } else if (value >= -2) {
+      return '#DAC828';
+    } else if (value >= -6) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+  const widthRtg = (value: number) => {
+    if (value >= 10) {
+      return '300px';
+    } else if (value >= 6) {
+      return '250px';
+    } else if (value >= 2) {
+      return '200px';
+    } else if (value >= -2) {
+      return '150px';
+    } else if (value >= -6) {
+      return '100px';
+    } else {
+      return '50px';
+    }
+  };
+
+  const colorEfgTs = (value: number) => {
+    if (value >= 65) {
+      return '#408416';
+    } else if (value >= 60) {
+      return '#86B16C';
+    } else if (value >= 55) {
+      return '#86B16C';
+    } else if (value >= 50) {
+      return '#DAC828';
+    } else if (value >= 45) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+  const widthEfgTs = (value: number) => {
+    if (value >= 65) {
+      return '300px';
+    } else if (value >= 60) {
+      return '250px';
+    } else if (value >= 55) {
+      return '200px';
+    } else if (value >= 50) {
+      return '150px';
+    } else if (value >= 45) {
+      return '100px';
+    } else {
+      return '50px';
+    }
+  };
+
+  const colorUsg = (value: number) => {
+    if (value >= 30) {
+      return '#408416';
+    } else if (value >= 25) {
+      return '#86B16C';
+    } else if (value >= 20) {
+      return '#86B16C';
+    } else if (value >= 15) {
+      return '#DAC828';
+    } else if (value >= 10) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+  const widthUsg = (value: number) => {
+    if (value >= 30) {
+      return '300px';
+    } else if (value >= 25) {
+      return '250px';
+    } else if (value >= 20) {
+      return '200px';
+    } else if (value >= 15) {
+      return '150px';
+    } else if (value >= 10) {
+      return '100px';
+    } else {
+      return '50px';
+    }
+  };
+
+  const colorPie = (value: number) => {
+    if (value >= 20) {
+      return '#408416';
+    } else if (value >= 16) {
+      return '#86B16C';
+    } else if (value >= 12) {
+      return '#86B16C';
+    } else if (value >= 8) {
+      return '#DAC828';
+    } else if (value >= 4) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+  const widthPie = (value: number) => {
+    if (value >= 20) {
+      return '300px';
+    } else if (value >= 16) {
+      return '250px';
+    } else if (value >= 12) {
+      return '200px';
+    } else if (value >= 8) {
+      return '150px';
+    } else if (value >= 4) {
+      return '100px';
+    } else {
+      return '50px';
+    }
+  };
 return (
   <>
     <div className="trad-container">
@@ -244,23 +368,23 @@ return (
         </div>
         <div className='search-stat-container'>
           <span className="stat-label">RTG</span>
-          <span className="search-variable-stat">{props.adv.rtg}</span>
+          <span className="search-variable-stat" style={{ backgroundColor: colorRtg(props.adv.rtg), width: widthRtg(props.adv.rtg)}}>{props.adv.rtg}</span>
         </div>
         <div className='search-stat-container'>
           <span className="stat-label">EFG</span>
-          <span className="search-variable-stat">{props.adv.efg}</span>
+          <span className="search-variable-stat" style={{ backgroundColor: colorEfgTs(props.adv.efg), width: widthEfgTs(props.adv.efg)}}>{props.adv.efg}</span>
         </div>
         <div className='search-stat-container'>
           <span className="stat-label">TS%</span>
-          <span className="search-variable-stat">{props.adv.ts}</span>
+          <span className="search-variable-stat" style={{ backgroundColor: colorEfgTs(props.adv.ts), width: widthEfgTs(props.adv.ts)}}>{props.adv.ts}</span>
         </div>
         <div className='search-stat-container'>
           <span className="stat-label">USG</span>
-          <span className="search-variable-stat">{props.adv.usg}</span>
+          <span className="search-variable-stat" style={{ backgroundColor: colorUsg(props.adv.usg), width: widthUsg(props.adv.usg)}}>{props.adv.usg}</span>
         </div>
         <div className='search-stat-container'>
           <span className="stat-label">PIE</span>
-          <span className="search-variable-stat">{props.adv.pie}</span>
+          <span className="search-variable-stat" style={{ backgroundColor: colorPie(props.adv.pie), width: widthPie(props.adv.pie)}}>{props.adv.pie}</span>
         </div>
     </div>
   </>
