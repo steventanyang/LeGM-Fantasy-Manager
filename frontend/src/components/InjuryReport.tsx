@@ -40,15 +40,33 @@ const Player = (props:
   );
 }
 
-const News = () => {
+const NewsBlock = () => {
   return (
     <>
       <div className="news-container">
-        
+        <News/>
+        <News/>
+        <News/>
+        <News/>
+        <News/>
+        <News/>
+        <News/>
+        <News/>
       </div>
     </>
   );
 }
+
+const News = () => {
+  return (
+    <>
+      <div className="top-news-block"></div>
+      <div className="news-block"></div>
+    </>
+  );
+}
+
+
 
 export default function InjuryReport() {
 
@@ -65,7 +83,7 @@ export default function InjuryReport() {
         <div className="title-text">Injury Report</div>
       </div>
       <div className='injury-main-container'>
-        <News/>
+        <NewsBlock/>
         <Player
           imageUrl="https://picsum.photos/250/250"
           name="SGA"

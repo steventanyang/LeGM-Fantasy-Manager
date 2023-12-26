@@ -130,26 +130,41 @@ Note: Beware of modifying this element as it can break the animations - you shou
   width: 100vw;
 }
 
+
+
 /* news section */
 
 .news-container {
-    background: #ddd;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: #fff;
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin-top: 25px;
     margin-right: 75px;
+    overflow-y: scroll;
     padding: 20px;
     width: 55%;
-    height: 73vh;
+    height: 70vh;
+}
+
+.top-news-block {
+    background: #144458;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    flex-shrink: 0;
+    margin-top: 15px;
+    height: 50px;
+    width: 900px;
 }
 
 .news-block {
-    background: navy;
-    
-    height: 300px;
-    width: 700px;
+    background: #5C7C8A;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    flex-shrink: 0;
+    height: 260px;
+    margin-bottom: 25px;
+    width: 900px;
 }
 
 
@@ -157,9 +172,10 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .injury-top-container {
     display: flex;
-    justify-content: flex-end;
-    margin-top: 25px;
+    justify-content: center;
+    margin-top: none;
     margin-right: 40px;
+    padding-top: 20px;
 }
 
 .title-text {
@@ -183,7 +199,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   padding: 20px;
   width: 300px;
 }
-  
+
 .player-image-container {
   display: flex;
   justify-content: center;
