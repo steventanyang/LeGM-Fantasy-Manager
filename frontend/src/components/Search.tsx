@@ -217,7 +217,6 @@ const Advanced = (props: { adv:Adv }) => {
       return '#D66464';
     }
   };
-  
   const widthMin = (value: number) => {
     if (value >= 30) {
       return '300px';
@@ -233,7 +232,6 @@ const Advanced = (props: { adv:Adv }) => {
       return '50px';
     }
   };
-
 
   const colorRtg = (value: number) => {
     if (value >= 10) {
@@ -358,37 +356,38 @@ const Advanced = (props: { adv:Adv }) => {
       return '50px';
     }
   };
-return (
-  <>
-    <div className="trad-container">
-      <h2 className="text-header">Advanced Stats</h2>
-        <div className='search-stat-container'>
-          <span className="stat-label">MIN</span>
-          <span className="search-variable-stat" style={{ backgroundColor: colorMin(props.adv.min), width: widthMin(props.adv.min)}}>{props.adv.min}</span>
-        </div>
-        <div className='search-stat-container'>
-          <span className="stat-label">RTG</span>
-          <span className="search-variable-stat" style={{ backgroundColor: colorRtg(props.adv.rtg), width: widthRtg(props.adv.rtg)}}>{props.adv.rtg}</span>
-        </div>
-        <div className='search-stat-container'>
-          <span className="stat-label">EFG</span>
-          <span className="search-variable-stat" style={{ backgroundColor: colorEfgTs(props.adv.efg), width: widthEfgTs(props.adv.efg)}}>{props.adv.efg}</span>
-        </div>
-        <div className='search-stat-container'>
-          <span className="stat-label">TS%</span>
-          <span className="search-variable-stat" style={{ backgroundColor: colorEfgTs(props.adv.ts), width: widthEfgTs(props.adv.ts)}}>{props.adv.ts}</span>
-        </div>
-        <div className='search-stat-container'>
-          <span className="stat-label">USG</span>
-          <span className="search-variable-stat" style={{ backgroundColor: colorUsg(props.adv.usg), width: widthUsg(props.adv.usg)}}>{props.adv.usg}</span>
-        </div>
-        <div className='search-stat-container'>
-          <span className="stat-label">PIE</span>
-          <span className="search-variable-stat" style={{ backgroundColor: colorPie(props.adv.pie), width: widthPie(props.adv.pie)}}>{props.adv.pie}</span>
-        </div>
-    </div>
-  </>
-);
+  
+  return (
+    <>
+      <div className="trad-container">
+        <h2 className="text-header">Advanced Stats</h2>
+          <div className='search-stat-container'>
+            <span className="stat-label">MIN</span>
+            <span className="search-variable-stat" style={{ backgroundColor: colorMin(props.adv.min), width: widthMin(props.adv.min)}}>{props.adv.min}</span>
+          </div>
+          <div className='search-stat-container'>
+            <span className="stat-label">RTG</span>
+            <span className="search-variable-stat" style={{ backgroundColor: colorRtg(props.adv.rtg), width: widthRtg(props.adv.rtg)}}>{props.adv.rtg}</span>
+          </div>
+          <div className='search-stat-container'>
+            <span className="stat-label">EFG</span>
+            <span className="search-variable-stat" style={{ backgroundColor: colorEfgTs(props.adv.efg), width: widthEfgTs(props.adv.efg)}}>{props.adv.efg}</span>
+          </div>
+          <div className='search-stat-container'>
+            <span className="stat-label">TS%</span>
+            <span className="search-variable-stat" style={{ backgroundColor: colorEfgTs(props.adv.ts), width: widthEfgTs(props.adv.ts)}}>{props.adv.ts}</span>
+          </div>
+          <div className='search-stat-container'>
+            <span className="stat-label">USG</span>
+            <span className="search-variable-stat" style={{ backgroundColor: colorUsg(props.adv.usg), width: widthUsg(props.adv.usg)}}>{props.adv.usg}</span>
+          </div>
+          <div className='search-stat-container'>
+            <span className="stat-label">PIE</span>
+            <span className="search-variable-stat" style={{ backgroundColor: colorPie(props.adv.pie), width: widthPie(props.adv.pie)}}>{props.adv.pie}</span>
+          </div>
+      </div>
+    </>
+  );
 }
 
 
@@ -403,6 +402,16 @@ export default function Search() {
           <a id="waiver" className="menu-item" href="/waiver">Waiver</a>
           <a id="injuryreport" className="menu-item" href="/injuryreport">News</a>
         </Menu>
+
+        <div className="search-bar-container">
+
+          <form>
+            <label className="search-bar">
+              <input type="text" name="name" />
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
 
         <div className='card_container'>
           <Traditional

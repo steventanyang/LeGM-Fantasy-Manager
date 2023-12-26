@@ -119,13 +119,30 @@ Note: Beware of modifying this element as it can break the animations - you shou
   margin-top: 15px;
 }
 
+.search-bar-container {
+  align-items: center;
+  background-color: #ddd;
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  margin: auto;
+  width: 100vw;
+}
+
 .card_container {
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: auto;
   margin-right: 2%;
   margin-left: 2%;
   width: auto;
+}
+
+/* search bar */
+
+.search-bar {
+  height: 100px;
+  border-radius: 20px;
 }
 
 /* traditional stats */
