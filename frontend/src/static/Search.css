@@ -133,7 +133,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .trad-container {
   background: #fff;
   border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: auto;
   padding: 20px;
   width: 500px;
@@ -146,8 +145,29 @@ Note: Beware of modifying this element as it can break the animations - you shou
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   text-align: center;
+}
+
+.search-stat-container {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.search-variable-stat {
+  background-color: #373a47;
+  border-radius: 25px;
+  color: #FFF;
+  text-align: center;
+  font-family: "Poppins";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-left: 40px;
+  padding: 5px 20px;
 }
 
 /* middle player card */
@@ -210,11 +230,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .stat-label {
   color: #5C7C8A;
   font-family: "Poppins";
-  font-size: 20px;
+  font-size: 25px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-left: 40px;
+  margin-left: 35px;
 }
   
 .stat-value-one {
@@ -227,7 +247,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-right: 40px;
+  margin-right: 35px;
   padding: 5px 20px;
 }
 
@@ -241,6 +261,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-right: 40px;
+  margin-right: 35px;
   padding: 5px 25px;
 }

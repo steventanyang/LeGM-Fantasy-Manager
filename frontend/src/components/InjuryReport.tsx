@@ -50,8 +50,6 @@ const NewsBlock = () => {
         <News/>
         <News/>
         <News/>
-        <News/>
-        <News/>
       </div>
     </>
   );
@@ -60,8 +58,17 @@ const NewsBlock = () => {
 const News = () => {
   return (
     <>
-      <div className="top-news-block"></div>
-      <div className="news-block"></div>
+      <div className="top-news-block">
+        <p className="injury-title">Trey Murphy: Starting against Cavaliers</p>
+      </div>
+      <div className="news-block">
+        <p className="news-description">
+          Murphy will start against the Cavaliers on Thursday, Christian Clark of The New Orleans Times-Picayune reports. Visit RotoWire.com for more analysis on this update.
+        </p>
+        <p className="news-timestamp">
+          Thu, 21 Dec 2023 4:16:00 PM PST
+        </p>
+      </div>
     </>
   );
 }
@@ -80,7 +87,7 @@ export default function InjuryReport() {
         <a id="injuryreport" className="menu-item" href="/injuryreport">News</a>
       </Menu>
       <div className="injury-top-container">
-        <div className="title-text">Injury Report</div>
+        <div className="title-text">Injury News</div>
       </div>
       <div className='injury-main-container'>
         <NewsBlock/>

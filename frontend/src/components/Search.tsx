@@ -45,11 +45,74 @@ const Traditional = (props:
     { imageUrl: string; name: string; status: string; stats: Stats;}
   ) => {
   return (
-    <div className="trad-container">
-      <h2 className="text-header"> Traditional Stats</h2>
-    </div>
+    <>
+      <div className="trad-container">
+        <h2 className="text-header">Traditional Stats</h2>
+          <div className='search-stat-container'>
+            <span className="stat-label">PTS</span>
+            <span className="search-variable-stat">30.7</span>
+          </div>
+          <div className='search-stat-container'>
+            <span className="stat-label">AST</span>
+            <span className="search-variable-stat">30.7</span>
+          </div>
+          <div className='search-stat-container'>
+            <span className="stat-label">REB</span>
+            <span className="search-variable-stat">30.7</span>
+          </div>
+          <div className='search-stat-container'>
+            <span className="stat-label">TOV</span>
+            <span className="search-variable-stat">30.7</span>
+          </div>
+          <div className='search-stat-container'>
+            <span className="stat-label">STL</span>
+            <span className="search-variable-stat">30.7</span>
+          </div>
+          <div className='search-stat-container'>
+            <span className="stat-label">BLK</span>
+            <span className="search-variable-stat">30.7</span>
+          </div>
+      </div>
+    </>
   );
 }
+
+const Advanced = (props: 
+  { imageUrl: string; name: string; status: string; stats: Stats;}
+) => {
+return (
+  <>
+    <div className="trad-container">
+      <h2 className="text-header">Advanced Stats</h2>
+        <div className='search-stat-container'>
+          <span className="stat-label">MIN</span>
+          <span className="search-variable-stat">30.7</span>
+        </div>
+        <div className='search-stat-container'>
+          <span className="stat-label">RTG</span>
+          <span className="search-variable-stat">30.7</span>
+        </div>
+        <div className='search-stat-container'>
+          <span className="stat-label">EFG</span>
+          <span className="search-variable-stat">30.7</span>
+        </div>
+        <div className='search-stat-container'>
+          <span className="stat-label">TS%</span>
+          <span className="search-variable-stat">30.7</span>
+        </div>
+        <div className='search-stat-container'>
+          <span className="stat-label">USG</span>
+          <span className="search-variable-stat">30.7</span>
+        </div>
+        <div className='search-stat-container'>
+          <span className="stat-label">PIE</span>
+          <span className="search-variable-stat">30.7</span>
+        </div>
+    </div>
+  </>
+);
+}
+
 
 export default function Search() {
 
@@ -86,7 +149,7 @@ export default function Search() {
               ovrRank: 54  
             }}
           />
-          <Traditional
+          <Advanced
               imageUrl="https://picsum.photos/250/250"
               name="SGA"
               status="active"
