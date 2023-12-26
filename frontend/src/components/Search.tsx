@@ -58,7 +58,6 @@ const Traditional = (props: { trad:Trad; }) => {
       return '#D66464';
     }
   };
-  
   const widthPts = (value: number) => {
     if (value >= 30) {
       return '300px';
@@ -75,6 +74,99 @@ const Traditional = (props: { trad:Trad; }) => {
     }
   };
 
+  const colorAstReb = (value: number) => {
+    if (value >= 10) {
+      return '#408416';
+    } else if (value >= 8) {
+      return '#86B16C';
+    } else if (value >= 6) {
+      return '#DAC828';
+    } else if (value >= 4) {
+      return '#E29853';
+    } else if (value >= 2) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
+  const widthAstReb = (value: number) => {
+    if (value >= 10) {
+      return '300px';
+    } else if (value >= 8) {
+      return '250px';
+    } else if (value >= 6) {
+      return '200px';
+    } else if (value >= 4) {
+      return '150px';
+    } else if (value >= 2) {
+      return '100px';
+    } else {
+      return '50px';
+    }
+  };
+
+  const colorTov = (value: number) => {
+    if (value <= 1.4) {
+      return '#408416';
+    } else if (value <= 2) {
+      return '#86B16C';
+    } else if (value <= 2.6) {
+      return '#DAC828';
+    } else if (value <= 3.2) {
+      return '#E29853';
+    } else if (value <= 3.8) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
+  const widthTov = (value: number) => {
+    if (value >= 3.8) {
+      return '300px';
+    } else if (value >= 3.2) {
+      return '250px';
+    } else if (value >= 2.6) {
+      return '200px';
+    } else if (value >= 2) {
+      return '150px';
+    } else if (value >= 1.4) {
+      return '100px';
+    } else {
+      return '50px';
+    }
+  };
+
+  const colorStlBlk = (value: number) => {
+    if (value >= 2.6) {
+      return '#408416';
+    } else if (value >= 2.1) {
+      return '#86B16C';
+    } else if (value >= 1.6) {
+      return '#DAC828';
+    } else if (value >= 1.1) {
+      return '#E29853';
+    } else if (value >= 0.6) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
+  const widthStlBlk = (value: number) => {
+    if (value >= 2.6) {
+      return '300px';
+    } else if (value >= 2.1) {
+      return '250px';
+    } else if (value >= 1.6) {
+      return '200px';
+    } else if (value >= 1.1) {
+      return '150px';
+    } else if (value >= 0.6) {
+      return '100px';
+    } else {
+      return '50px';
+    }
+  };
+
   return (
     <>
       <div className="trad-container">
@@ -85,23 +177,23 @@ const Traditional = (props: { trad:Trad; }) => {
           </div>
           <div className='search-stat-container'>
             <span className="stat-label">AST</span>
-            <span className="search-variable-stat">{props.trad.ast}</span>
+            <span className="search-variable-stat" style={{ backgroundColor: colorAstReb(props.trad.ast), width: widthAstReb(props.trad.ast)}}>{props.trad.ast}</span>
           </div>
           <div className='search-stat-container'>
             <span className="stat-label">REB</span>
-            <span className="search-variable-stat">{props.trad.reb}</span>
+            <span className="search-variable-stat" style={{ backgroundColor: colorAstReb(props.trad.reb), width: widthAstReb(props.trad.reb)}}>{props.trad.reb}</span>
           </div>
           <div className='search-stat-container'>
             <span className="stat-label">TOV</span>
-            <span className="search-variable-stat">{props.trad.tov}</span>
+            <span className="search-variable-stat" style={{ backgroundColor: colorTov(props.trad.tov), width: widthTov(props.trad.tov)}}>{props.trad.tov}</span>
           </div>
           <div className='search-stat-container'>
             <span className="stat-label">STL</span>
-            <span className="search-variable-stat">{props.trad.stl}</span>
+            <span className="search-variable-stat" style={{ backgroundColor: colorStlBlk(props.trad.stl), width: widthStlBlk(props.trad.stl)}}>{props.trad.stl}</span>
           </div>
           <div className='search-stat-container'>
             <span className="stat-label">BLK</span>
-            <span className="search-variable-stat">{props.trad.blk}</span>
+            <span className="search-variable-stat" style={{ backgroundColor: colorStlBlk(props.trad.blk), width: widthStlBlk(props.trad.blk)}}>{props.trad.blk}</span>
           </div>
       </div>
     </>
@@ -195,7 +287,7 @@ export default function Search() {
                 ast: 6.6,
                 reb: 6.8,
                 tov: 2.2,
-                stl: 3.0,
+                stl: 3.2,
                 blk: 0.4
               }}
             />
