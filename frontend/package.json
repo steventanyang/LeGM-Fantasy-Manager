@@ -2,7 +2,7 @@
   "name": "legm-new",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:8000",
   "dependencies": {
     "@fontsource/poppins": "^5.0.8",
     "@fontsource/roboto": "^5.0.8",

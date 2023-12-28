@@ -1,5 +1,6 @@
 import '../static/Search.css';
 import { slide as Menu } from 'react-burger-menu'
+import { useState, useEffect } from 'react';
 
 
 const Player = (props: 
@@ -393,6 +394,27 @@ const Advanced = (props: { adv:Adv }) => {
 
 export default function Search() {
 
+  const [player, setPlayer] = useState<Playerstat | null>(null);
+
+  useEffect(() => {
+    fetch('/test')
+      .then(response => response.json())
+      .then(data => {
+        // Find Bradley Beal in the data
+        const beal = data.find((player: Playerstat) => player.Name === 'Bradley Beal');
+
+        // Update the state with Bradley Beal's data
+        if (beal) {
+          setPlayer(beal);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data: ', error);
+      });
+  }, []);
+
+  const playerName = player?.Name as string;
+  
   return (
       <div>
         <Menu>
@@ -426,7 +448,7 @@ export default function Search() {
             />
           <Player
             imageUrl="https://picsum.photos/250/250"
-            name="SGA"
+            name={playerName}
             status="active"
             stats={{
               fppg: 58.7,

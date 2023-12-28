@@ -27,3 +27,11 @@ interface Adv {
   usg: number;
   pie: number;
 }
+
+interface Playerstat {
+  Name: string;
+  Minutes: number;
+  Points: number;
+  Assists: number;
+  Rebounds: number;
+}

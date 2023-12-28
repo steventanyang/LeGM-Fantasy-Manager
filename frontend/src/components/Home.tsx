@@ -43,16 +43,16 @@ return (
 
 export default function Home() {
 
-  const [team, setTeam] = useState([{}])
+  const [player, setPlayer] = useState([{}])
 
   useEffect(() => {
-    // Fetch the user data from the "/users" endpoint
-    fetch('/users')
+    // Fetch the user data from the "/test" endpoint
+    fetch('/test')
       .then(response => response.json())
       .then(data => {
         // Assuming the data is an array and you want the 'team' of the first user
         if (data.length > 0) {
-          setTeam(data[0].team);
+          setPlayer(data[0].team);
         }
       })
       .catch(error => {
