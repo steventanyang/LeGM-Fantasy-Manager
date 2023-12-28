@@ -1,5 +1,6 @@
 import '../static/Injury.css';
 import { slide as Menu } from 'react-burger-menu'
+import { useState, useEffect } from 'react';
 
 const Player = (props: 
   { imageUrl: string; name: string; status: string; stats: Stats;}
@@ -40,33 +41,51 @@ const Player = (props:
   );
 }
 
-const NewsBlock = () => {
+const NewsBlock = ({ onNewsItemClick }: { onNewsItemClick: (title: string) => void }) => {
+
+  const [newsData, setNewsData] = useState([]);
+  useEffect(() => {
+    fetch('/news') 
+      .then(response => response.json())
+      .then(data => setNewsData(data.slice(0, 5)));
+  }, []);
+
+
   return (
     <>
       <div className="news-container">
-        <News/>
-        <News/>
-        <News/>
-        <News/>
-        <News/>
-        <News/>
+        {newsData.map((newsItem, index) => (
+          <News key={index} newsItem={newsItem} onNewsItemClick={onNewsItemClick} />
+        ))}
       </div>
     </>
   );
 }
 
-const News = () => {
+const News = ({ newsItem, onNewsItemClick }: { newsItem: { Title: string; Content: string; Updated: string }, onNewsItemClick: (title: string) => void }) => {
+  
+
+  const truncateContent = (content: string, maxLength: number) => {
+    return content.length > maxLength ? content.substring(0, maxLength) + '...' : content;
+  };
+
+  const getPlayerNameFromContent = (content: string): string => {
+    const words = content.split(' '); // Split the content by spaces
+    console.log(words.slice(0, 2).join(' '));
+    return words.slice(0, 2).join(' '); // Take the first two words and join them as the player's name
+  };
+  
   return (
     <>
-      <div className="top-news-block">
-        <p className="injury-title">Trey Murphy: Starting against Cavaliers</p>
+      <div className="top-news-block" onClick={() => onNewsItemClick(getPlayerNameFromContent(newsItem.Title))}>
+        <p className="injury-title">{newsItem.Title}</p>
       </div>
       <div className="news-block">
         <p className="news-description">
-          Murphy will start against the Cavaliers on Thursday, Christian Clark of The New Orleans Times-Picayune reports. Visit RotoWire.com for more analysis on this update.
+          {truncateContent(newsItem.Content, 750)}
         </p>
         <p className="news-timestamp">
-          Thu, 21 Dec 2023 4:16:00 PM PST
+          {newsItem.Updated}
         </p>
       </div>
     </>
@@ -74,8 +93,27 @@ const News = () => {
 }
 
 
-
 export default function InjuryReport() {
+
+
+  const [selectedPlayer, setSelectedPlayer] = useState<Playercard | null>(null);
+  const handleNewsItemClick = (playerName: string) => {
+    fetch('/stats')
+      .then(response => response.json())
+      .then(data => {
+        const stats = data.find((player: Playercard) => player.Name === playerName);
+        if (stats) {
+          setSelectedPlayer(stats);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data: ', error);
+      });
+  };
+
+
+  const playerName = selectedPlayer?.Name as string;
+
 
   return (
     <div>
@@ -90,10 +128,10 @@ export default function InjuryReport() {
         <div className="title-text">Injury News</div>
       </div>
       <div className='injury-main-container'>
-        <NewsBlock/>
+        <NewsBlock onNewsItemClick={handleNewsItemClick} />
         <Player
           imageUrl="https://picsum.photos/250/250"
-          name="SGA"
+          name={playerName}
           status="active"
           stats={{
             fppg: 42.3,

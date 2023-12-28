@@ -2,13 +2,14 @@
 declare module 'react-burger-menu';
 
 
+// search page
 
 interface Stats {
-    fppg: number;
-    legmScore: number;
-    posRank: number;
-    ovrRank: number;
-  }
+  fppg: number;
+  legmScore: number;
+  posRank: number;
+  ovrRank: number;
+}
 
 interface Trad {
   pts: number;
@@ -44,4 +45,23 @@ interface Playerstat {
   TrueShootingPercentage: number;
   UsageRatePercentage: number;
   PlayerEfficiencyRating: number;
+}
+
+
+// injury pages
+
+interface NewsItem {
+  Title: string;
+  Content: string;
+  Updated: string;
+}
+
+interface NewsBlockProps {
+  onNewsItemClick: (title: string) => void;
+}
+
+interface Playercard {
+  Name: string;
+  Games: number;
+  Position: string;
 }

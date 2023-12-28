@@ -183,11 +183,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
     color: #FFF;
     flex-shrink: 0;
     font-family: "Poppins";
-    font-size: 20px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin: 20px;
+    margin: 5px 20px;
     padding: 10px;
 }
 
@@ -199,7 +199,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin: 20px;
+    margin: 0px 20px;
     padding: 10px;
 }
 

@@ -138,15 +138,15 @@ const Traditional = (props: { trad:Trad; }) => {
   };
 
   const colorStlBlk = (value: number) => {
-    if (value >= 2.6) {
+    if (value >= 2.1) {
       return '#408416';
-    } else if (value >= 2.1) {
-      return '#86B16C';
     } else if (value >= 1.6) {
-      return '#DAC828';
+      return '#86B16C';
     } else if (value >= 1.1) {
-      return '#E29853';
+      return '#DAC828';
     } else if (value >= 0.6) {
+      return '#E29853';
+    } else if (value >= 0.2) {
       return '#D66464';
     } else {
       return '#CB3434';
