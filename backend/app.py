@@ -51,8 +51,8 @@ def team():
 def players():
     return {"test": ["100", "200", "300"]}
 
-@app.route('/test')
-def test():
+@app.route('/stats')
+def stats():
 
     api_url = 'https://api.sportsdata.io/v3/nba/stats/json/PlayerSeasonStats/2023?key=a05b89392fc741e49290bbb8eb0f23d8'
 
@@ -63,6 +63,21 @@ def test():
         return jsonify(data)
     else:
         return jsonify({"error": "Failed to fetch data from external API"}), response.status_code
+
+@app.route('/news')
+def news():
+
+    api_url = 'https://api.sportsdata.io/v3/nba/scores/json/News?key=a05b89392fc741e49290bbb8eb0f23d8'
+
+    response = requests.get(api_url)
+
+    if response.status_code == 200:
+        data = response.json()
+        return jsonify(data)
+    else:
+        return jsonify({"error": "Failed to fetch data from external API"}), response.status_code
+
+
 
 if __name__=="__main__":
     app.run(port=8000, debug=True)
