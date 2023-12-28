@@ -21,17 +21,27 @@ interface Trad {
 
 interface Adv {
   min: number;
-  rtg: number;
+  PM: number;
   efg: number;
   ts: number;
   usg: number;
-  pie: number;
+  per: number;
 }
 
 interface Playerstat {
   Name: string;
-  Minutes: number;
+  Games: number;
   Points: number;
   Assists: number;
   Rebounds: number;
+  Turnovers: number;
+  Steals: number;
+  BlockedShots: number;
+  
+  Minutes: number;
+  PlusMinus: number;
+  EffectiveFieldGoalsPercentage: number;
+  TrueShootingPercentage: number;
+  UsageRatePercentage: number;
+  PlayerEfficiencyRating: number;
 }

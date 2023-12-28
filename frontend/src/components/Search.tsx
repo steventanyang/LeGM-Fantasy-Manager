@@ -234,7 +234,7 @@ const Advanced = (props: { adv:Adv }) => {
     }
   };
 
-  const colorRtg = (value: number) => {
+  const colorPM = (value: number) => {
     if (value >= 10) {
       return '#408416';
     } else if (value >= 6) {
@@ -249,7 +249,7 @@ const Advanced = (props: { adv:Adv }) => {
       return '#D66464';
     }
   };
-  const widthRtg = (value: number) => {
+  const widthPM = (value: number) => {
     if (value >= 10) {
       return '300px';
     } else if (value >= 6) {
@@ -327,31 +327,31 @@ const Advanced = (props: { adv:Adv }) => {
     }
   };
 
-  const colorPie = (value: number) => {
-    if (value >= 20) {
+  const colorPer = (value: number) => {
+    if (value >= 30) {
       return '#408416';
-    } else if (value >= 16) {
+    } else if (value >= 25) {
       return '#86B16C';
-    } else if (value >= 12) {
+    } else if (value >= 20) {
       return '#86B16C';
-    } else if (value >= 8) {
+    } else if (value >= 15) {
       return '#DAC828';
-    } else if (value >= 4) {
+    } else if (value >= 10) {
       return '#E29853';
     } else {
       return '#D66464';
     }
   };
-  const widthPie = (value: number) => {
-    if (value >= 20) {
+  const widthPer = (value: number) => {
+    if (value >= 30) {
       return '300px';
-    } else if (value >= 16) {
+    } else if (value >= 25) {
       return '250px';
-    } else if (value >= 12) {
+    } else if (value >= 20) {
       return '200px';
-    } else if (value >= 8) {
+    } else if (value >= 15) {
       return '150px';
-    } else if (value >= 4) {
+    } else if (value >= 10) {
       return '100px';
     } else {
       return '50px';
@@ -367,8 +367,8 @@ const Advanced = (props: { adv:Adv }) => {
             <span className="search-variable-stat" style={{ backgroundColor: colorMin(props.adv.min), width: widthMin(props.adv.min)}}>{props.adv.min}</span>
           </div>
           <div className='search-stat-container'>
-            <span className="stat-label">RTG</span>
-            <span className="search-variable-stat" style={{ backgroundColor: colorRtg(props.adv.rtg), width: widthRtg(props.adv.rtg)}}>{props.adv.rtg}</span>
+            <span className="stat-label">+/-</span>
+            <span className="search-variable-stat" style={{ backgroundColor: colorPM(props.adv.PM), width: widthPM(props.adv.PM)}}>{props.adv.PM}</span>
           </div>
           <div className='search-stat-container'>
             <span className="stat-label">EFG</span>
@@ -383,29 +383,28 @@ const Advanced = (props: { adv:Adv }) => {
             <span className="search-variable-stat" style={{ backgroundColor: colorUsg(props.adv.usg), width: widthUsg(props.adv.usg)}}>{props.adv.usg}</span>
           </div>
           <div className='search-stat-container'>
-            <span className="stat-label">PIE</span>
-            <span className="search-variable-stat" style={{ backgroundColor: colorPie(props.adv.pie), width: widthPie(props.adv.pie)}}>{props.adv.pie}</span>
+            <span className="stat-label">PER</span>
+            <span className="search-variable-stat" style={{ backgroundColor: colorPer(props.adv.per), width: widthPer(props.adv.per)}}>{props.adv.per}</span>
           </div>
       </div>
     </>
   );
 }
 
-
 export default function Search() {
 
   const [player, setPlayer] = useState<Playerstat | null>(null);
 
   useEffect(() => {
-    fetch('/test')
+    fetch('/stats')
       .then(response => response.json())
       .then(data => {
         // Find Bradley Beal in the data
-        const beal = data.find((player: Playerstat) => player.Name === 'Bradley Beal');
+        const stats = data.find((player: Playerstat) => player.Name === 'Paul George');
 
         // Update the state with Bradley Beal's data
-        if (beal) {
-          setPlayer(beal);
+        if (stats) {
+          setPlayer(stats);
         }
       })
       .catch(error => {
@@ -413,8 +412,38 @@ export default function Search() {
       });
   }, []);
 
+  //sportsdata.io per game stats
+
   const playerName = player?.Name as string;
+  const playerGames = player?.Games as number;
+  const totalPoints = player?.Points as number;
+  const totalAssists = player?.Assists as number;
+  const totalRebounds = player?.Rebounds as number;
+  const totalTurnovers = player?.Turnovers as number;
+  const totalSteals = player?.Steals as number;
+  const totalBlocks = player?.BlockedShots as number;
+
+  const pts = parseFloat((totalPoints / playerGames).toFixed(1));
+  const ast = parseFloat((totalAssists / playerGames).toFixed(1));
+  const reb = parseFloat((totalRebounds / playerGames).toFixed(1));
+  const tov = parseFloat((totalTurnovers / playerGames).toFixed(1));
+  const stl = parseFloat((totalSteals / playerGames).toFixed(1));
+  const blk = parseFloat((totalBlocks / playerGames).toFixed(1));
   
+  //sportsdata.io advanced stats
+
+  const playerMin = player?.Minutes as number;
+  const playerPlusMinus = player?.PlusMinus as number;
+  const playerEFG = player?.EffectiveFieldGoalsPercentage as number;
+  const playerTS = player?.TrueShootingPercentage as number;
+  const playerUsg = player?.UsageRatePercentage as number;
+  const playerPER = player?.PlayerEfficiencyRating as number;
+
+  const min = parseFloat((playerMin / playerGames).toFixed(1));
+  const plusMinus = parseFloat((playerPlusMinus / playerGames).toFixed(1));
+  
+
+
   return (
       <div>
         <Menu>
@@ -438,12 +467,12 @@ export default function Search() {
         <div className='card_container'>
           <Traditional
               trad={{
-                pts: 34.6,
-                ast: 6.6,
-                reb: 6.8,
-                tov: 2.2,
-                stl: 3.2,
-                blk: 0.4
+                pts: pts,
+                ast: ast,
+                reb: reb,
+                tov: tov,
+                stl: stl,
+                blk: blk
               }}
             />
           <Player
@@ -459,12 +488,12 @@ export default function Search() {
           />
           <Advanced
               adv={{
-                min: 34.7,
-                rtg: 12.7,
-                efg: 56.0,
-                ts: 63.1,
-                usg: 31.5,
-                pie: 20.1
+                min: min,
+                PM: plusMinus,
+                efg: playerEFG,
+                ts: playerTS,
+                usg: playerUsg,
+                per: playerPER
               }}
             />
         </div>
