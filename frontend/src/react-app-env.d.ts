@@ -7,7 +7,7 @@ declare module 'react-burger-menu';
 interface Stats {
   fppg: number;
   legmScore: number;
-  posRank: number;
+  pos: string;
   ovrRank: number;
 }
 

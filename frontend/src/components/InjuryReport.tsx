@@ -29,8 +29,8 @@ const Player = (props:
           <span className="stat-value-one">{props.stats.legmScore}</span>
         </div>
         <div className="stat">
-          <span className="stat-label">pos rank</span>
-          <span className="stat-value-two">{props.stats.posRank}</span>
+          <span className="stat-label">position</span>
+          <span className="stat-value-two">{props.stats.pos}</span>
         </div>
         <div className="stat">
           <span className="stat-label">ovr rank</span>
@@ -113,7 +113,7 @@ export default function InjuryReport() {
 
 
   const playerName = selectedPlayer?.Name as string;
-
+  const playerPosition = selectedPlayer?.Position as string;
 
   return (
     <div>
@@ -136,7 +136,7 @@ export default function InjuryReport() {
           stats={{
             fppg: 42.3,
             legmScore: 54.3,
-            posRank: 16,
+            pos: playerPosition,
             ovrRank: 54  
           }}
         />

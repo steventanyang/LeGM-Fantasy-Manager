@@ -30,7 +30,7 @@ return (
       </div>
       <div className="stat">
         <span className="stat-label">pos rank</span>
-        <span className="stat-value-two">{props.stats.posRank}</span>
+        <span className="stat-value-two">{props.stats.pos}</span>
       </div>
       <div className="stat">
         <span className="stat-label">ovr rank</span>
@@ -78,7 +78,7 @@ export default function Home() {
           stats={{
             fppg: 20.2,
             legmScore: 54.3,
-            posRank: 16,
+            pos: 'SF',
             ovrRank: 54  
           }}
         />

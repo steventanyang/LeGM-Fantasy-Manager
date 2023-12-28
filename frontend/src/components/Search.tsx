@@ -31,7 +31,7 @@ const Player = (props:
         </div>
         <div className="stat">
           <span className="stat-label">pos rank</span>
-          <span className="stat-value-two">{props.stats.posRank}</span>
+          <span className="stat-value-two">{props.stats.pos}</span>
         </div>
         <div className="stat">
           <span className="stat-label">ovr rank</span>
@@ -482,7 +482,7 @@ export default function Search() {
             stats={{
               fppg: 58.7,
               legmScore: 54.3,
-              posRank: 2,
+              pos: 'SF',
               ovrRank: 6 
             }}
           />
