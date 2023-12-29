@@ -125,7 +125,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   display: flex;
   height: 100px;
   justify-content: center;
-  margin: auto;
+  margin-top: 20px;
   width: 100vw;
 }
 
@@ -133,6 +133,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   display: flex;
   flex-direction: row;
   height: auto;
+  margin-top: 50px;
   margin-right: 2%;
   margin-left: 2%;
   width: auto;

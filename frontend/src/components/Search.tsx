@@ -486,10 +486,14 @@ export default function Search() {
             value={searchTerm}
             onChange={setSearchTerm}
             onRequestSearch={() => handleSearch(searchTerm)}
+            style={{ 
+              borderRadius: '25px',
+              width: '400px',
+              boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
+            }}
           />
         </div>
         
-
         <div className='card_container'>
           <Traditional
               trad={{
