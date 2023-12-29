@@ -1,11 +1,12 @@
 from flask import Flask
 from flask import jsonify
 import requests
-# from flask_sqlalchemy import SQLAlchemy
+
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
+#https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/201939.png
 
 engine = create_engine('mysql+pymysql://root:Ca123456%40@localhost/leGM', echo = False)
 Session = sessionmaker(bind=engine)
@@ -22,14 +23,8 @@ class User(Base):
     team = Column(String(100))
     record = Column(String(10))
 
-    # Add a representation method for debugging purposes
     def __repr__(self):
         return f"<User(id={self.id}, espn_user={self.espn_user})>"
-
-#inser data into database: 
-# new_user = User(espn_user='example_user', espn_pass='example_pass', league='example_league', team='example_team', record='0-0')
-# session.add(new_user)
-# session.commit()
 
 app = Flask(__name__)
 
@@ -64,6 +59,19 @@ def stats():
     else:
         return jsonify({"error": "Failed to fetch data from external API"}), response.status_code
 
+@app.route('/headshots')
+def headshots():
+
+    api_url = 'https://api.sportsdata.io/v3/nba/stats/json/PlayerSeasonStats/2023?key=a05b89392fc741e49290bbb8eb0f23d8'
+
+    response = requests.get(api_url)
+
+    if response.status_code == 200:
+        data = response.json()
+        return jsonify(data)
+    else:
+        return jsonify({"error": "Failed to fetch data from external API"}), response.status_code
+
 @app.route('/news')
 def news():
 
@@ -76,7 +84,6 @@ def news():
         return jsonify(data)
     else:
         return jsonify({"error": "Failed to fetch data from external API"}), response.status_code
-
 
 
 if __name__=="__main__":
