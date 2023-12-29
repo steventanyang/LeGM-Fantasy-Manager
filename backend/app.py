@@ -1,12 +1,11 @@
 from flask import Flask
 from flask import jsonify
 import requests
+from datetime import datetime, timedelta
 
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-
-#https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/201939.png
 
 engine = create_engine('mysql+pymysql://root:Ca123456%40@localhost/leGM', echo = False)
 Session = sessionmaker(bind=engine)
@@ -71,6 +70,80 @@ def stats():
         return jsonify(data)
     else:
         return jsonify({"error": "Failed to fetch data from external API"}), response.status_code
+
+
+@app.route('/preseason')
+def preseason():
+
+    api_url = 'https://api.sportsdata.io/v3/nba/projections/json/PlayerSeasonProjectionStats/2023?key=a05b89392fc741e49290bbb8eb0f23d8'
+    response = requests.get(api_url)
+
+    if response.status_code == 200:
+        data = response.json()
+        return jsonify(data)
+    else:
+        return jsonify({"error": "Failed to fetch data from external API"}), response.status_code
+
+
+
+# projections tdy/tmrw and games tdy/tmrw used to calculate player value
+
+@app.route('/today')
+def today():
+
+    today = datetime.now().strftime("%Y-%b-%d").upper()
+
+    api_url = f'https://api.sportsdata.io/v3/nba/projections/json/PlayerGameProjectionStatsByDate/{today}?key=a05b89392fc741e49290bbb8eb0f23d8'
+    response = requests.get(api_url)
+
+    if response.status_code == 200:
+        data = response.json()
+        return jsonify(data)
+    else:
+        return jsonify({"error": "Failed to fetch data from external API"}), response.status_code
+
+@app.route('/tomorrow')
+def tomorrow():
+
+    tomorrow = (datetime.now() + timedelta(days=1)).strftime("%Y-%b-%d").upper()
+
+    api_url = f'https://api.sportsdata.io/v3/nba/projections/json/PlayerGameProjectionStatsByDate/{tomorrow}?key=a05b89392fc741e49290bbb8eb0f23d8'
+    response = requests.get(api_url)
+
+    if response.status_code == 200:
+        data = response.json()
+        return jsonify(data)
+    else:
+        return jsonify({"error": "Failed to fetch data from external API"}), response.status_code
+
+@app.route('/gamestdy')
+def gamestdy():
+
+    today = datetime.now().strftime("%Y-%b-%d").upper()
+
+    api_url = f'https://api.sportsdata.io/v3/nba/scores/json/GamesByDate/{today}?key=a05b89392fc741e49290bbb8eb0f23d8'
+    response = requests.get(api_url)
+
+    if response.status_code == 200:
+        data = response.json()
+        return jsonify(data)
+    else:
+        return jsonify({"error": "Failed to fetch data from external API"}), response.status_code
+
+@app.route('/gamestmrw')
+def gamestmrw():
+
+    tomorrow = (datetime.now() + timedelta(days=1)).strftime("%Y-%b-%d").upper()
+
+    api_url = f'https://api.sportsdata.io/v3/nba/scores/json/GamesByDate/{tomorrow}?key=a05b89392fc741e49290bbb8eb0f23d8'
+    response = requests.get(api_url)
+
+    if response.status_code == 200:
+        data = response.json()
+        return jsonify(data)
+    else:
+        return jsonify({"error": "Failed to fetch data from external API"}), response.status_code
+
 
 @app.route('/headshots')
 def headshots():

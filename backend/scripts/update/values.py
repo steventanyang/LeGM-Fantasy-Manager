@@ -10,6 +10,7 @@ Base = declarative_base()
 
 
 
+
 # we're going to update values for players that have back to back games
 
 def teams_today():
