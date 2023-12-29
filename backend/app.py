@@ -34,9 +34,11 @@ class Player(Base):
     last_name = Column(String(50))
     name = Column(String(50))
     headshot_id = Column(Integer)
+    team = Column(String(50))
+    value = Column(Integer)
 
     def __repr__(self):
-        return f"<Player(id={self.player_id}, first_name={self.first_name}, last_name={self.last_name}, headshot_id={self.headshot_id})>"
+        return f"<Player(id={self.player_id}, first_name={self.first_name}, last_name={self.last_name}, headshot_id={self.headshot_id}, team={self.team}, value={self.value})>"
 
 app = Flask(__name__)
 
@@ -143,6 +145,20 @@ def gamestmrw():
         return jsonify(data)
     else:
         return jsonify({"error": "Failed to fetch data from external API"}), response.status_code
+
+@app.route('/top-players')
+def top_players_route():
+
+    def get_top_players(limit=8):
+        top_players = session.query(Player).order_by(Player.value.desc()).limit(limit).all()
+        return top_players
+    
+    top_players = get_top_players()
+    top_players_data = [
+        {"name": player.name, "team": player.team, "value": player.value}
+        for player in top_players
+    ]
+    return jsonify(top_players_data)
 
 
 @app.route('/headshots')
