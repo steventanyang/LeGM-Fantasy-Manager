@@ -201,6 +201,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
   
 .player-image-container {
+  border: #282c34;
+  border-radius: 20px;
+  border-width: 5px;
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
@@ -222,7 +225,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
   
 .player-status {
-  background-color: #86B16C;
+  background-color: #408416;
   border-radius: 25px;
   color: #fff;
   text-align: center;

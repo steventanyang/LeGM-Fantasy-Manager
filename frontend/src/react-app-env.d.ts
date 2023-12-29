@@ -47,6 +47,11 @@ interface Playerstat {
   PlayerEfficiencyRating: number;
 }
 
+interface Playerhead {
+  name: string;
+  headshot_id: number;
+}
+
 
 // injury pages
 

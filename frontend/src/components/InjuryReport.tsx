@@ -95,7 +95,6 @@ const News = ({ newsItem, onNewsItemClick }: { newsItem: { Title: string; Conten
 
 export default function InjuryReport() {
 
-
   const [selectedPlayer, setSelectedPlayer] = useState<Playercard | null>(null);
   const handleNewsItemClick = (playerName: string) => {
     fetch('/stats')
@@ -111,9 +110,32 @@ export default function InjuryReport() {
       });
   };
 
+  const [playerHead, setPlayerHead] = useState<Playerhead | null>(null);
+  useEffect(() => {
+
+    if (selectedPlayer) {
+      fetch('/players')
+        .then(response => response.json())
+        .then(data => {
+          const stats = data.find((playerHead: Playerhead) => playerHead.name === selectedPlayer.Name);
+          if (stats) {
+            setPlayerHead(stats);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching data: ', error);
+        });
+    }
+  }, [selectedPlayer]);
+  
 
   const playerName = selectedPlayer?.Name as string;
   const playerPosition = selectedPlayer?.Position as string;
+
+  const nbaid = playerHead?.headshot_id as number;
+  const headshot = nbaid ? `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${nbaid}.png` : '';
+
+
 
   return (
     <div>
@@ -129,17 +151,19 @@ export default function InjuryReport() {
       </div>
       <div className='injury-main-container'>
         <NewsBlock onNewsItemClick={handleNewsItemClick} />
-        <Player
-          imageUrl="https://picsum.photos/250/250"
-          name={playerName}
-          status="active"
-          stats={{
-            fppg: 42.3,
-            legmScore: 54.3,
-            pos: playerPosition,
-            ovrRank: 54  
-          }}
-        />
+        {selectedPlayer && headshot && (
+          <Player
+            imageUrl={headshot}
+            name={playerName}
+            status="active"
+            stats={{
+              fppg: 42.3,
+              legmScore: 54.3,
+              pos: playerPosition,
+              ovrRank: 54  
+            }}
+          />
+        )}
       </div>
     </div>
   );

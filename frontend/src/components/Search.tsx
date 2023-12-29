@@ -393,18 +393,36 @@ const Advanced = (props: { adv:Adv }) => {
 
 export default function Search() {
 
-  const [player, setPlayer] = useState<Playerstat | null>(null);
+  let name = 'Paul George';
 
+  const [player, setPlayer] = useState<Playerstat | null>(null);
   useEffect(() => {
     fetch('/stats')
       .then(response => response.json())
       .then(data => {
-        // Find Bradley Beal in the data
-        const stats = data.find((player: Playerstat) => player.Name === 'Paul George');
 
-        // Update the state with Bradley Beal's data
+        const stats = data.find((player: Playerstat) => player.Name === name);
+
         if (stats) {
           setPlayer(stats);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data: ', error);
+      });
+  }, []);
+
+  const [playerHead, setPlayerHead] = useState<Playerhead | null>(null);
+
+  useEffect(() => {
+    fetch('/players')
+      .then(response => response.json())
+      .then(data => {
+
+        const stats = data.find((playerHead: Playerhead) => playerHead.name === name);
+
+        if (stats) {
+          setPlayerHead(stats);
         }
       })
       .catch(error => {
@@ -442,7 +460,10 @@ export default function Search() {
   const min = parseFloat((playerMin / playerGames).toFixed(1));
   const plusMinus = parseFloat((playerPlusMinus / playerGames).toFixed(1));
   
+  // player headshot url
 
+  const nbaid = playerHead?.headshot_id as number;
+  const headshot = `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${nbaid}.png`
 
   return (
       <div>
@@ -476,7 +497,7 @@ export default function Search() {
               }}
             />
           <Player
-            imageUrl="https://picsum.photos/250/250"
+            imageUrl={headshot}
             name={playerName}
             status="active"
             stats={{
