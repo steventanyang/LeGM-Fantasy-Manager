@@ -121,7 +121,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .search-bar-container {
   align-items: center;
-  background-color: #ddd;
+  background-color: #fff;
   display: flex;
   height: 100px;
   justify-content: center;

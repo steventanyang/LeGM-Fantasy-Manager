@@ -1,6 +1,7 @@
 import '../static/Search.css';
 import { slide as Menu } from 'react-burger-menu'
 import { useState, useEffect } from 'react';
+import SearchBar from "material-ui-search-bar";
 
 
 const Player = (props: 
@@ -394,41 +395,46 @@ const Advanced = (props: { adv:Adv }) => {
 export default function Search() {
 
   let name = 'Paul George';
+  const [searchTerm, setSearchTerm] = useState('Paul George'); // Default search term
 
   const [player, setPlayer] = useState<Playerstat | null>(null);
   useEffect(() => {
-    fetch('/stats')
-      .then(response => response.json())
-      .then(data => {
-
-        const stats = data.find((player: Playerstat) => player.Name === name);
-
-        if (stats) {
-          setPlayer(stats);
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching data: ', error);
-      });
-  }, []);
+    if (searchTerm) {
+      fetch('/stats')
+        .then(response => response.json())
+        .then(data => {
+          const stats = data.find((player: Playerstat) => player.Name === searchTerm);
+          if (stats) {
+            setPlayer(stats);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching data: ', error);
+        });
+    }
+  }, [searchTerm]); // Re-run this effect when searchTerm changes
 
   const [playerHead, setPlayerHead] = useState<Playerhead | null>(null);
 
   useEffect(() => {
-    fetch('/players')
-      .then(response => response.json())
-      .then(data => {
+    if (searchTerm) {
+      fetch('/players')
+        .then(response => response.json())
+        .then(data => {
+          const stats = data.find((playerHead: Playerhead) => playerHead.name === searchTerm);
+          if (stats) {
+            setPlayerHead(stats);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching data: ', error);
+        });
+    }
+  }, [searchTerm]); // Re-run this effect when searchTerm changes
 
-        const stats = data.find((playerHead: Playerhead) => playerHead.name === name);
-
-        if (stats) {
-          setPlayerHead(stats);
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching data: ', error);
-      });
-  }, []);
+  const handleSearch = (newValue: string) => {
+    setSearchTerm(newValue); // This will trigger the useEffect hooks above
+  };
 
   //sportsdata.io per game stats
 
@@ -476,14 +482,13 @@ export default function Search() {
         </Menu>
 
         <div className="search-bar-container">
-
-          <form>
-            <label className="search-bar">
-              <input type="text" name="name" />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
+          <SearchBar
+            value={searchTerm}
+            onChange={setSearchTerm}
+            onRequestSearch={() => handleSearch(searchTerm)}
+          />
         </div>
+        
 
         <div className='card_container'>
           <Traditional
