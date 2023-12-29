@@ -3,6 +3,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import requests
 
+#this script updates the database values for players who have back to back games
+
 engine = create_engine('mysql+pymysql://root:Ca123456%40@localhost/leGM', echo = False)
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -18,8 +20,6 @@ class Player(Base):
 
     def __repr__(self):
         return f"<Player(name={self.name}, team={self.team}, value={self.value})>"
-
-# we're going to update values for players that have back to back games
 
 def teams_today():
     url = 'http://127.0.0.1:8000/gamestdy'

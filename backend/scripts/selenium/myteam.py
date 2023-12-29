@@ -9,33 +9,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import time
 
-
 service = Service(executable_path="./chromedriver")
 driver = webdriver.Chrome(service=service)
-
-def statmuseSearch(website, search):
-
-    driver.get(website) #this gets the website
-
-    WebDriverWait(driver, 5).until( #we're waiting until everything loads
-	    EC.presence_of_element_located((By.NAME, "question[query]")) 
-    )
-
-    input_element = driver.find_element(By.NAME, "question[query]") #finds the search bar
-    input_element.send_keys(search + Keys.ENTER) #enters the search
-
-
-    WebDriverWait(driver, 5).until( #we're waiting until everything loads
-	    EC.presence_of_element_located((By.XPATH, "//p[contains(@class, 'my-[1em]') and contains(@class, 'underline') and contains(@class, 'text-team-secondary')]")) 
-    )
-    print('found')
-
-    element = driver.find_element(By.XPATH, "//p[contains(@class, 'my-[1em]') and contains(@class, 'underline') and contains(@class, 'text-team-secondary')]")
-    
-    time.sleep(10)
-    driver.quit()
-
-    return element
 
 def pullEspnLeague(website, email, password, teamName):
 
@@ -60,6 +35,7 @@ def pullEspnLeague(website, email, password, teamName):
     iframe = 'oneid-iframe'
     driver.switch_to.frame(iframe)
 
+
     #entering username
 
     WebDriverWait(driver, 10).until( 
@@ -76,6 +52,7 @@ def pullEspnLeague(website, email, password, teamName):
 
 
     #entering password
+
     WebDriverWait(driver, 10).until( 
 	    EC.presence_of_element_located((By.CSS_SELECTOR, 'input[placeholder="Password"]')) 
     )
@@ -100,12 +77,6 @@ def pullEspnLeague(website, email, password, teamName):
     )
     link = driver.find_element(By.LINK_TEXT, teamName).click()
 
-    # WebDriverWait(driver, 5).until( #we're waiting until everything loads
-	#     EC.presence_of_element_located((By.CLASS_NAME, 'AnchorLink.link.clr-link.pointer')) 
-    # )
-    # players = driver.find_element(By.CLASS_NAME, 'AnchorLink.link.clr-link.pointer').text
-    
-
     WebDriverWait(driver, 5).until( #we're waiting until everything loads
 	    EC.presence_of_element_located((By.CLASS_NAME, "player-column__athlete"))
     )
@@ -115,13 +86,9 @@ def pullEspnLeague(website, email, password, teamName):
         print(player.get_attribute('title'))
 
 
-
-
     time.sleep(10)
     driver.quit()
 
     return
-
-# statmuseSearch("https://www.statmuse.com/nba", "most assists this season")
 
 pullEspnLeague('https://www.espn.com/fantasy/', 'stevenwatchesyou88@gmail.com', 'blackhawks158819', 'Yang')

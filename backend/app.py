@@ -73,7 +73,6 @@ def stats():
     else:
         return jsonify({"error": "Failed to fetch data from external API"}), response.status_code
 
-
 @app.route('/preseason')
 def preseason():
 
@@ -159,6 +158,7 @@ def top_players_route():
         for player in top_players
     ]
     return jsonify(top_players_data)
+
 
 
 @app.route('/headshots')
