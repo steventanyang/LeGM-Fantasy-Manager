@@ -72,7 +72,7 @@ export default function Home() {
 
       <div className='card_container'>
         <Player
-          imageUrl="https://picsum.photos/250/250"
+          imageUrl="https://g.espncdn.com/lm-static/fba/images/default_logos/16.svg"
           name="SGA"
           status="active"
           stats={{
