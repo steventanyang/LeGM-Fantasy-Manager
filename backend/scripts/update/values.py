@@ -108,6 +108,8 @@ def main():
     today = teams_today()
     tomorrow = teams_tmrw()
     common_teams = set(today) & set(tomorrow)
+    for team in common_teams:
+        print(team)
 
     today_api = 'http://127.0.0.1:8000/today'
     tomorrow_api = 'http://127.0.0.1:8000/tomorrow'

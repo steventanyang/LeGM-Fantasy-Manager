@@ -2,6 +2,7 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import requests
+import json
 from decimal import Decimal
 
 #this script updates player status using our espn api
@@ -21,7 +22,7 @@ class Player(Base):
     status = Column(Integer)
 
     def __repr__(self):
-        return f"<Player(name={self.name}, posrank={self.posrank}, ovrrank={self.ovrrank})>"
+        return f"<Player(name={self.name}, status={self.status}, posrank={self.posrank}, ovrrank={self.ovrrank})>"
     
 response = requests.get('http://127.0.0.1:8000/espn')
 data = response.json()
@@ -38,20 +39,22 @@ for user in data:
                 player = entry["playerPoolEntry"]["player"]
 
                 fullname = player["fullName"]
+                if fullname.endswith(' Jr.') or fullname.endswith(' III'):
+                    fulllname = fullname[:-4].strip()
+                
                 newstatus = player["injuryStatus"]
+
                 ratings = entry["playerPoolEntry"]["ratings"]
-                posrank = ratings["0"]["positionalRanking"]
-                totalRanking = ratings["0"]["totalRanking"]
+                newposrank = ratings["0"]["positionalRanking"]
+                newovrrank = ratings["0"]["totalRanking"]
 
                 db_player = session.query(Player).filter_by(name=fullname).first()
                 if db_player:
                     db_player.status = newstatus
-
+                    db_player.posrank = newposrank
+                    db_player.ovrrank = newovrrank
                     session.commit()
                 else:
                     print(f"Player {db_player} not found in the database.")
 
 session.close()
-    
-
-
