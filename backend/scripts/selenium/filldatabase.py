@@ -74,17 +74,19 @@ def pullEspnLeague(website, email, password, teamName, team):
 
     #entering password
 
-    WebDriverWait(driver, 10).until( 
+    WebDriverWait(driver, 50).until( 
 	    EC.presence_of_element_located((By.CSS_SELECTOR, 'input[placeholder="Password"]')) 
     )
     driver.find_element(By.CSS_SELECTOR, 'input[placeholder="Password"]').click()
     ActionChains(driver).send_keys(password).perform()
 
-    WebDriverWait(driver, 10).until( 
+
+    WebDriverWait(driver, 50).until( 
 	    EC.presence_of_element_located((By.ID, 'BtnSubmit')) 
     )
     submit = driver.find_element(By.ID, 'BtnSubmit').click()
 
+    time.sleep(30)
 
     #scraping players on team
 
@@ -133,4 +135,8 @@ def pullEspnLeague(website, email, password, teamName, team):
 
     return
 
-pullEspnLeague('https://www.espn.com/fantasy/', 'stevenwatchesyou88@gmail.com', 'blackhawks158819', 'Yang', 'josh giggity-giggity')
+pullEspnLeague('https://www.espn.com/fantasy/', 'stevenwatchesyou88@gmail.com', 'blackhawks158819', 'Yang', 'milwaukee brICKS')
+
+
+# idea we can expor this function. Once we have all the team names in the database we can iterate through them and run this once,
+# getting all the players from all the teams and just updating "rostered" again. Wiping it clean first. 

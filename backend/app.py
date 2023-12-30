@@ -1,7 +1,9 @@
 from flask import Flask
 from flask import jsonify
+from json import JSONEncoder
 import requests
 from datetime import datetime, timedelta
+from espnapi.basketball import League
 
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
@@ -86,6 +88,12 @@ def preseason():
         return jsonify({"error": "Failed to fetch data from external API"}), response.status_code
 
 
+# @app.route('/espn-data')
+# def espn_data():
+#     league = League(league_id=2063835714, year=2024, espn_s2='AEAzt%2BFd8NB99LdFla9u20I%2FDL6stmvo%2BdznVl39R6I%2FTgFQKQlfLXv%2BzLQZYOttEd0nsE6XYPJ77zgbdfd74yiO%2BnzvwfwzaBtPmDBR%2FkA2q4E9qKpTdQXm2mr%2FMN3HJ1WXZaRhyJfwGRk2JeAYYL%2FIRuDMUk%2BJiTT8tfN5DrkEpRMpdyaUGZIe7mwAeSF6RmpTxXyDyKeOq4s5Msq9B74OQtEfzbAOfOAExfAGA3FUbS9KMCFJo9rQ%2BDbgtufrYUMDa6N3O%2F%2FbOBuMy2Ie%2FwAnl%2FXO5TEqGtvOHAtW2KpVLg%3D%3D', swid='{E6A7AF31-1BDA-47A5-B5E0-A8692CA83F56}', debug=True)
+
+#     data = league.get_team_data(1)
+#     return jsonify(data)
 
 # projections tdy/tmrw and games tdy/tmrw used to calculate player value
 
