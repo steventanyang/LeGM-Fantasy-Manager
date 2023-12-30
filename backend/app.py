@@ -50,9 +50,11 @@ class Teams(Base):
     __tablename__ = 'teams'
     team_id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(100))
+    currentmatchup = Column(String(100))
+    nextmatchup = Column(String(100))
 
     def __repr__(self):
-        return f"<Team(name={self.name}, team_id={self.team_id})>"
+        return f"<Team(name={self.name}, team_id={self.team_id}, currentmatchup={self.currentmatchup}, nextmatchup={self.nextmatchup})>"
 
 app = Flask(__name__)
 
@@ -107,6 +109,13 @@ def espn():
     with open('static/espn.json', 'r') as file:
         data = json.load(file)
     return jsonify(data)
+
+@app.route('/schedule')
+def schedule():
+    with open('static/schedule.json', 'r') as file:
+        data = json.load(file)
+    return jsonify(data)
+
 
 # projections tdy/tmrw and games tdy/tmrw used to calculate player value
 
