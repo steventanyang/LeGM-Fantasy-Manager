@@ -1,11 +1,12 @@
 from flask import Flask
 from flask import jsonify
-from json import JSONEncoder
-import requests
-from datetime import datetime, timedelta
-from espnapi.basketball import League
 
-from sqlalchemy import create_engine, Column, Integer, String
+import requests
+import json
+from datetime import datetime, timedelta
+# from espnapi.basketball import League
+
+from sqlalchemy import create_engine, Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -31,37 +32,50 @@ class Player(Base):
 
     __tablename__ = 'players'
 
-    player_id = Column(Integer, primary_key=True)
+    player_id = Column(Integer, primary_key=True, autoincrement=True)
     first_name = Column(String(50))
     last_name = Column(String(50))
     name = Column(String(50))
     headshot_id = Column(Integer)
     team = Column(String(50))
     value = Column(Integer)
+    rostered = Column(Boolean)
+    score = Column(Integer)
+    fantasyteam = Column(Integer, ForeignKey('teams.team_id'))
 
     def __repr__(self):
-        return f"<Player(id={self.player_id}, first_name={self.first_name}, last_name={self.last_name}, headshot_id={self.headshot_id}, team={self.team}, value={self.value})>"
+        return f"<Player(id={self.player_id}, first_name={self.first_name}, last_name={self.last_name}, headshot_id={self.headshot_id}, team={self.team}, value={self.value}, fantasyteam={self.fantasyteam})>"
+
+class Teams(Base):
+    __tablename__ = 'teams'
+    team_id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(100))
+
+    def __repr__(self):
+        return f"<Team(name={self.name}, team_id={self.team_id})>"
 
 app = Flask(__name__)
 
-#route for users table
+#route for users, teams, and players table
 @app.route("/users")
 def users():
     all_users = session.query(User).all()
     users_data = [{"id": user.id, "espn_user": user.espn_user, "espn_pass": user.espn_pass, "league": user.league, "team": user.team, "record": user.record} for user in all_users]
     return jsonify(users_data)
 
-#route for team table
-@app.route("/team")
+@app.route("/teams")
 def team():
-    return {"test": ["100", "200", "300"]}
+    all_teams = session.query(Teams).all()
+    teams_data = [{"team_id": team.team_id, "name": team.name} for team in all_teams ]
+    return jsonify(teams_data)
 
-#route for player stats table
 @app.route("/players")
 def players():
     all_players = session.query(Player).all()
     player_data = [{"player_id": player.player_id, "name": player.name, "headshot_id": player.headshot_id} for player in all_players]
     return jsonify(player_data)
+
+
 
 @app.route('/stats')
 def stats():
@@ -88,12 +102,11 @@ def preseason():
         return jsonify({"error": "Failed to fetch data from external API"}), response.status_code
 
 
-# @app.route('/espn-data')
-# def espn_data():
-#     league = League(league_id=2063835714, year=2024, espn_s2='AEAzt%2BFd8NB99LdFla9u20I%2FDL6stmvo%2BdznVl39R6I%2FTgFQKQlfLXv%2BzLQZYOttEd0nsE6XYPJ77zgbdfd74yiO%2BnzvwfwzaBtPmDBR%2FkA2q4E9qKpTdQXm2mr%2FMN3HJ1WXZaRhyJfwGRk2JeAYYL%2FIRuDMUk%2BJiTT8tfN5DrkEpRMpdyaUGZIe7mwAeSF6RmpTxXyDyKeOq4s5Msq9B74OQtEfzbAOfOAExfAGA3FUbS9KMCFJo9rQ%2BDbgtufrYUMDa6N3O%2F%2FbOBuMy2Ie%2FwAnl%2FXO5TEqGtvOHAtW2KpVLg%3D%3D', swid='{E6A7AF31-1BDA-47A5-B5E0-A8692CA83F56}', debug=True)
-
-#     data = league.get_team_data(1)
-#     return jsonify(data)
+@app.route('/espn')
+def espn():
+    with open('static/espn.json', 'r') as file:
+        data = json.load(file)
+    return jsonify(data)
 
 # projections tdy/tmrw and games tdy/tmrw used to calculate player value
 
@@ -154,10 +167,16 @@ def gamestmrw():
         return jsonify({"error": "Failed to fetch data from external API"}), response.status_code
 
 @app.route('/top-players')
-def top_players_route():
+def top_players():
 
     def get_top_players(limit=8):
-        top_players = session.query(Player).order_by(Player.value.desc()).limit(limit).all()
+        top_players = (
+            session.query(Player)
+            .filter(Player.rostered == False)
+            .order_by(Player.value.desc())
+            .limit(limit)
+            .all()
+        )
         return top_players
     
     top_players = get_top_players()
@@ -167,6 +186,25 @@ def top_players_route():
     ]
     return jsonify(top_players_data)
 
+@app.route('/drop-players')
+def drop_players():
+
+    def get_low_score(limit=5):
+        score_players = (
+            session.query(Player)
+            .filter(Player.fantasyteam == 1)
+            .order_by(Player.value.asc())
+            .limit(limit)
+            .all()
+        )
+        return score_players
+    
+    top_players = get_low_score()
+    top_players_data = [
+        {"name": player.name, "score": player.score}
+        for player in top_players
+    ]
+    return jsonify(top_players_data)
 
 
 @app.route('/headshots')

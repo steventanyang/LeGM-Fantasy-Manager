@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import time
 
-from sqlalchemy import create_engine, Column, Integer, String, Boolean
+from sqlalchemy import create_engine, Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import requests
@@ -24,12 +24,22 @@ Base = declarative_base()
 class Player(Base):
 
     __tablename__ = 'players'
-    player_id = Column(Integer, primary_key=True)
+    player_id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(50))
     rostered = Column(Boolean)
+    fantasyteam = Column(Integer, ForeignKey('teams.team_id'))
 
     def __repr__(self):
         return f"<Player(name={self.name}, rostered={self.rostered})>"
+
+class Team(Base):
+    __tablename__ = 'teams'
+    team_id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(100))
+
+    def __repr__(self):
+        return f"<Team(name={self.name})>"
+
 
 service = Service(executable_path="./chromedriver")
 driver = webdriver.Chrome(service=service)
@@ -39,6 +49,8 @@ def pullEspnLeague(website, email, password, teamName, team):
     #test
     
     driver.get(website)
+    time.sleep(3)
+
     WebDriverWait(driver, 5).until( #we're waiting until everything loads
 	    EC.presence_of_element_located((By.LINK_TEXT, "Log In")) 
     )
@@ -86,7 +98,7 @@ def pullEspnLeague(website, email, password, teamName, team):
     )
     submit = driver.find_element(By.ID, 'BtnSubmit').click()
 
-    time.sleep(30)
+    time.sleep(20)
 
     #scraping players on team
 
@@ -99,6 +111,7 @@ def pullEspnLeague(website, email, password, teamName, team):
 	    EC.presence_of_element_located((By.LINK_TEXT, teamName)) 
     )
     link = driver.find_element(By.LINK_TEXT, teamName).click()
+
 
     WebDriverWait(driver, 5).until( #click on league name
 	    EC.presence_of_element_located((By.LINK_TEXT, 'League')) 
@@ -116,21 +129,28 @@ def pullEspnLeague(website, email, password, teamName, team):
     )
     players = driver.find_elements(By.CLASS_NAME, "player-column__athlete")
 
-
+    db_team = session.query(Team).filter_by(name=team).first()
+    if not db_team:
+        db_team = Team(name=team)
+        session.add(db_team)
+        session.commit()
 
     for player in players: 
         player_name = player.get_attribute('title')
-        print(player_name)
 
+        if player_name.endswith(' Jr.') or player_name.endswith(' III'):
+            player_name = player_name[:-4].strip()
+
+        print(player_name)
         db_player = session.query(Player).filter_by(name=player_name).first()
 
         if db_player:
-            db_player.rostered = True
+            db_player.fantasyteam = db_team.team_id
             session.commit()
         else:
             print(f"Player {player_name} not found in database.")
 
-    time.sleep(10)
+    time.sleep(5)
     driver.quit()
 
     return
@@ -140,3 +160,18 @@ pullEspnLeague('https://www.espn.com/fantasy/', 'stevenwatchesyou88@gmail.com', 
 
 # idea we can expor this function. Once we have all the team names in the database we can iterate through them and run this once,
 # getting all the players from all the teams and just updating "rostered" again. Wiping it clean first. 
+
+
+# right now team record is in users table we need to fill that in our teams table
+
+# team id's 
+# Yang 1
+# josh giggity-giggity 2
+# Team agustin 3
+# Luu Dynasty 4
+# Team Reyes 5
+# Team Hay 6
+# JordanFool 7
+# Team Efunbajo 8
+# Team Darku 9
+# milwaukee brICKS 10
