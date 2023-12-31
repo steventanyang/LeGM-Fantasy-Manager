@@ -1,64 +1,27 @@
-import '../App.css';
+import '../static/Home.css';
 import { slide as Menu } from 'react-burger-menu'
-import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 
-const Player = (props: 
-  { imageUrl: string; name: string; status: string; stats: Stats;}
-) => {
-return (
-  <div className="player-card">
-
-    <div className="player-image-container">
-      <img
-        src={props.imageUrl}
-        alt={props.name}
-        className="player-image"
-      />
-    </div>
-
-    <h2 className="player-name">{props.name}</h2>
-    <div className="player-status">{props.status}</div>
-
-    <div className="player-stats">
-      <div className="stat">
-        <span className="stat-label">FPPG</span>
-        <span className="stat-value-one">{props.stats.fppg}</span>
-      </div>
-      <div className="stat">
-        <span className="stat-label">Score</span>
-        <span className="stat-value-one">{props.stats.legmScore}</span>
-      </div>
-      <div className="stat">
-        <span className="stat-label">pos rank</span>
-        <span className="stat-value-two">{props.stats.pos}</span>
-      </div>
-      <div className="stat">
-        <span className="stat-label">ovr rank</span>
-        <span className="stat-value-two">{props.stats.ovrRank}</span>
-      </div>
-    </div>
-  </div>
-);
-}
 
 export default function Home() {
 
-  const [player, setPlayer] = useState([{}])
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    // Fetch the user data from the "/test" endpoint
-    fetch('/test')
-      .then(response => response.json())
-      .then(data => {
-        // Assuming the data is an array and you want the 'team' of the first user
-        if (data.length > 0) {
-          setPlayer(data[0].team);
-        }
-      })
-      .catch(error => {
-        console.error('There was an error fetching the team data:', error);
-      });
-  }, []);
+  const team = () => {
+    navigate('/team'); 
+  };
+
+  const search = () => {
+    navigate('/search'); 
+  };
+
+  const waiver = () => {
+    navigate('/waiver'); 
+  };
+
+  const injury = () => {
+    navigate('/injuryreport'); 
+  };
 
   return (
     <div>
@@ -71,18 +34,23 @@ export default function Home() {
         <a id="injuryreport" className="menu-item" href="/injuryreport">News</a>
       </Menu>
 
-      <div className='card_container'>
-        <Player
-          imageUrl="https://g.espncdn.com/lm-static/fba/images/default_logos/16.svg"
-          name="SGA"
-          status="active"
-          stats={{
-            fppg: 20.2,
-            legmScore: 54.3,
-            pos: 'SF',
-            ovrRank: 54  
-          }}
-        />
+      <div className="home-top-container">
+        <div className="title-text">LeGM</div>
+      </div>
+
+      <div className="home-main-container">
+        <div className="home-content-container"></div>
+      </div>
+
+      <div className="home-bottom-container">
+        <div className="home-button-container">
+
+          <button onClick={team} className='home-nav-buttons' style={{ marginLeft:'10px'}}>My Team</button>
+          <button onClick={search} className='home-nav-buttons'>Search</button>
+          <button onClick={waiver} className='home-nav-buttons'>Waiver Wire</button>
+          <button onClick={injury} className='home-nav-buttons' style={{ marginRight:'10px'}}>News</button>
+
+        </div>
       </div>
     </div>
     );

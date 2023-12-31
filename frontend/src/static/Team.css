@@ -164,7 +164,7 @@
     margin-bottom: 7px;
   }
   
-  .player-score {
+  .team-player-score {
     border-radius: 25px;
     color: #FFF;
     display: flex;
@@ -172,10 +172,10 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    margin-left: 20px;
-    padding: 8px 10px;
+    margin-left: 25px;
+    padding: 8px 15px;
     text-align: center;
-    width: 120px;
+    width: 105px;
   }
   
   .team-player-name {

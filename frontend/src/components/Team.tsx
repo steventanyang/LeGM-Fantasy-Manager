@@ -8,29 +8,37 @@ const PlayerStatus = (props:
   // Define a function to get the status class based on the status text
   const getStatusClass = () => {
     switch (props.status) {
-      case 'ACT':
+      case 'ACTIVE':
         return 'status-in';
       case 'OUT':
         return 'status-out';
-      case 'DTD':
+      case 'DAY_TO_DAY':
         return 'status-dtd';
-      case 'GTD':
-        return 'status-gtd';
       default:
         return 'status-unknown';
     }
   };
 
+  const getDisplayStatus = () => {
+    switch (props.status) {
+      case 'ACTIVE':
+        return 'ACT';
+      case 'DAY_TO_DAY':
+        return 'DTD';
+      default:
+        return props.status;
+    }
+  };
+
   return (
     <div className="team-player-status">
-      <div className="player-score" style={{ backgroundColor: scoreColor(props.score) }}>{props.score}</div>
+      <div className="team-player-score" style={{ backgroundColor: scoreColor(props.score) }}>{props.score}</div>
       <div className="team-player-name">{props.name}</div>
-      <div className={`team-player-status-indicator ${getStatusClass()}`}>{props.status}</div>
+      <div className={`team-player-status-indicator ${getStatusClass()}`}>{getDisplayStatus()}</div>
     </div>
   );
 };
 
-// Define a function to determine the score color based on the value
 const scoreColor = (score: number) => {
   if (score >= 50) {
     return 'green';
@@ -41,47 +49,21 @@ const scoreColor = (score: number) => {
   }
 };
 
-// Define the main App component
 export default function Team() {
-  // Sample data array
-  const players = [
-    { name: 'Lamelo Ball', score: 50.24, status: 'ACT' },
-    { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
-    { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
-    { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
-    { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
-    { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
-    { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
-    { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
-    { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
-    { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
-    { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
-    { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
-    { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
-    { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
-    { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
-  ];
-
-
-  const [teamPlayer, setTeamPlayer] = useState<TeamPlayer | null>(null);
+  const [players, setPlayers] = useState<Playerteam[]>([]);
 
   useEffect(() => {
-
-    fetch('/players') 
+    fetch('/players')
       .then(response => response.json())
       .then(data => {
-        const filteredPlayers = data.filter((teamPlayer: TeamPlayer) => teamPlayer.fantasyteam === 1);
-        if (filteredPlayers) {
-          setTeamPlayer(filteredPlayers);
-        }
+        // Filter players with fantasyteam equals 1
+        const filteredPlayers = data.filter((player: Playerteam) => player.fantasyteam === 1);
+        setPlayers(filteredPlayers);
       })
       .catch(error => {
-        console.error('Error fetching data: ', error);
+        console.error('Error fetching players:', error);
       });
-    }, []);
-
-  const playerName = teamPlayer?.name as string;
-
+  }, []);
 
   return (
     <div>
@@ -99,9 +81,10 @@ export default function Team() {
             <p className="team-title-text">score</p>
             <p className="team-title-text">status</p>
           </div>
-          {/* {teamPlayer.map((player, index) => (
+          {players.map((player, index) => (
             <PlayerStatus key={index} name={player.name} score={player.score} status={player.status} />
-          ))} */}
+          ))}
+
         </div>
 
 

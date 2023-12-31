@@ -5,7 +5,7 @@ declare module 'typewriter-effect/dist/core'
 
 // team page
 
-interface TeamPlayer {
+interface Playerteam {
   name: string;
   fantasyteam: number;
   score: number;
