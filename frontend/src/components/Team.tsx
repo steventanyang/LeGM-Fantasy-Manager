@@ -1,5 +1,6 @@
 import '../static/Team.css';
 import { slide as Menu } from 'react-burger-menu'
+import { useState, useEffect } from 'react';
 
 const PlayerStatus = (props: 
     { name: string; score: number; status: string }) => {
@@ -61,14 +62,36 @@ export default function Team() {
     { name: 'Lamelo Ball', score: 45.26, status: 'DTD' },
   ];
 
+
+  const [teamPlayer, setTeamPlayer] = useState<TeamPlayer | null>(null);
+
+  useEffect(() => {
+
+    fetch('/players') 
+      .then(response => response.json())
+      .then(data => {
+        const filteredPlayers = data.filter((teamPlayer: TeamPlayer) => teamPlayer.fantasyteam === 1);
+        if (filteredPlayers) {
+          setTeamPlayer(filteredPlayers);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data: ', error);
+      });
+    }, []);
+
+  const playerName = teamPlayer?.name as string;
+
+
   return (
     <div>
       <Menu>
-          <a id="home" className="menu-item" href="/">Home</a>
-          <a id="team" className="menu-item" href="/team">Team</a>
-          <a id="search" className="menu-item" href="/search">Search</a>
-          <a id="waiver" className="menu-item" href="/waiver">Waiver</a>
-          <a id="injuryreport" className="menu-item" href="/injuryreport">News</a>
+        <a id="home" className="menu-item" href="/">Home</a>
+        <a id="team" className="menu-item" href="/team">Team</a>
+        <a id="search" className="menu-item" href="/search">Search</a>
+        <a id="aisearch" className="menu-item" href="/aisearch">AI Search</a>
+        <a id="waiver" className="menu-item" href="/waiver">Waiver</a>
+        <a id="injuryreport" className="menu-item" href="/injuryreport">News</a>
       </Menu>
       <div className="team-page-container">
         <div className="team-list">
@@ -76,9 +99,9 @@ export default function Team() {
             <p className="team-title-text">score</p>
             <p className="team-title-text">status</p>
           </div>
-          {players.map((player, index) => (
+          {/* {teamPlayer.map((player, index) => (
             <PlayerStatus key={index} name={player.name} score={player.score} status={player.status} />
-          ))}
+          ))} */}
         </div>
 
 

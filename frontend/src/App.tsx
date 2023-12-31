@@ -6,7 +6,7 @@ import Team from './components/Team';
 import Search from './components/Search';
 import Waiver from './components/Waiver';
 
-import SearchAi from './components/test';
+import SearchAi from './components/Aisearch';
 
 
 function App() {
@@ -20,8 +20,7 @@ function App() {
 					<Route path="/search" element={<Search />} />
 					<Route path="/waiver" element={<Waiver />} />
 					<Route path="/injuryreport" element={<Injury />} />
-
-					<Route path="/test" element={<SearchAi />} />
+					<Route path="/aisearch" element={<SearchAi />} />
 				</Routes>
 			</main>
 		</BrowserRouter>

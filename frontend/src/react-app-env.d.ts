@@ -1,6 +1,16 @@
 /// <reference types="react-scripts" />
 declare module 'react-burger-menu';
+declare module 'typewriter-effect/dist/core'
 
+
+// team page
+
+interface TeamPlayer {
+  name: string;
+  fantasyteam: number;
+  score: number;
+  status: string;
+}
 
 // search page
 
