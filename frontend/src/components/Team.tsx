@@ -65,6 +65,13 @@ export default function Team() {
       });
   }, []);
 
+  useEffect(() => {
+    const element = document.querySelector('.bm-menu') as HTMLElement; // Replace with the actual selector for your element
+    if (element) {
+      element.style.overflow = 'visible';
+    }
+  }, []);
+
   return (
     <div>
       <Menu>

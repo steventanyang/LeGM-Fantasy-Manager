@@ -21,6 +21,14 @@ export default function SearchAi() {
     }
   };
 
+  useEffect(() => {
+    // Select the element and override the style
+    const element = document.querySelector('.bm-menu') as HTMLElement; // Type assertion here
+    if (element) {
+      element.style.overflow = 'visible';
+    }
+  }, []);
+
   return (
       <div style={{ backgroundColor:'#5C7C8A', width: '100vw', height: '100vh' }}>
         <Menu>

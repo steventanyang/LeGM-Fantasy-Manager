@@ -432,6 +432,14 @@ export default function Search() {
     }
   }, [searchTerm]); // Re-run this effect when searchTerm changes
 
+  useEffect(() => {
+    // Select the element and override the style
+    const element = document.querySelector('.bm-menu') as HTMLElement; // Replace with the actual selector for your element
+    if (element) {
+      element.style.overflow = 'visible';
+    }
+  }, []);
+
   const handleSearch = (newValue: string) => {
     setSearchTerm(newValue); // This will trigger the useEffect hooks above
   };

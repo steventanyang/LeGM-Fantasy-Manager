@@ -127,6 +127,14 @@ export default function InjuryReport() {
         });
     }
   }, [selectedPlayer]);
+
+  useEffect(() => {
+    // Select the element and override the style
+    const element = document.querySelector('.bm-menu') as HTMLElement; // Replace with the actual selector for your element
+    if (element) {
+      element.style.overflow = 'visible';
+    }
+  }, []);
   
 
   const playerName = selectedPlayer?.Name as string;

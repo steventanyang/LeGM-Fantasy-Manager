@@ -1,5 +1,6 @@
 import '../static/Waiver.css';
 import { slide as Menu } from 'react-burger-menu'
+import { useState, useEffect } from 'react';
 
 
 const PlayerScore = (props: 
@@ -55,6 +56,14 @@ export default function Waiver() {
     { name: 'Lamelo Ball', score: 45.26, status: 'DTD', value: 10.23 },
     { name: 'Lamelo Ball', score: 45.26, status: 'DTD', value: 10.23 },
   ];
+
+  useEffect(() => {
+    // Select the element and override the style
+    const element = document.querySelector('.bm-menu') as HTMLElement; // Replace with the actual selector for your element
+    if (element) {
+      element.style.overflow = 'visible';
+    }
+  }, []);
 
   return (
       <div>

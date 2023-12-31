@@ -1,7 +1,7 @@
 import '../static/Home.css';
 import { slide as Menu } from 'react-burger-menu'
 import { useNavigate } from 'react-router-dom';
-
+import { useEffect } from 'react';
 
 export default function Home() {
 
@@ -22,6 +22,14 @@ export default function Home() {
   const injury = () => {
     navigate('/injuryreport'); 
   };
+
+  useEffect(() => {
+    // Select the element and override the style
+    const element = document.querySelector('.bm-menu') as HTMLElement; // Type assertion here
+    if (element) {
+      element.style.overflow = 'visible';
+    }
+  }, []);
 
   return (
     <div>
