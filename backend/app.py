@@ -1,8 +1,16 @@
-from flask import Flask
-from flask import jsonify
+from flask import Flask, request, jsonify
+from scripts.selenium.statmuse import statmuseSearch
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 import requests
 import json
+import time
 from datetime import datetime, timedelta
 # from espnapi.basketball import League
 
@@ -156,6 +164,43 @@ def players():
     ]
     return jsonify(player_data)
 
+#for selenium statmuse
+@app.route('/aisearch', methods=['GET'])
+def aisearch():
+
+    search_query = request.args.get('query', '')
+    print(search_query)
+    if not search_query:
+        return jsonify({"error": "No search query provided."}), 400
+    
+    service = Service(executable_path="./chromedriver")
+    driver = webdriver.Chrome(service=service)
+    website = 'https://www.statmuse.com/nba'
+
+    driver.get(website) #this gets the website
+
+    WebDriverWait(driver, 5).until( #we're waiting until everything loads
+	    EC.presence_of_element_located((By.NAME, "question[query]")) 
+    )
+
+    input_element = driver.find_element(By.NAME, "question[query]") #finds the search bar
+    input_element.send_keys(search_query + Keys.ENTER) #enters the search
+
+
+    WebDriverWait(driver, 5).until( #we're waiting until everything loads
+	    EC.presence_of_element_located((By.XPATH, "//p[contains(@class, 'my-[1em]') and contains(@class, 'underline') and contains(@class, 'text-team-secondary')]")) 
+    )
+
+    element = driver.find_element(By.XPATH, "//p[contains(@class, 'my-[1em]') and contains(@class, 'underline') and contains(@class, 'text-team-secondary')]")
+
+    try: 
+        return jsonify({"result": element.text})
+    except Exception as e:
+        driver.quit()
+        return jsonify({"error": str(e)}), 500
+    finally:
+        print('quit')
+        driver.quit()
 
 
 @app.route('/stats')

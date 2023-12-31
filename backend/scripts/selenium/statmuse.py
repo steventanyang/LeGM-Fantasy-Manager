@@ -10,11 +10,10 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 
 
-service = Service(executable_path="./chromedriver")
-driver = webdriver.Chrome(service=service)
+def statmuseSearch(driver, website, search):
 
-def statmuseSearch(website, search):
-
+    # service = Service(executable_path="./chromedriver")
+    # driver = webdriver.Chrome(service=service)
     driver.get(website) #this gets the website
 
     WebDriverWait(driver, 5).until( #we're waiting until everything loads
@@ -30,12 +29,8 @@ def statmuseSearch(website, search):
     )
 
     element = driver.find_element(By.XPATH, "//p[contains(@class, 'my-[1em]') and contains(@class, 'underline') and contains(@class, 'text-team-secondary')]")
-    print(element.text)
-
-    time.sleep(10)
-    driver.quit()
 
     return element.text
 
-result = statmuseSearch("https://www.statmuse.com/nba", "most assists this season")
-print(result)
+# result = statmuseSearch("https://www.statmuse.com/nba", "most assists this season")
+# print(result)
