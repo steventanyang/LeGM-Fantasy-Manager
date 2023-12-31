@@ -50,8 +50,9 @@ const scoreColor = (score: number) => {
 };
 
 export default function Team() {
-  const [players, setPlayers] = useState<Playerteam[]>([]);
 
+  const [players, setPlayers] = useState<Playerteam[]>([]);
+  
   useEffect(() => {
     fetch('/players')
       .then(response => response.json())

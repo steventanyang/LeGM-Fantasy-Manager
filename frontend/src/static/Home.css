@@ -148,22 +148,59 @@ Note: Beware of modifying this element as it can break the animations - you shou
   justify-content: center;
   margin-right: 2%;
   margin-left: 2%;
-  margin-bottom: 20px; 
+  margin-bottom: none;
+  margin-top: 20px; 
   width: auto;
 }
 
 .home-content-container {
+  align-items: center;
   background: #fff;
-  border-radius: 20px;
+  border-radius: 40px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
   margin-top: none;
-  margin-left: 120px;
-  margin-right: 120px;
+  margin-left: 25px;
+  margin-right: 25px;
   padding: 20px;
-  width: 500px;
-  height: 600px;
+  width: 800px;
+  height: 573px;
 }
 
+.two-box-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-date-container {
+  align-items: center;
+  background: #fff;
+  border-radius: 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  margin-top: none;
+  margin-left: 25px;
+  margin-right: 25px;
+  padding: 20px;
+  width: 800px;
+  height: 50px;
+}
+
+.home-date-text {
+  color: #5C7C8A;
+  font-family: "Poppins";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  justify-content: flex-end;
+  line-height: normal;
+  margin-bottom: none;
+  text-align: center;
+}
 
 .home-bottom-container {
   display: flex;
@@ -210,3 +247,220 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .home-nav-buttons:hover {
   background-color: #282c34;
 }
+
+
+
+/* left team card */
+
+.user-team {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  justify-content: center;
+  margin-right: 25px;
+  width: 320px;
+}
+
+.home-image-container {
+  border: #282c34;
+  border-radius: 20px;
+  border-width: 5px;
+  display: flex;
+  justify-content: center;
+}
+  
+.team-image {
+  border-radius: 10px;
+  height: 300px;
+  width: 250px;
+}
+
+.home-title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: none;
+}
+
+.home-name-text {
+  color: #144458;
+  font-family: "Poppins";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  justify-content: flex-end;
+  line-height: normal;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.record-bar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.record-bar-wins {
+  background-color: #86B16C;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  text-align: center;
+  width: 50%;
+}
+
+.record-bar-losses {
+  background-color: #D66464;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  text-align: center;
+  width: 50%;
+}
+
+.record-bar-number {
+  color: #fff;
+  font-family: "Poppins";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  padding: 5px 10px;
+}
+
+.home-rank-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.home-rank-title {
+  color: #144458;
+  font-family: "Poppins";
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.home-rank {
+  align-items: center;
+  background-color: #373a47;
+  border-radius: 35px;
+  color: #FFF;
+  text-align: center;
+  font-family: "Poppins";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-left: 10px;
+  padding: 5px 30px;
+}
+
+
+
+
+.user-team-info {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  width: 300px;
+}
+
+.user-team-stat-title {
+  color: #144458;
+  font-family: "Poppins";
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  justify-content: flex-end;
+  line-height: normal;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.home-stats-table-container {
+  display: flex; 
+  flex-direction: row;
+  justify-content: center;
+}
+
+.home-stats-table-titles {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-stats-table-titles-text {
+  color: #5C7C8A;
+  font-family: "Poppins";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  margin-right: 10px;
+  margin-top: 10px; 
+  margin-bottom: 10px;
+}
+
+.home-stats-table-values {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-stats-table-values-text {
+  background-color: black;
+  border-radius: 25px;
+  color: #fff;
+  font-family: "Poppins";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  padding: 5px 0px;
+  margin-left: 10px;
+  margin-top: 5px; 
+  margin-bottom: 5px;
+  text-align: center;
+  width: 100px;
+}
+
+
+/* right matchup card */
+
+.matchup-week-title {
+  color: #144458;
+  font-family: "Poppins";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  justify-content: flex-end;
+  line-height: normal;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.current-matchup-container {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+}
+
+.current-matchup-user {
+  display: flex;
+  flex-direction: column;
+  margin-right: 25px;
+  width: 300px;
+}
+
+.next-matchup-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: auto;
+}
+

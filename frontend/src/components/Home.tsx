@@ -1,7 +1,163 @@
 import '../static/Home.css';
 import { slide as Menu } from 'react-burger-menu'
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import dayjs from 'dayjs';
+import advancedFormat from 'dayjs/plugin/advancedFormat';
+dayjs.extend(advancedFormat);
+
+const Userteam = (props: 
+  { 
+    imageUrl: string; 
+    name: string; 
+    wins: number; 
+    losses: number;
+    rank: number;
+    playoff_per: number;
+    playoffseed: number;
+    gamesback: number;
+    winstreak: number;
+    legmscore: number;
+    draftrank: number;
+  }
+  ) => {
+
+  return (
+    <>
+    <div className='user-team'>
+
+      <div className="home-image-container">
+        <img
+          src={props.imageUrl}
+          alt={props.name}
+          className="team-image"
+        />
+      </div>
+
+      <div className='home-title-container'>
+        <p className='home-name-text'>{props.name}</p>
+      </div>
+
+      <div className='record-bar-container'>
+        <div className='record-bar-wins'><p className='record-bar-number'>{props.wins}</p></div>
+        <div className='record-bar-losses'><p className='record-bar-number'>{props.losses}</p></div>
+      </div>
+
+      <div className='home-rank-container'>
+        <p className='home-rank-title'>rank</p>
+        <div className='home-rank'>{props.rank}</div>
+      </div>
+
+    </div>
+
+    <div className='user-team-info'>
+
+      <div className='user-team-stat-title'>Stats</div>
+
+        <div className='home-stats-table-container'>
+          <div className='home-stats-table-titles'>
+            <p className='home-stats-table-titles-text'>playoff %</p>
+            <p className='home-stats-table-titles-text'>playoff seed</p>
+            <p className='home-stats-table-titles-text'>games back</p>
+            <p className='home-stats-table-titles-text'>win streak</p>
+          </div>
+
+          <div className='home-stats-table-values'>
+            <p className='home-stats-table-values-text'>{props.playoff_per}</p>
+            <p className='home-stats-table-values-text'>{props.playoffseed}</p>
+            <p className='home-stats-table-values-text'>{props.gamesback}</p>
+            <p className='home-stats-table-values-text'>{props.winstreak}</p>
+          </div>
+        </div>
+        
+      <div className='user-team-stat-title' style={{ marginTop: '15px' }}>Team</div>
+        <div className='home-stats-table-container'>
+          <div className='home-stats-table-titles'>
+            <p className='home-stats-table-titles-text'>LeGM score</p>
+            <p className='home-stats-table-titles-text'>draft rank</p>
+          </div>
+
+          <div className='home-stats-table-values'>
+            <p className='home-stats-table-values-text' style={{ fontSize: '22px', padding: '8px 0px' }}>{props.legmscore}</p>
+            <p className='home-stats-table-values-text'>{props.draftrank}</p>
+          </div>
+        </div>
+    </div>
+    </>
+  );
+}
+
+const Matchups = (props: 
+  {
+    currentmatchup: string; 
+    wins: number; 
+    losses: number;
+    rank: number;
+    legmscore: number;
+    playoff_per: number;
+    winstreak: number;
+    nextmatchup: string;
+    next_rank: number;
+  }
+  ) => {
+
+  const startOfWeek1 = dayjs('2023-10-23');
+  const currentDate = dayjs();
+  const weekNumber = currentDate.diff(startOfWeek1, 'week') + 1;
+
+  return (
+    <>
+      <div className='matchup-week-title'>Week {weekNumber}</div>
+
+      <div className='current-matchup-container'>
+
+        <div className='current-matchup-user'>
+          <div className='home-title-container'>
+            <p className='home-name-text' style={{ color: '#5C7C8A' }}>{props.currentmatchup}</p>
+          </div>
+
+          <div className='record-bar-container'>
+            <div className='record-bar-wins'><p className='record-bar-number'>{props.wins}</p></div>
+            <div className='record-bar-losses'><p className='record-bar-number'>{props.losses}</p></div>
+          </div>
+
+          <div className='home-rank-container'>
+            <p className='home-rank-title' style={{ color: '#5C7C8A' }}>rank</p>
+            <div className='home-rank'>{props.rank}</div>
+          </div>
+        </div>
+
+        <div className='home-stats-table-container' style={{ marginLeft: '35px' }}>
+          <div className='home-stats-table-titles'>
+            <p className='home-stats-table-titles-text'>LeGM score</p>
+            <p className='home-stats-table-titles-text'>playoff %</p>
+            <p className='home-stats-table-titles-text'>win streak</p>
+          </div>
+
+          <div className='home-stats-table-values'>
+            <p className='home-stats-table-values-text'>{props.legmscore}</p>
+            <p className='home-stats-table-values-text'>{props.playoff_per}</p>
+            <p className='home-stats-table-values-text'>{props.winstreak}</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div className='matchup-week-title' style={{ fontSize: '28px' , marginTop: '35px' }}>Next Matchup</div>
+
+      <div className='next-matchup-container'> 
+        <div className='home-name-text' style={{  color: '#5C7C8A', fontSize: '28px', marginBottom: '0px', marginRight: '20px' }}>
+          {props.nextmatchup}
+        </div>
+        <div className='home-rank-container' style={{ marginTop: '0px', marginLeft: '20px' }}>
+            <p className='home-rank-title' style={{ color: '#5C7C8A', marginTop: '0px' }}>rank</p>
+            <div className='home-rank'>{props.next_rank}</div>
+        </div>
+      </div>
+
+    </>
+  );
+}
 
 export default function Home() {
 
@@ -24,12 +180,46 @@ export default function Home() {
   };
 
   useEffect(() => {
-    // Select the element and override the style
-    const element = document.querySelector('.bm-menu') as HTMLElement; // Type assertion here
+    const element = document.querySelector('.bm-menu') as HTMLElement;
     if (element) {
       element.style.overflow = 'visible';
     }
   }, []);
+
+  const [userteam, setTeam] = useState<Userteam | undefined>(undefined);
+  const [currentmatch, setCurrentMatch] = useState<Current | undefined>(undefined);
+
+  useEffect(() => {
+    fetch('/teams')
+      .then(response => response.json())
+      .then(data => {
+        const filteredTeam = data.find((userteam: Userteam) => userteam.team_id === 1);
+        setTeam(filteredTeam);
+      })
+      .catch(error => {
+        console.error('Error fetching team:', error);
+      });
+  }, []);
+  
+  useEffect(() => {
+    const currentMatchup = userteam?.currentmatchup as string;
+    fetch('/teams')
+      .then(response => response.json())
+      .then(data => {
+        const current = data.find((currentmatch: Current) => currentmatch.name === currentMatchup);
+        setCurrentMatch(current);
+      })
+      .catch(error => {
+        console.error('Error fetching current:', error);
+      });
+  }, [userteam?.currentmatchup]);
+
+  const currentDate = dayjs().format('dddd MMMM Do YYYY');
+  
+  const teamName = userteam?.name as string;
+
+
+  const currentName = currentmatch?.name as string;
 
   return (
     <div>
@@ -47,7 +237,44 @@ export default function Home() {
       </div>
 
       <div className="home-main-container">
-        <div className="home-content-container"></div>
+        <div className="home-content-container" style={{ flexDirection: 'row' }}>
+          <Userteam
+            imageUrl='https://g.espncdn.com/lm-static/fba/images/default_logos/8.svg'
+            name={teamName}
+            wins={9}
+            losses={1}
+            rank={2}
+            playoff_per={2}
+            playoffseed={3}
+            gamesback={5}
+            winstreak={5}
+            legmscore={114.3}
+            draftrank={5}
+          />
+        </div>
+
+        <div className='two-box-container'>
+
+          <div className='home-date-container'>
+            <p className='home-date-text'>{currentDate}</p>
+          </div>
+
+          <div className="home-content-container" style={{ flexDirection: 'column', height: '450px' }}>
+            <div></div>
+            <Matchups
+              currentmatchup={currentName}
+              wins={9}
+              losses={1}
+              rank={2}
+              legmscore={114.3}
+              playoff_per={2}
+              winstreak={5}
+              nextmatchup="Team Hay"
+              next_rank={4}
+            />
+          </div>
+
+        </div>
       </div>
 
       <div className="home-bottom-container">

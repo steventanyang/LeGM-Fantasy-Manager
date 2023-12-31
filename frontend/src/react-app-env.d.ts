@@ -3,6 +3,31 @@ declare module 'react-burger-menu';
 declare module 'typewriter-effect/dist/core'
 
 
+// home page
+
+interface Userteam {
+  team_id: number;
+  name: string;
+  wins: number;
+  losses: number;
+  rank: number;
+  playoffpercentage: number;
+  playoffseed: number;
+  gamesback: number;
+  winstreak: number;
+  legmscore: number;
+  draftrank: number;
+
+  currentmatchup: string;
+  nextmatchup: string;
+}
+
+interface Current {
+  name: string;
+}
+
+
+
 // team page
 
 interface Playerteam {
