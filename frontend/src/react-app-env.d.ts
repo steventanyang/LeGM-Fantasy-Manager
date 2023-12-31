@@ -10,7 +10,7 @@ interface Userteam {
   name: string;
   wins: number;
   losses: number;
-  rank: number;
+  projectedrank: number;
   playoffpercentage: number;
   playoffseed: number;
   gamesback: number;
@@ -24,6 +24,17 @@ interface Userteam {
 
 interface Current {
   name: string;
+  wins: number;
+  losses: number;
+  projectedrank: number;
+  legmscore: number;
+  playoffpercentage: number;
+  winstreak: number;
+}
+
+interface Next {
+  name: string;
+  projectedrank: number;
 }
 
 

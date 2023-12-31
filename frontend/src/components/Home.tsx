@@ -188,6 +188,7 @@ export default function Home() {
 
   const [userteam, setTeam] = useState<Userteam | undefined>(undefined);
   const [currentmatch, setCurrentMatch] = useState<Current | undefined>(undefined);
+  const [nextmatch, setNextMatch] = useState<Next | undefined>(undefined);
 
   useEffect(() => {
     fetch('/teams')
@@ -214,12 +215,43 @@ export default function Home() {
       });
   }, [userteam?.currentmatchup]);
 
+  useEffect(() => {
+    const nextMatchup = userteam?.nextmatchup as string;
+    fetch('/teams')
+      .then(response => response.json())
+      .then(data => {
+        const next = data.find((nextmatch: Next) => nextmatch.name === nextMatchup);
+        setNextMatch(next);
+      })
+      .catch(error => {
+        console.error('Error fetching next:', error);
+      });
+  }, [userteam?.nextmatchup]);
+
   const currentDate = dayjs().format('dddd MMMM Do YYYY');
-  
+
   const teamName = userteam?.name as string;
-
-
+  const teamWins = userteam?.wins as number;
+  const teamLosses = userteam?.losses as number;
+  const teamRank = userteam?.projectedrank as number;
+  const teamPlayoffPercentage = userteam?.playoffpercentage as number;
+  const teamPlayoffSeed = userteam?.playoffseed as number;
+  const teamGamesBack = userteam?.gamesback as number;
+  const teamWinStreak = userteam?.winstreak as number;
+  const teamLegmScore = userteam?.legmscore as number;
+  const teamDraftRank = userteam?.draftrank as number;
+  
   const currentName = currentmatch?.name as string;
+  const currentWins = currentmatch?.wins as number;
+  const currentLosses = currentmatch?.losses as number;
+  const currentRank = currentmatch?.projectedrank as number;
+  const currentLegmScore = currentmatch?.legmscore as number;
+  const currentPlayoffPercentage = currentmatch?.playoffpercentage as number;
+  const currentWinStreak = currentmatch?.winstreak as number;
+  
+
+  const nextName = nextmatch?.name as string;
+  const nextRank = nextmatch?.projectedrank as number;
 
   return (
     <div>
@@ -241,15 +273,15 @@ export default function Home() {
           <Userteam
             imageUrl='https://g.espncdn.com/lm-static/fba/images/default_logos/8.svg'
             name={teamName}
-            wins={9}
-            losses={1}
-            rank={2}
-            playoff_per={2}
-            playoffseed={3}
-            gamesback={5}
-            winstreak={5}
-            legmscore={114.3}
-            draftrank={5}
+            wins={teamWins}
+            losses={teamLosses}
+            rank={teamRank}
+            playoff_per={teamPlayoffPercentage}
+            playoffseed={teamPlayoffSeed}
+            gamesback={teamGamesBack}
+            winstreak={teamWinStreak}
+            legmscore={teamLegmScore}
+            draftrank={teamDraftRank}
           />
         </div>
 
@@ -263,14 +295,14 @@ export default function Home() {
             <div></div>
             <Matchups
               currentmatchup={currentName}
-              wins={9}
-              losses={1}
-              rank={2}
-              legmscore={114.3}
-              playoff_per={2}
-              winstreak={5}
-              nextmatchup="Team Hay"
-              next_rank={4}
+              wins={currentWins}
+              losses={currentLosses}
+              rank={currentRank}
+              legmscore={currentLegmScore}
+              playoff_per={currentPlayoffPercentage}
+              winstreak={currentWinStreak}
+              nextmatchup={nextName}
+              next_rank={nextRank}
             />
           </div>
 
