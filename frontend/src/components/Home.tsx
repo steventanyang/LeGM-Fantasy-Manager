@@ -82,7 +82,7 @@ const Userteam = (props:
             <p className='home-stats-table-values-text'>{props.draftrank}</p>
           </div>
         </div>
-    </div>
+      </div>
     </>
   );
 }

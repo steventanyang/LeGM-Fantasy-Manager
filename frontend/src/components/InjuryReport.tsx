@@ -92,7 +92,6 @@ const News = ({ newsItem, onNewsItemClick }: { newsItem: { Title: string; Conten
   );
 }
 
-
 export default function InjuryReport() {
 
   const [selectedPlayer, setSelectedPlayer] = useState<Playercard | null>(null);
@@ -129,8 +128,7 @@ export default function InjuryReport() {
   }, [selectedPlayer]);
 
   useEffect(() => {
-    // Select the element and override the style
-    const element = document.querySelector('.bm-menu') as HTMLElement; // Replace with the actual selector for your element
+    const element = document.querySelector('.bm-menu') as HTMLElement;
     if (element) {
       element.style.overflow = 'visible';
     }

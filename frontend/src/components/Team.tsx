@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 const PlayerStatus = (props: 
     { name: string; score: number; status: string }) => {
 
-  // Define a function to get the status class based on the status text
   const getStatusClass = () => {
     switch (props.status) {
       case 'ACTIVE':
@@ -39,6 +38,72 @@ const PlayerStatus = (props:
   );
 };
 
+const BigPlayerCard = () => {
+  return (
+    <>
+      <div className='team-player-info-container'>
+
+        <div className='horizontal-player-card'>
+
+          <span className='image-status'>
+            <span className="team-player-image-container">
+              <img
+                src='https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203507.png'
+                alt='name'
+                className="team-player-image"
+              />
+            </span>
+            <span className='team-player-card-status'>active</span>
+          </span>
+
+          <div className='home-stats-table-container'>
+            <div className='home-stats-table-titles'>
+              <p className='home-stats-table-titles-text'>FPPG</p>
+              <p className='home-stats-table-titles-text'>position</p>
+              <p className='home-stats-table-titles-text'>LeGM score</p>
+              <p className='home-stats-table-titles-text'>pos rank</p>
+              <p className='home-stats-table-titles-text'>ovr rank</p>
+            </div>
+
+            <div className='home-stats-table-values'>
+              <p className='home-stats-table-values-text'>4</p>
+              <p className='home-stats-table-values-text'>5</p>
+              <p className='home-stats-table-values-text'>5</p>
+              <p className='home-stats-table-values-text'>4</p>
+              <p className='home-stats-table-values-text'>4</p>
+            </div>
+          </div>
+
+        </div>
+
+        <h2 className='team-player-title'>Shai Gilgeous-Alexander</h2>
+
+        <div className='team-player-stats-container'>
+          <div className='team-stats-table-container'>
+            <div className='home-stats-table-titles'>
+              <p className='team-stats-table-titles-text'>PTS</p>
+              <p className='team-stats-table-titles-text'>AST</p>
+              <p className='team-stats-table-titles-text'>REB</p>
+              <p className='team-stats-table-titles-text'>TOV</p>
+              <p className='team-stats-table-titles-text'>STL</p>
+              <p className='team-stats-table-titles-text'>BLK</p>
+            </div>
+
+            <div className='team-stats-table-values'>
+              <p className='team-stats-table-values-text'>4</p>
+              <p className='team-stats-table-values-text'>5</p>
+              <p className='team-stats-table-values-text'>5</p>
+              <p className='team-stats-table-values-text'>4</p>
+              <p className='team-stats-table-values-text'>4</p>
+              <p className='team-stats-table-values-text'>4</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
 const scoreColor = (score: number) => {
   if (score >= 50) {
     return 'green';
@@ -52,6 +117,8 @@ const scoreColor = (score: number) => {
 export default function Team() {
 
   const [players, setPlayers] = useState<Playerteam[]>([]);
+  const [selectedPlayer, setSelectedPlayer] = useState<Playercard | null>(null);
+  const [playerHead, setPlayerHead] = useState<Playerhead | null>(null);
 
   useEffect(() => {
     fetch('/players')
@@ -65,6 +132,37 @@ export default function Team() {
         console.error('Error fetching players:', error);
       });
   }, []);
+
+  const handleNewsItemClick = (playerName: string) => {
+    fetch('/stats')
+      .then(response => response.json())
+      .then(data => {
+        const stats = data.find((player: Playercard) => player.Name === playerName);
+        if (stats) {
+          setSelectedPlayer(stats);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data: ', error);
+      });
+  };
+
+  useEffect(() => {
+
+    if (selectedPlayer) {
+      fetch('/players')
+        .then(response => response.json())
+        .then(data => {
+          const stats = data.find((playerHead: Playerhead) => playerHead.name === selectedPlayer.Name);
+          if (stats) {
+            setPlayerHead(stats);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching data: ', error);
+        });
+    }
+  }, [selectedPlayer]);
 
   useEffect(() => {
     const element = document.querySelector('.bm-menu') as HTMLElement; // Replace with the actual selector for your element
@@ -97,10 +195,7 @@ export default function Team() {
         
         <div className='team-right-side'>
           <div className='team-title'>My Team</div>
-          <div className='team-player-info-container'>
-
-            
-          </div>
+            <BigPlayerCard/>
         </div>
 
       </div>
