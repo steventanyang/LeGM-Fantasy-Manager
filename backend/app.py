@@ -83,29 +83,6 @@ class Player(Base):
         headshot_id={self.headshot_id}, name={self.name}, team={self.team}, value={self.value}, \
         rostered={self.rostered}, score={self.score}, fantasyteam={self.fantasyteam}, status={self.status}, \
         posrank={self.posrank}, ovrrank={self.ovrrank}, pos={self.pos})>"
-        class Teams(Base):
-            __tablename__ = 'teams'
-            team_id = Column(Integer, primary_key=True)
-            name = Column(String(100))
-            currentmatchup = Column(Integer)
-            nextmatchup = Column(Integer)
-            espnid = Column(Integer)
-            wins = Column(Integer)
-            losses = Column(Integer)
-            projectedrank = Column(Integer)
-            draftrank = Column(Integer)
-            legmscore = Column(Numeric(4, 1))
-            playoffpercentage = Column(Numeric(4, 3))
-            playoffseed = Column(Integer)
-            gamesback = Column(Integer)
-            winstreak = Column(Integer)
-
-            def __repr__(self):
-                return f"<Team(name={self.name}, team_id={self.team_id}, currentmatchup={self.currentmatchup}, \
-                nextmatchup={self.nextmatchup}, espnid={self.espnid}, wins={self.wins}, losses={self.losses}, \
-                projectedrank={self.projectedrank}, draftrank={self.draftrank}, legmscore={self.legmscore}, \
-                playoffpercentage={self.playoffpercentage}, playoffseed={self.playoffseed}, gamesback={self.gamesback}, \
-                winstreak={self.winstreak})>"
 
 app = Flask(__name__)
 

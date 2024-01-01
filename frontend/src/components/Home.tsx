@@ -98,6 +98,8 @@ const Matchups = (props:
     winstreak: number;
     nextmatchup: string;
     next_rank: number;
+    next_wins: number;
+    next_losses: number;
   }
   ) => {
 
@@ -143,15 +145,22 @@ const Matchups = (props:
 
       </div>
 
-      <div className='matchup-week-title' style={{ fontSize: '28px' , marginTop: '35px' }}>Next Matchup</div>
+      <div className='matchup-week-title' style={{ fontSize: '28px' , marginTop: '45px' }}>Next Matchup</div>
 
-      <div className='next-matchup-container'> 
+      <div className='next-matchup-container' style={{ marginTop: '15px' }}> 
         <div className='home-name-text' style={{  color: '#5C7C8A', fontSize: '28px', marginBottom: '0px', marginRight: '20px' }}>
           {props.nextmatchup}
         </div>
         <div className='home-rank-container' style={{ marginTop: '0px', marginLeft: '20px' }}>
             <p className='home-rank-title' style={{ color: '#5C7C8A', marginTop: '0px' }}>rank</p>
             <div className='home-rank'>{props.next_rank}</div>
+        </div>
+      </div>
+
+      <div className='next-matchup-container'> 
+        <div className='record-bar-container' style={{ width: '300px' }}>
+          <div className='record-bar-wins'><p className='record-bar-number'>{props.wins}</p></div>
+          <div className='record-bar-losses'><p className='record-bar-number'>{props.losses}</p></div>
         </div>
       </div>
 
@@ -228,8 +237,6 @@ export default function Home() {
       });
   }, [userteam?.nextmatchup]);
 
-  const currentDate = dayjs().format('dddd MMMM Do YYYY');
-
   const teamName = userteam?.name as string;
   const teamWins = userteam?.wins as number;
   const teamLosses = userteam?.losses as number;
@@ -252,6 +259,8 @@ export default function Home() {
 
   const nextName = nextmatch?.name as string;
   const nextRank = nextmatch?.projectedrank as number;
+  const nextWins = nextmatch?.wins as number;
+  const nextLosses = nextmatch?.losses as number;
 
   return (
     <div>
@@ -285,14 +294,7 @@ export default function Home() {
           />
         </div>
 
-        <div className='two-box-container'>
-
-          <div className='home-date-container'>
-            <p className='home-date-text'>{currentDate}</p>
-          </div>
-
-          <div className="home-content-container" style={{ flexDirection: 'column', height: '450px' }}>
-            <div></div>
+          <div className="home-content-container" style={{ flexDirection: 'column', height: '550px' }}>
             <Matchups
               currentmatchup={currentName}
               wins={currentWins}
@@ -303,20 +305,19 @@ export default function Home() {
               winstreak={currentWinStreak}
               nextmatchup={nextName}
               next_rank={nextRank}
+              next_wins={nextWins}
+              next_losses={nextLosses}
             />
           </div>
 
-        </div>
       </div>
 
       <div className="home-bottom-container">
         <div className="home-button-container">
-
           <button onClick={team} className='home-nav-buttons' style={{ marginLeft:'10px'}}>My Team</button>
           <button onClick={search} className='home-nav-buttons'>Search</button>
           <button onClick={waiver} className='home-nav-buttons'>Waiver Wire</button>
           <button onClick={injury} className='home-nav-buttons' style={{ marginRight:'10px'}}>News</button>
-
         </div>
       </div>
     </div>

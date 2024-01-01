@@ -52,7 +52,7 @@ const scoreColor = (score: number) => {
 export default function Team() {
 
   const [players, setPlayers] = useState<Playerteam[]>([]);
-  
+
   useEffect(() => {
     fetch('/players')
       .then(response => response.json())
@@ -84,6 +84,7 @@ export default function Team() {
         <a id="injuryreport" className="menu-item" href="/injuryreport">News</a>
       </Menu>
       <div className="team-page-container">
+
         <div className="team-list">
           <div className="team-list-title">
             <p className="team-title-text">score</p>
@@ -92,9 +93,15 @@ export default function Team() {
           {players.map((player, index) => (
             <PlayerStatus key={index} name={player.name} score={player.score} status={player.status} />
           ))}
-
         </div>
+        
+        <div className='team-right-side'>
+          <div className='team-title'>My Team</div>
+          <div className='team-player-info-container'>
 
+            
+          </div>
+        </div>
 
       </div>
     </div>

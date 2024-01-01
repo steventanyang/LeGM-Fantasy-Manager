@@ -35,6 +35,8 @@ interface Current {
 interface Next {
   name: string;
   projectedrank: number;
+  wins: number;
+  losses: number;
 }
 
 

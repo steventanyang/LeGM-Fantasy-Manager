@@ -35,7 +35,7 @@ class Teams(Base):
         playoffpercentage={self.playoffpercentage}, playoffseed={self.playoffseed}, gamesback={self.gamesback}, \
         winstreak={self.winstreak})>"
 
-start_date = datetime(2023, 10, 24)
+start_date = datetime(2023, 10, 23)
 current_date = datetime.now()
 days_difference = (current_date - start_date).days
 current_week = (days_difference // 7) + 1
