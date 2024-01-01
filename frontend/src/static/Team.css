@@ -154,7 +154,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   font-style: normal;
   font-weight: 700;
   margin-left: 25px;
-  margin-right: 20px;
+  margin-right: 0px;
 }
 
 .team-player-status {

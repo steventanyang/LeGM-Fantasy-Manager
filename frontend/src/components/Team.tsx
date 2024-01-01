@@ -44,7 +44,27 @@ const PlayerStatus = (props:
   );
 };
 
-const BigPlayerCard = ({ player, imageUrl }: BigPlayerCardProps) => {
+const BigPlayerCard = ({ player, playerstats, imageUrl }: BigPlayerCardProps) => {
+
+
+  const playerName = player?.Name as string;
+  const playerGames = player?.Games as number;
+  const totalPoints = player?.Points as number;
+  const totalAssists = player?.Assists as number;
+  const totalRebounds = player?.Rebounds as number;
+  const totalTurnovers = player?.Turnovers as number;
+  const totalSteals = player?.Steals as number;
+  const totalBlocks = player?.BlockedShots as number;
+  const totalFPPG = player?.FantasyPoints as number;
+
+  const pts = parseFloat((totalPoints / playerGames).toFixed(1));
+  const ast = parseFloat((totalAssists / playerGames).toFixed(1));
+  const reb = parseFloat((totalRebounds / playerGames).toFixed(1));
+  const tov = parseFloat((totalTurnovers / playerGames).toFixed(1));
+  const stl = parseFloat((totalSteals / playerGames).toFixed(1));
+  const blk = parseFloat((totalBlocks / playerGames).toFixed(1));
+  const fppg = parseFloat((totalFPPG / playerGames).toFixed(1));
+
   return (
     <>
       <div className='team-player-info-container'>
@@ -59,7 +79,9 @@ const BigPlayerCard = ({ player, imageUrl }: BigPlayerCardProps) => {
                 className="team-player-image"
               />
             </span>
-            <span className='team-player-card-status'>active</span>
+            <span className='team-player-card-status'>
+              {playerstats?.status === 'DAY_TO_DAY' ? 'DAY TO DAY' : playerstats?.status}
+            </span>
           </span>
 
           <div className='home-stats-table-container'>
@@ -72,17 +94,17 @@ const BigPlayerCard = ({ player, imageUrl }: BigPlayerCardProps) => {
             </div>
 
             <div className='home-stats-table-values'>
-              <p className='home-stats-table-values-text'>4</p>
-              <p className='home-stats-table-values-text'>5</p>
-              <p className='home-stats-table-values-text'>5</p>
-              <p className='home-stats-table-values-text'>4</p>
-              <p className='home-stats-table-values-text'>4</p>
+              <p className='home-stats-table-values-text'>{fppg}</p>
+              <p className='home-stats-table-values-text'>{playerstats?.pos}</p>
+              <p className='home-stats-table-values-text'>{playerstats?.score || '?'}</p>
+              <p className='home-stats-table-values-text'>{playerstats?.posrank || '?'}</p>
+              <p className='home-stats-table-values-text'>{playerstats?.ovrrank || '?'}</p>
             </div>
           </div>
 
         </div>
 
-        <h2 className='team-player-title'>{player?.Name}</h2>
+        <h2 className='team-player-title'>{playerName}</h2>
 
         <div className='team-player-stats-container'>
           <div className='team-stats-table-container'>
@@ -96,12 +118,12 @@ const BigPlayerCard = ({ player, imageUrl }: BigPlayerCardProps) => {
             </div>
 
             <div className='team-stats-table-values'>
-              <p className='team-stats-table-values-text'>4</p>
-              <p className='team-stats-table-values-text'>5</p>
-              <p className='team-stats-table-values-text'>5</p>
-              <p className='team-stats-table-values-text'>4</p>
-              <p className='team-stats-table-values-text'>4</p>
-              <p className='team-stats-table-values-text'>4</p>
+              <p className='team-stats-table-values-text'>{pts}</p>
+              <p className='team-stats-table-values-text'>{ast}</p>
+              <p className='team-stats-table-values-text'>{reb}</p>
+              <p className='team-stats-table-values-text'>{tov}</p>
+              <p className='team-stats-table-values-text'>{stl}</p>
+              <p className='team-stats-table-values-text'>{blk}</p>
             </div>
           </div>
         </div>
@@ -201,7 +223,7 @@ export default function Team() {
               onPlayerClick={handlePlayerClick} 
               key={index} name={player.name} 
               score={player.score} 
-              status={player.status} />
+              status={player.status}/>
           ))}
         </div>
 
@@ -210,6 +232,7 @@ export default function Team() {
             {selectedPlayer && headshot && (
               <BigPlayerCard 
                 player={selectedPlayer}
+                playerstats={playerHead}
                 imageUrl={headshot}
               />
             )}

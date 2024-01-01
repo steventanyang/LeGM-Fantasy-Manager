@@ -7,6 +7,17 @@ import SearchBar from "material-ui-search-bar";
 const Player = (props: 
     { imageUrl: string; name: string; status: string; stats: Stats;}
   ) => {
+
+  const colorStatus = (value: string) => {
+    if (value == 'ACTIVE') {
+      return '#408416';
+    } else if (value == 'OUT') {
+      return '#CB3434';
+    } else {
+      return '#E29853';
+    }
+  };
+
   return (
     <div className="player-card">
 
@@ -19,7 +30,9 @@ const Player = (props:
       </div>
 
       <h2 className="player-name">{props.name}</h2>
-      <div className="player-status">{props.status}</div>
+      <div className="player-status" style={{ backgroundColor: colorStatus(props.status)}}>
+        {props.status === 'DAY_TO_DAY' ? 'DAY TO DAY' : props.status}
+      </div>
 
       <div className="player-stats">
         <div className="stat">
@@ -454,6 +467,7 @@ export default function Search() {
   const totalTurnovers = player?.Turnovers as number;
   const totalSteals = player?.Steals as number;
   const totalBlocks = player?.BlockedShots as number;
+  const totalFPPG = player?.FantasyPoints as number;
 
   const pts = parseFloat((totalPoints / playerGames).toFixed(1));
   const ast = parseFloat((totalAssists / playerGames).toFixed(1));
@@ -461,6 +475,7 @@ export default function Search() {
   const tov = parseFloat((totalTurnovers / playerGames).toFixed(1));
   const stl = parseFloat((totalSteals / playerGames).toFixed(1));
   const blk = parseFloat((totalBlocks / playerGames).toFixed(1));
+  const fppg = parseFloat((totalFPPG / playerGames).toFixed(1));
   
   //sportsdata.io advanced stats
 
@@ -474,10 +489,14 @@ export default function Search() {
   const min = parseFloat((playerMin / playerGames).toFixed(1));
   const plusMinus = parseFloat((playerPlusMinus / playerGames).toFixed(1));
   
-  // player headshot url
+  // player headshot url and other stats from database
 
   const nbaid = playerHead?.headshot_id as number;
   const headshot = `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${nbaid}.png`
+  const status = playerHead?.status as string;
+  const legmscore = playerHead?.score as number;
+  const position = playerHead?.pos as string;
+  const ovrrank = playerHead?.ovrrank as number;
 
   return (
       <div>
@@ -517,12 +536,12 @@ export default function Search() {
           <Player
             imageUrl={headshot}
             name={playerName}
-            status="active"
+            status={status}
             stats={{
-              fppg: 58.7,
-              legmScore: 54.3,
-              pos: 'SF',
-              ovrRank: 6 
+              fppg: fppg,
+              legmScore: legmscore,
+              pos: position,
+              ovrRank: ovrrank 
             }}
           />
           <Advanced

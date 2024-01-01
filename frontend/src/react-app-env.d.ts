@@ -48,10 +48,14 @@ interface Playerteam {
   fantasyteam: number;
   score: number;
   status: string;
+  value: number;
+  posrank: number;
+  ovrrank: number;
 }
 
 type BigPlayerCardProps = {
   player: Playercard | null;
+  playerstats: Playerhead | null;
   imageUrl: string;
 };
 
@@ -92,6 +96,9 @@ interface Playerstat {
   Steals: number;
   BlockedShots: number;
   
+  FantasyPoints: number;
+
+
   Minutes: number;
   PlusMinus: number;
   EffectiveFieldGoalsPercentage: number;
@@ -103,6 +110,11 @@ interface Playerstat {
 interface Playerhead {
   name: string;
   headshot_id: number;
+  status: string;
+  pos: string;
+  score: number;
+  posrank: number;
+  ovrrank: number;
 }
 
 
@@ -122,4 +134,12 @@ interface Playercard {
   Name: string;
   Games: number;
   Position: string;
+  Points: number;
+  Assists: number;
+  Rebounds: number;
+  Turnovers: number;
+  Steals: number;
+  BlockedShots: number;
+
+  FantasyPoints: number;
 }

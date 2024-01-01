@@ -159,8 +159,8 @@ const Matchups = (props:
 
       <div className='next-matchup-container'> 
         <div className='record-bar-container' style={{ width: '300px' }}>
-          <div className='record-bar-wins'><p className='record-bar-number'>{props.wins}</p></div>
-          <div className='record-bar-losses'><p className='record-bar-number'>{props.losses}</p></div>
+          <div className='record-bar-wins'><p className='record-bar-number'>{props.next_wins}</p></div>
+          <div className='record-bar-losses'><p className='record-bar-number'>{props.next_losses}</p></div>
         </div>
       </div>
 
