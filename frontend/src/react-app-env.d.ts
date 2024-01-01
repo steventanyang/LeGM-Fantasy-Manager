@@ -50,6 +50,11 @@ interface Playerteam {
   status: string;
 }
 
+type BigPlayerCardProps = {
+  player: Playercard | null;
+  imageUrl: string;
+};
+
 // search page
 
 interface Stats {

@@ -233,7 +233,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .team-right-side {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  width: 59%;
 }
 
 .team-title {
@@ -246,7 +246,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
   line-height: normal;
   margin-top: 20px;
   margin-right: 35px;
-  margin-bottom: 30px;
   text-align: end;
   width: auto;
 }
@@ -260,12 +259,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
   flex-direction: column;
   justify-content: center;
   margin-bottom: 30px;
-  margin-top: none;
+  margin-top: 30px;
   margin-left: 50px;
   margin-right: 25px;
   padding: 20px;
   width: 650px;
-  height: 730px;
+  height: 700px;
 }
 
 .horizontal-player-card {

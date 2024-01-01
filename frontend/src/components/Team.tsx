@@ -3,8 +3,12 @@ import { slide as Menu } from 'react-burger-menu'
 import { useState, useEffect } from 'react';
 
 const PlayerStatus = (props: 
-    { name: string; score: number; status: string }) => {
-
+    { name: string; 
+      score: number; 
+      status: string 
+      onPlayerClick: (title: string) => void;
+    }
+  ) => {
   const getStatusClass = () => {
     switch (props.status) {
       case 'ACTIVE':
@@ -32,13 +36,15 @@ const PlayerStatus = (props:
   return (
     <div className="team-player-status">
       <div className="team-player-score" style={{ backgroundColor: scoreColor(props.score) }}>{props.score}</div>
-      <div className="team-player-name">{props.name}</div>
+      <div className="team-player-name" onClick={() => props.onPlayerClick(props.name)} >
+        {props.name}
+      </div>
       <div className={`team-player-status-indicator ${getStatusClass()}`}>{getDisplayStatus()}</div>
     </div>
   );
 };
 
-const BigPlayerCard = () => {
+const BigPlayerCard = ({ player, imageUrl }: BigPlayerCardProps) => {
   return (
     <>
       <div className='team-player-info-container'>
@@ -48,7 +54,7 @@ const BigPlayerCard = () => {
           <span className='image-status'>
             <span className="team-player-image-container">
               <img
-                src='https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/203507.png'
+                src={imageUrl}
                 alt='name'
                 className="team-player-image"
               />
@@ -76,7 +82,7 @@ const BigPlayerCard = () => {
 
         </div>
 
-        <h2 className='team-player-title'>Shai Gilgeous-Alexander</h2>
+        <h2 className='team-player-title'>{player?.Name}</h2>
 
         <div className='team-player-stats-container'>
           <div className='team-stats-table-container'>
@@ -133,7 +139,7 @@ export default function Team() {
       });
   }, []);
 
-  const handleNewsItemClick = (playerName: string) => {
+  const handlePlayerClick = (playerName: string) => {
     fetch('/stats')
       .then(response => response.json())
       .then(data => {
@@ -148,7 +154,6 @@ export default function Team() {
   };
 
   useEffect(() => {
-
     if (selectedPlayer) {
       fetch('/players')
         .then(response => response.json())
@@ -171,6 +176,9 @@ export default function Team() {
     }
   }, []);
 
+  const nbaid = playerHead?.headshot_id as number;
+  const headshot = nbaid ? `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${nbaid}.png` : '';
+
   return (
     <div>
       <Menu>
@@ -189,13 +197,22 @@ export default function Team() {
             <p className="team-title-text">status</p>
           </div>
           {players.map((player, index) => (
-            <PlayerStatus key={index} name={player.name} score={player.score} status={player.status} />
+            <PlayerStatus 
+              onPlayerClick={handlePlayerClick} 
+              key={index} name={player.name} 
+              score={player.score} 
+              status={player.status} />
           ))}
         </div>
-        
+
         <div className='team-right-side'>
           <div className='team-title'>My Team</div>
-            <BigPlayerCard/>
+            {selectedPlayer && headshot && (
+              <BigPlayerCard 
+                player={selectedPlayer}
+                imageUrl={headshot}
+              />
+            )}
         </div>
 
       </div>
