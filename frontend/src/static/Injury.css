@@ -127,7 +127,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   margin-right: 2%;
   margin-left: 2%;
   margin-bottom: 20px; 
-  width: 100vw;
+  width: auto;
 }
 
 
@@ -143,7 +143,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     margin-right: 75px;
     overflow-y: scroll;
     padding: 20px;
-    width: 55%;
+    width: 56%;
     height: 70vh;
 }
 

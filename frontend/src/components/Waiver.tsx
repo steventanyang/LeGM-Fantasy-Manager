@@ -52,38 +52,42 @@ export default function Waiver() {
 
   const [players, setPlayers] = useState<Playerteam[]>([]);
   const [lowRank, setLowRank] = useState<Playerteam[]>([]);
-  const [lowPosRank, setLowPosRank] = useState<Playerteam[]>([]);
+  
+  // useEffect(() => {
+  //   fetch('/top-players')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       const topPlayers = data;
+  //       setPlayers(topPlayers);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching players:', error);
+  //     });
+  // }, []);
+
+  // useEffect(() => {
+  //   fetch('/low-rank')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       const lowRankPlayers = data;
+  //       setLowRank(lowRankPlayers);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching players:', error);
+  //     });
+  // }, []);
 
   useEffect(() => {
     fetch('/top-players')
       .then(response => response.json())
       .then(data => {
-        const topPlayers = data;
-        setPlayers(topPlayers);
-      })
-      .catch(error => {
-        console.error('Error fetching players:', error);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetch('/low-rank')
-      .then(response => response.json())
-      .then(data => {
-        const lowRankPlayers = data;
-        setLowRank(lowRankPlayers);
-      })
-      .catch(error => {
-        console.error('Error fetching players:', error);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetch('/low-posrank')
-      .then(response => response.json())
-      .then(data => {
-        const lowPosRankPlayers = data;
-        setLowPosRank(lowPosRankPlayers);
+        // Extract the top value players and low rank players from the response
+        const topValuePlayers = data.top_value_players;
+        const lowOvrrankPlayers = data.low_ovrrank_players;
+  
+        // Update the state with the fetched data
+        setPlayers(topValuePlayers);
+        setLowRank(lowOvrrankPlayers);
       })
       .catch(error => {
         console.error('Error fetching players:', error);
@@ -132,18 +136,12 @@ export default function Waiver() {
             <div className="waiver-list-title">
               <p className="waiver-title-text">rank</p>
             </div>
-              {/* {lowRank.map((player, index) => (
+              {lowRank.map((player, index) => (
               <PlayerScore key={index} name={player.name} rank={player.ovrrank}/>
-              ))} */}
+              ))}
 
-            <div className="waiver-list-title">
-              <p className="waiver-title-text">pos rank</p>
             </div>
-              {/* {lowPosRank.map((player, index) => (
-              <PlayerScore key={index} name={player.name} rank={player.posrank}/>
-              ))} */}
           </div>
         </div>
-      </div>
     );
 }

@@ -151,13 +151,19 @@ def aisearch():
     if not search_query:
         return jsonify({"error": "No search query provided."}), 400
 
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-gpu")  # This line might be necessary for older versions of Chrome
-    chrome_options.add_argument("--no-sandbox") 
+    # chrome_options = Options()
+    # chrome_options.add_argument("--headless")
+    # chrome_options.add_argument("--disable-gpu") 
+    # # chrome_options.add_argument("--no-sandbox") 
+    options = Options()
+    # options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
+    options.add_argument('window-size=1920x1080')
+
     
     service = Service(executable_path="./chromedriver")
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver = webdriver.Chrome(service=service, options=options)
     website = 'https://www.statmuse.com/nba'
 
     driver.get(website) #this gets the website
@@ -169,8 +175,7 @@ def aisearch():
     input_element = driver.find_element(By.NAME, "question[query]") #finds the search bar
     input_element.send_keys(search_query + Keys.ENTER) #enters the search
 
-
-    WebDriverWait(driver, 5).until( #we're waiting until everything loads
+    WebDriverWait(driver, 10).until( #we're waiting until everything loads
 	    EC.presence_of_element_located((By.XPATH, "//p[contains(@class, 'my-[1em]') and contains(@class, 'underline') and contains(@class, 'text-team-secondary')]")) 
     )
 
@@ -285,22 +290,46 @@ def gamestmrw():
 @app.route('/top-players')
 def top_players():
 
-    def get_top_players(limit=8):
-        top_players = (
-            session.query(Player)
-            .filter(Player.rostered == False)
-            .order_by(Player.value.desc())
-            .limit(limit)
-            .all()
-        )
-        return top_players
-    
-    top_players = get_top_players()
-    top_players_data = [
+    def get_top_value_players(limit=7):
+            try:
+                return (
+                    session.query(Player)
+                    .filter(Player.rostered == False)
+                    .order_by(Player.value.desc())
+                    .limit(limit)
+                    .all()
+                )
+            except Exception as e:
+                print(f"An error occurred while fetching top value players: {e}")
+                return []
+
+    def get_low_ovrrank_players(limit=7):
+        try:
+            return (
+                session.query(Player)
+                .filter(Player.fantasyteam == 1)
+                .order_by(Player.ovrrank.desc())
+                .limit(limit)
+                .all()
+            )
+        except Exception as e:
+            print(f"An error occurred while fetching low ovrrank players: {e}")
+            return []
+
+    top_value_players = get_top_value_players()
+    low_ovrrank_players = get_low_ovrrank_players()
+
+    top_value_players_data = [
         {"name": player.name, "team": player.team, "value": player.value}
-        for player in top_players
+        for player in top_value_players
     ]
-    return jsonify(top_players_data)
+
+    low_ovrrank_players_data = [
+        {"name": player.name, "ovrrank": player.ovrrank}
+        for player in low_ovrrank_players
+    ]
+
+    return jsonify({"top_value_players": top_value_players_data, "low_ovrrank_players": low_ovrrank_players_data})
 
 # @app.route('/low-posrank')
 # def low_posrank_players():

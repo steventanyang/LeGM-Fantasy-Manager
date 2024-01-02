@@ -107,9 +107,9 @@ def main():
 
     today = teams_today()
     tomorrow = teams_tmrw()
-    # common_teams = set(today) & set(tomorrow)
-    # for team in common_teams:
-    #     print(team)
+    common_teams = set(today) & set(tomorrow)
+    for team in common_teams:
+        print(team)
 
     uncommon_teams = set(today) | set(tomorrow)
     for team in uncommon_teams:
@@ -121,8 +121,8 @@ def main():
     today_points = fetch_player_fantasy_points(today_api)
     tomorrow_points = fetch_player_fantasy_points(tomorrow_api)
 
-    update_player_values(uncommon_teams, today_points, tomorrow_points)
-    # update_player_values(common_teams, today_points, tomorrow_points)
+    # update_player_values(uncommon_teams, today_points, tomorrow_points)
+    update_player_values(common_teams, today_points, tomorrow_points)
 
 if __name__ == "__main__":
     main()
