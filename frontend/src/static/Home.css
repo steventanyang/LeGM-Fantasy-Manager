@@ -218,8 +218,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
   height: 70px;
   justify-content: space-evenly;
   line-height: normal;
-  margin-left: 45px;
-  margin-right: 45px;
+  margin-left: 25px;
+  margin-right: 25px;
   transition: background-color 0.3s ease;
   width: 240px
 }

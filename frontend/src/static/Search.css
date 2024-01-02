@@ -9,6 +9,42 @@
   pointer-events: none;
 }
 
+.dot-typing {
+  position: relative;
+  left: -9999px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #144458;
+  color: #144458;
+  box-shadow: 9984px 0 0 0 #144458, 9999px 0 0 0 #144458, 10014px 0 0 0 #144458;
+  animation: dot-typing 1.5s infinite linear;
+}
+
+@keyframes dot-typing {
+  0% {
+    box-shadow: 9984px 0 0 0 #144458, 9999px 0 0 0 #144458, 10014px 0 0 0 #144458;
+  }
+  16.667% {
+    box-shadow: 9984px -10px 0 0 #144458, 9999px 0 0 0 #144458, 10014px 0 0 0 #144458;
+  }
+  33.333% {
+    box-shadow: 9984px 0 0 0 #144458, 9999px 0 0 0 #144458, 10014px 0 0 0 #144458;
+  }
+  50% {
+    box-shadow: 9984px 0 0 0 #144458, 9999px -10px 0 0 #144458, 10014px 0 0 0 #144458;
+  }
+  66.667% {
+    box-shadow: 9984px 0 0 0 #144458, 9999px 0 0 0 #144458, 10014px 0 0 0 #144458;
+  }
+  83.333% {
+    box-shadow: 9984px 0 0 0 #144458, 9999px 0 0 0 #144458, 10014px -10px 0 0 #144458;
+  }
+  100% {
+    box-shadow: 9984px 0 0 0 #144458, 9999px 0 0 0 #144458, 10014px 0 0 0 #144458;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -357,7 +393,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .stat-value-two {
-  background-color: #373a47;
+  background-color: #144458;
   border-radius: 25px;
   color: #FFF;
   text-align: center;

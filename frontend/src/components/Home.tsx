@@ -316,6 +316,7 @@ export default function Home() {
         <div className="home-button-container">
           <button onClick={team} className='home-nav-buttons' style={{ marginLeft:'10px'}}>My Team</button>
           <button onClick={search} className='home-nav-buttons'>Search</button>
+          <button onClick={search} className='home-nav-buttons'>AI Search</button>
           <button onClick={waiver} className='home-nav-buttons'>Waiver Wire</button>
           <button onClick={injury} className='home-nav-buttons' style={{ marginRight:'10px'}}>News</button>
         </div>

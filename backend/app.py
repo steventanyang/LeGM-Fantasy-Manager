@@ -325,28 +325,28 @@ def top_players():
 #     ]
 #     return jsonify(top_players_data)
 
-@app.route('/low-rank')
-def low_ovrrank_players():
+# @app.route('/low-rank')
+# def low_ovrrank_players():
 
-    def get_low_rank(limit=5):
-        try:
-            low_players = (
-                session.query(Player)
-                .filter(Player.fantasyteam == 1)
-                .order_by(Player.ovrrank.desc())
-                .limit(limit)
-                .all()
-            )
-            return low_players
-        except Exception as e:
-            print(f"An error occurred: {e}")
+#     def get_low_rank(limit=5):
+#         try:
+#             low_players = (
+#                 session.query(Player)
+#                 .filter(Player.fantasyteam == 1)
+#                 .order_by(Player.ovrrank.desc())
+#                 .limit(limit)
+#                 .all()
+#             )
+#             return low_players
+#         except Exception as e:
+#             print(f"An error occurred: {e}")
     
-    top_players = get_low_rank()
-    top_players_data = [
-        {"name": player.name, "ovrrank": player.ovrrank}
-        for player in top_players
-    ]
-    return jsonify(top_players_data)
+#     top_players = get_low_rank()
+#     top_players_data = [
+#         {"name": player.name, "ovrrank": player.ovrrank}
+#         for player in top_players
+#     ]
+#     return jsonify(top_players_data)
 
 
 @app.route('/headshots')

@@ -49,13 +49,6 @@ const PlayerValue = (props:
 
 export default function Waiver() {
 
-  // const players = [
-  //   { name: 'Lamelo Ball', score: 50.24, status: 'ACT', value: 10.23 },
-  //   { name: 'Lamelo Ball', score: 45.26, status: 'DTD', value: 10.23},
-  //   { name: 'Lamelo Ball', score: 45.26, status: 'DTD', value: 10.23 },
-  //   { name: 'Lamelo Ball', score: 45.26, status: 'DTD', value: 10.23 },
-  //   { name: 'Lamelo Ball', score: 45.26, status: 'DTD', value: 10.23 },
-  // ];
 
   const [players, setPlayers] = useState<Playerteam[]>([]);
   const [lowRank, setLowRank] = useState<Playerteam[]>([]);
@@ -126,9 +119,9 @@ export default function Waiver() {
             <div className="waiver-value-title">
               <p className="waiver-title-text">value</p>
             </div>
-              {/* {players.map((player, index) => (
+              {players.map((player, index) => (
               <PlayerValue key={index} name={player.name} value={player.value}/>
-              ))} */}
+              ))}
 
           </div>
 

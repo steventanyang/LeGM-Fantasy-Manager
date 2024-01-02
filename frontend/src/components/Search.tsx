@@ -18,6 +18,54 @@ const Player = (props:
     }
   };
 
+  const colorFppg = (value: number) => {
+    if (value >= 55) {
+      return '#408416';
+    } else if (value >= 45) {
+      return '#86B16C';
+    } else if (value >= 35) {
+      return '#86B16C';
+    } else if (value >= 25) {
+      return '#DAC828';
+    } else if (value >= 15) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+
+  const colorScore = (value: number) => {
+    if (value >= 15) {
+      return '#408416';
+    } else if (value >= 10) {
+      return '#86B16C';
+    } else if (value >= 5) {
+      return '#86B16C';
+    } else if (value >= 0) {
+      return '#DAC828';
+    } else if (value >= -5) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+
+  const colorRank = (value: number) => {
+    if (value >= 10) {
+      return '#408416';
+    } else if (value >= 25) {
+      return '#86B16C';
+    } else if (value >= 50) {
+      return '#86B16C';
+    } else if (value >= 75) {
+      return '#DAC828';
+    } else if (value >= 100) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+
   return (
     <div className="player-card">
 
@@ -37,19 +85,19 @@ const Player = (props:
       <div className="player-stats">
         <div className="stat">
           <span className="stat-label">FPPG</span>
-          <span className="stat-value-one">{props.stats.fppg}</span>
+          <span className="stat-value-one" style={{ backgroundColor: colorFppg(props.stats.fppg)}}>{props.stats.fppg}</span>
         </div>
         <div className="stat">
           <span className="stat-label">Score</span>
-          <span className="stat-value-one">{props.stats.legmScore}</span>
+          <span className="stat-value-one" style={{ backgroundColor: colorScore(props.stats.legmScore)}}>{props.stats.legmScore}</span>
         </div>
         <div className="stat">
           <span className="stat-label">pos rank</span>
-          <span className="stat-value-two">{props.stats.pos}</span>
+          <span className="stat-value-two" >{props.stats.pos}</span>
         </div>
         <div className="stat">
           <span className="stat-label">ovr rank</span>
-          <span className="stat-value-two">{props.stats.ovrRank}</span>
+          <span className="stat-value-two" style={{ backgroundColor: colorRank(props.stats.ovrRank)}}>{props.stats.ovrRank}</span>
         </div>
       </div>
     </div>
@@ -184,55 +232,28 @@ const Traditional = (props: { trad:Trad; }) => {
 
   return (
     <>
-      {/* <div className="trad-container">
-        <h2 className="text-header">Per Game Stats</h2>
-          <div className='search-stat-container'>
-            <span className="stat-label">PTS</span>
-            <span className="search-variable-stat" style={{ backgroundColor: colorPts(props.trad.pts), width: widthPts(props.trad.pts)}}>{props.trad.pts}</span>
-          </div>
-          <div className='search-stat-container'>
-            <span className="stat-label">AST</span>
-            <span className="search-variable-stat" style={{ backgroundColor: colorAstReb(props.trad.ast), width: widthAstReb(props.trad.ast)}}>{props.trad.ast}</span>
-          </div>
-          <div className='search-stat-container'>
-            <span className="stat-label">REB</span>
-            <span className="search-variable-stat" style={{ backgroundColor: colorAstReb(props.trad.reb), width: widthAstReb(props.trad.reb)}}>{props.trad.reb}</span>
-          </div>
-          <div className='search-stat-container'>
-            <span className="stat-label">TOV</span>
-            <span className="search-variable-stat" style={{ backgroundColor: colorTov(props.trad.tov), width: widthTov(props.trad.tov)}}>{props.trad.tov}</span>
-          </div>
-          <div className='search-stat-container'>
-            <span className="stat-label">STL</span>
-            <span className="search-variable-stat" style={{ backgroundColor: colorStlBlk(props.trad.stl), width: widthStlBlk(props.trad.stl)}}>{props.trad.stl}</span>
-          </div>
-          <div className='search-stat-container'>
-            <span className="stat-label">BLK</span>
-            <span className="search-variable-stat" style={{ backgroundColor: colorStlBlk(props.trad.blk), width: widthStlBlk(props.trad.blk)}}>{props.trad.blk}</span>
-          </div>
-      </div> */}
-        <div className='search-stats-container'>
-          <h2 className="search-text-title">Per Game Stats</h2>
-          <div className='search-stats-table-container'>
-              <div className='home-stats-table-titles'>
-                <p className='search-stats-table-titles-text' style={{ marginTop: '22px'}}>PTS</p>
-                <p className='search-stats-table-titles-text'>AST</p>
-                <p className='search-stats-table-titles-text'>REB</p>
-                <p className='search-stats-table-titles-text'>TOV</p>
-                <p className='search-stats-table-titles-text'>STL</p>
-                <p className='search-stats-table-titles-text'>BLK</p>
-              </div>
+      <div className='search-stats-container'>
+        <h2 className="search-text-title">Per Game Stats</h2>
+        <div className='search-stats-table-container'>
+            <div className='home-stats-table-titles'>
+              <p className='search-stats-table-titles-text' style={{ marginTop: '22px'}}>PTS</p>
+              <p className='search-stats-table-titles-text'>AST</p>
+              <p className='search-stats-table-titles-text'>REB</p>
+              <p className='search-stats-table-titles-text'>TOV</p>
+              <p className='search-stats-table-titles-text'>STL</p>
+              <p className='search-stats-table-titles-text'>BLK</p>
+            </div>
 
-              <div className='search-stats-table-values'>
-                <p className='search-stats-table-values-text' style={{ backgroundColor: colorPts(props.trad.pts), width: widthPts(props.trad.pts)}}>{props.trad.pts}</p>
-                <p className='search-stats-table-values-text' style={{ backgroundColor: colorAstReb(props.trad.ast), width: widthAstReb(props.trad.ast)}}>{props.trad.ast}</p>
-                <p className='search-stats-table-values-text' style={{ backgroundColor: colorAstReb(props.trad.reb), width: widthAstReb(props.trad.reb)}}>{props.trad.reb}</p>
-                <p className='search-stats-table-values-text' style={{ backgroundColor: colorTov(props.trad.tov), width: widthTov(props.trad.tov)}}>{props.trad.tov}</p>
-                <p className='search-stats-table-values-text' style={{ backgroundColor: colorStlBlk(props.trad.stl), width: widthStlBlk(props.trad.stl)}}>{props.trad.stl}</p>
-                <p className='search-stats-table-values-text' style={{ backgroundColor: colorStlBlk(props.trad.blk), width: widthStlBlk(props.trad.blk)}}>{props.trad.blk}</p>
-              </div>
-          </div>
+            <div className='search-stats-table-values'>
+              <p className='search-stats-table-values-text' style={{ backgroundColor: colorPts(props.trad.pts), width: widthPts(props.trad.pts)}}>{props.trad.pts}</p>
+              <p className='search-stats-table-values-text' style={{ backgroundColor: colorAstReb(props.trad.ast), width: widthAstReb(props.trad.ast)}}>{props.trad.ast}</p>
+              <p className='search-stats-table-values-text' style={{ backgroundColor: colorAstReb(props.trad.reb), width: widthAstReb(props.trad.reb)}}>{props.trad.reb}</p>
+              <p className='search-stats-table-values-text' style={{ backgroundColor: colorTov(props.trad.tov), width: widthTov(props.trad.tov)}}>{props.trad.tov}</p>
+              <p className='search-stats-table-values-text' style={{ backgroundColor: colorStlBlk(props.trad.stl), width: widthStlBlk(props.trad.stl)}}>{props.trad.stl}</p>
+              <p className='search-stats-table-values-text' style={{ backgroundColor: colorStlBlk(props.trad.blk), width: widthStlBlk(props.trad.blk)}}>{props.trad.blk}</p>
+            </div>
         </div>
+      </div>
     </>
   );
 }
@@ -256,17 +277,17 @@ const Advanced = (props: { adv:Adv }) => {
   };
   const widthMin = (value: number) => {
     if (value >= 30) {
-      return '300px';
+      return '350px';
     } else if (value >= 25) {
-      return '250px';
+      return '300px';
     } else if (value >= 20) {
-      return '200px';
+      return '250px';
     } else if (value >= 15) {
-      return '150px';
+      return '200px';
     } else if (value >= 10) {
-      return '100px';
+      return '150px';
     } else {
-      return '50px';
+      return '100px';
     }
   };
 
@@ -287,17 +308,17 @@ const Advanced = (props: { adv:Adv }) => {
   };
   const widthPM = (value: number) => {
     if (value >= 10) {
-      return '300px';
+      return '350px';
     } else if (value >= 6) {
-      return '250px';
+      return '300px';
     } else if (value >= 2) {
-      return '200px';
+      return '250px';
     } else if (value >= -2) {
-      return '150px';
+      return '200px';
     } else if (value >= -6) {
-      return '100px';
+      return '150px';
     } else {
-      return '50px';
+      return '100px';
     }
   };
 
@@ -318,17 +339,17 @@ const Advanced = (props: { adv:Adv }) => {
   };
   const widthEfgTs = (value: number) => {
     if (value >= 65) {
-      return '300px';
+      return '350px';
     } else if (value >= 60) {
-      return '250px';
+      return '300px';
     } else if (value >= 55) {
-      return '200px';
+      return '250px';
     } else if (value >= 50) {
-      return '150px';
+      return '200px';
     } else if (value >= 45) {
-      return '100px';
+      return '150px';
     } else {
-      return '50px';
+      return '100px';
     }
   };
 
@@ -349,17 +370,17 @@ const Advanced = (props: { adv:Adv }) => {
   };
   const widthUsg = (value: number) => {
     if (value >= 30) {
-      return '300px';
+      return '350px';
     } else if (value >= 25) {
-      return '250px';
+      return '300px';
     } else if (value >= 20) {
-      return '200px';
+      return '250px';
     } else if (value >= 15) {
-      return '150px';
+      return '200px';
     } else if (value >= 10) {
-      return '100px';
+      return '150px';
     } else {
-      return '50px';
+      return '100px';
     }
   };
 
@@ -380,48 +401,43 @@ const Advanced = (props: { adv:Adv }) => {
   };
   const widthPer = (value: number) => {
     if (value >= 30) {
-      return '300px';
+      return '350px';
     } else if (value >= 25) {
-      return '250px';
+      return '300px';
     } else if (value >= 20) {
-      return '200px';
+      return '250px';
     } else if (value >= 15) {
-      return '150px';
+      return '200px';
     } else if (value >= 10) {
-      return '100px';
+      return '150px';
     } else {
-      return '50px';
+      return '100px';
     }
   };
   
   return (
     <>
-      <div className="trad-container">
-        <h2 className="text-header">Advanced Stats</h2>
-          <div className='search-stat-container'>
-            <span className="stat-label">MIN</span>
-            <span className="search-variable-stat" style={{ backgroundColor: colorMin(props.adv.min), width: widthMin(props.adv.min)}}>{props.adv.min}</span>
-          </div>
-          <div className='search-stat-container'>
-            <span className="stat-label">+/-</span>
-            <span className="search-variable-stat" style={{ backgroundColor: colorPM(props.adv.PM), width: widthPM(props.adv.PM)}}>{props.adv.PM}</span>
-          </div>
-          <div className='search-stat-container'>
-            <span className="stat-label">EFG</span>
-            <span className="search-variable-stat" style={{ backgroundColor: colorEfgTs(props.adv.efg), width: widthEfgTs(props.adv.efg)}}>{props.adv.efg}</span>
-          </div>
-          <div className='search-stat-container'>
-            <span className="stat-label">TS%</span>
-            <span className="search-variable-stat" style={{ backgroundColor: colorEfgTs(props.adv.ts), width: widthEfgTs(props.adv.ts)}}>{props.adv.ts}</span>
-          </div>
-          <div className='search-stat-container'>
-            <span className="stat-label">USG</span>
-            <span className="search-variable-stat" style={{ backgroundColor: colorUsg(props.adv.usg), width: widthUsg(props.adv.usg)}}>{props.adv.usg}</span>
-          </div>
-          <div className='search-stat-container'>
-            <span className="stat-label">PER</span>
-            <span className="search-variable-stat" style={{ backgroundColor: colorPer(props.adv.per), width: widthPer(props.adv.per)}}>{props.adv.per}</span>
-          </div>
+      <div className='search-stats-container'>
+        <h2 className="search-text-title">Advanced Stats</h2>
+        <div className='search-stats-table-container'>
+            <div className='home-stats-table-titles'>
+              <p className='search-stats-table-titles-text' style={{ marginTop: '22px'}}>MIN</p>
+              <p className='search-stats-table-titles-text'>+/-</p>
+              <p className='search-stats-table-titles-text'>EFG</p>
+              <p className='search-stats-table-titles-text'>TS</p>
+              <p className='search-stats-table-titles-text'>USG</p>
+              <p className='search-stats-table-titles-text'>PER</p>
+            </div>
+
+            <div className='search-stats-table-values'>
+              <p className='search-stats-table-values-text' style={{ backgroundColor: colorMin(props.adv.min), width: widthMin(props.adv.min)}}>{props.adv.min}</p>
+              <p className='search-stats-table-values-text' style={{ backgroundColor: colorPM(props.adv.PM), width: widthPM(props.adv.PM)}}>{props.adv.PM}</p>
+              <p className='search-stats-table-values-text' style={{ backgroundColor: colorEfgTs(props.adv.efg), width: widthEfgTs(props.adv.efg)}}>{props.adv.efg}</p>
+              <p className='search-stats-table-values-text' style={{ backgroundColor: colorEfgTs(props.adv.ts), width: widthEfgTs(props.adv.ts)}}>{props.adv.ts}</p>
+              <p className='search-stats-table-values-text' style={{ backgroundColor: colorUsg(props.adv.usg), width: widthUsg(props.adv.usg)}}>{props.adv.usg}</p>
+              <p className='search-stats-table-values-text' style={{ backgroundColor: colorPer(props.adv.per), width: widthPer(props.adv.per)}}>{props.adv.per}</p>
+            </div>
+        </div>
       </div>
     </>
   );
@@ -430,9 +446,10 @@ const Advanced = (props: { adv:Adv }) => {
 export default function Search() {
 
   let name = 'Paul George';
-  const [searchTerm, setSearchTerm] = useState('Paul George'); // Default search term
-
+  const [searchTerm, setSearchTerm] = useState('Paul George');
   const [player, setPlayer] = useState<Playerstat | null>(null);
+  const [isLoading, setIsLoading] = useState(true); 
+
   useEffect(() => {
     if (searchTerm) {
       fetch('/stats')
@@ -441,6 +458,7 @@ export default function Search() {
           const stats = data.find((player: Playerstat) => player.Name === searchTerm);
           if (stats) {
             setPlayer(stats);
+            setIsLoading(false)
           }
         })
         .catch(error => {
@@ -543,8 +561,11 @@ export default function Search() {
             }}
           />
         </div>
-        
+        {isLoading ?
+        <div className="dot-typing"></div> :
+          searchTerm &&
         <div className='card_container'>
+          <div className="dot-typing"></div> 
           <Traditional
               trad={{
                 pts: pts,
@@ -576,7 +597,9 @@ export default function Search() {
                 per: playerPER
               }}
             />
+        
         </div>
+        }
       </div>
     );
 }

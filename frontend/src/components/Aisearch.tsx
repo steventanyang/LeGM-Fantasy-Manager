@@ -9,7 +9,7 @@ export default function SearchAi() {
 
   const [searchTerm, setSearchTerm] = useState("Who's scored the most points this season?");
   const [searchResult, setSearchResult] = useState(''); 
-  const [isLoading, setIsLoading] = useState(false); // State to track loading
+  const [isLoading, setIsLoading] = useState(false); 
 
   const handleSearch = async () => {
     try {
