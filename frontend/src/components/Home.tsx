@@ -66,6 +66,100 @@ const Userteam = (props:
       return '#CB3434';
     }
   };
+  const colorPlayoffper = (rank: number) => {
+    if (rank >= 0.9) {
+      return '#408416';
+    } else if (rank >= 0.7) {
+      return '#86B16C';
+    } else if (rank >= 0.5) {
+      return '#DAC828';
+    } else if (rank >= 0.3) {
+      return '#E29853';
+    } else if (rank >= 0.1) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
+  const colorSeed = (rank: number) => {
+    if (rank <= 2) {
+      return '#408416';
+    } else if (rank <= 4) {
+      return '#86B16C';
+    } else if (rank <= 5) {
+      return '#DAC828';
+    } else if (rank <= 6) {
+      return '#E29853';
+    } else if (rank <= 8) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
+  const colorGamesback = (gb: number) => {
+    const maxwins = weekNumber - 1;
+    if (gb/maxwins >= 0.9) {
+      return '#408416';
+    } else if (gb/maxwins >= 0.7) {
+      return '#86B16C';
+    } else if (gb/maxwins >= 0.5) {
+      return '#DAC828';
+    } else if (gb/maxwins >= 0.3) {
+      return '#E29853';
+    } else if (gb/maxwins >= 0.1) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
+  const colorStreak = (streak: number) => {
+    const maxwins = weekNumber - 1;
+    const value = weekNumber/6;
+    if (streak >= maxwins - value) {
+      return '#408416';
+    } else if (streak >= maxwins - value) {
+      return '#86B16C';
+    } else if (streak >= maxwins - value) {
+      return '#DAC828';
+    } else if (streak >= maxwins - value) {
+      return '#E29853';
+    } else if (streak >= maxwins - value) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
+  const colorScore = (score: number) => {
+    if (score >= 150) {
+      return '#408416';
+    } else if (score >= 120) {
+      return '#86B16C';
+    } else if (score >= 90) {
+      return '#DAC828';
+    } else if (score >= 60) {
+      return '#E29853';
+    } else if (score >= 30) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
+  const colorDraftRank = (rank: number) => {
+    if (rank <= 2) {
+      return '#408416';
+    } else if (rank <= 4) {
+      return '#86B16C';
+    } else if (rank <= 5) {
+      return '#DAC828';
+    } else if (rank <= 6) {
+      return '#E29853';
+    } else if (rank <= 8) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
+
   return (
     <>
     <div className='user-team'>
@@ -107,10 +201,10 @@ const Userteam = (props:
           </div>
 
           <div className='home-stats-table-values'>
-            <p className='home-stats-table-values-text'>{props.playoff_per}</p>
-            <p className='home-stats-table-values-text'>{props.playoffseed}</p>
-            <p className='home-stats-table-values-text'>{props.gamesback}</p>
-            <p className='home-stats-table-values-text'>{props.winstreak}</p>
+            <p className='home-stats-table-values-text' style={{ backgroundColor: colorPlayoffper(props.playoff_per) }}>{props.playoff_per}</p>
+            <p className='home-stats-table-values-text' style={{ backgroundColor: colorSeed(props.playoffseed) }}>{props.playoffseed}</p>
+            <p className='home-stats-table-values-text' style={{ backgroundColor: colorGamesback(props.gamesback) }}>{props.gamesback}</p>
+            <p className='home-stats-table-values-text' style={{ backgroundColor: colorStreak(props.winstreak) }}>{props.winstreak}</p>
           </div>
         </div>
         
@@ -122,8 +216,12 @@ const Userteam = (props:
           </div>
 
           <div className='home-stats-table-values'>
-            <p className='home-stats-table-values-text' style={{ fontSize: '22px', padding: '8px 0px' }}>{props.legmscore}</p>
-            <p className='home-stats-table-values-text'>{props.draftrank}</p>
+            <p className='home-stats-table-values-text' style={{ fontSize: '22px', padding: '8px 0px', backgroundColor: colorScore(props.legmscore) }}>
+              {props.legmscore}
+            </p>
+            <p className='home-stats-table-values-text' style={{ backgroundColor: colorDraftRank(props.draftrank) }}>
+              {props.draftrank}
+            </p>
           </div>
         </div>
       </div>
@@ -176,6 +274,68 @@ const Matchups = (props:
       return '10%';
     }
   };
+  const colorRank = (rank: number) => {
+    if (rank <= 2) {
+      return '#408416';
+    } else if (rank <= 4) {
+      return '#86B16C';
+    } else if (rank <= 5) {
+      return '#DAC828';
+    } else if (rank <= 6) {
+      return '#E29853';
+    } else if (rank <= 8) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
+  const colorStreak = (streak: number) => {
+    const maxwins = weekNumber - 1;
+    const value = weekNumber/6;
+    if (streak >= maxwins - value) {
+      return '#408416';
+    } else if (streak >= maxwins - value) {
+      return '#86B16C';
+    } else if (streak >= maxwins - value) {
+      return '#DAC828';
+    } else if (streak >= maxwins - value) {
+      return '#E29853';
+    } else if (streak >= maxwins - value) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
+  const colorScore = (score: number) => {
+    if (score >= 150) {
+      return '#408416';
+    } else if (score >= 120) {
+      return '#86B16C';
+    } else if (score >= 90) {
+      return '#DAC828';
+    } else if (score >= 60) {
+      return '#E29853';
+    } else if (score >= 30) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
+  const colorPlayoffper = (rank: number) => {
+    if (rank >= 0.9) {
+      return '#408416';
+    } else if (rank >= 0.7) {
+      return '#86B16C';
+    } else if (rank >= 0.5) {
+      return '#DAC828';
+    } else if (rank >= 0.3) {
+      return '#E29853';
+    } else if (rank >= 0.1) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
 
   return (
     <>
@@ -195,7 +355,7 @@ const Matchups = (props:
 
           <div className='home-rank-container'>
             <p className='home-rank-title' style={{ color: '#5C7C8A' }}>rank</p>
-            <div className='home-rank'>{props.rank}</div>
+            <div className='home-rank' style={{ backgroundColor: colorRank(props.rank) }}>{props.rank}</div>
           </div>
         </div>
 
@@ -207,9 +367,9 @@ const Matchups = (props:
           </div>
 
           <div className='home-stats-table-values'>
-            <p className='home-stats-table-values-text'>{props.legmscore}</p>
-            <p className='home-stats-table-values-text'>{props.playoff_per}</p>
-            <p className='home-stats-table-values-text'>{props.winstreak}</p>
+            <p className='home-stats-table-values-text' style={{ backgroundColor: colorScore(props.legmscore) }}>{props.legmscore}</p>
+            <p className='home-stats-table-values-text' style={{ backgroundColor: colorPlayoffper(props.playoff_per) }}>{props.playoff_per}</p>
+            <p className='home-stats-table-values-text' style={{ backgroundColor: colorStreak(props.winstreak) }}>{props.winstreak}</p>
           </div>
         </div>
 
@@ -223,7 +383,7 @@ const Matchups = (props:
         </div>
         <div className='home-rank-container' style={{ marginTop: '0px', marginLeft: '20px' }}>
             <p className='home-rank-title' style={{ color: '#5C7C8A', marginTop: '0px' }}>rank</p>
-            <div className='home-rank'>{props.next_rank}</div>
+            <div className='home-rank' style={{ backgroundColor: colorRank(props.next_rank) }}>{props.next_rank}</div>
         </div>
       </div>
 
