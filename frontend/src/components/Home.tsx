@@ -22,6 +22,50 @@ const Userteam = (props:
   }
   ) => {
 
+  const startOfWeek1 = dayjs('2023-10-23');
+  const currentDate = dayjs();
+  const weekNumber = currentDate.diff(startOfWeek1, 'week') + 1;
+
+  const widthRecord = (value: number) => {
+    if (value/weekNumber == 1) {
+      return '100%';
+    } else if (value/weekNumber >= 0.9) {
+      return '90%';
+    } else if (value/weekNumber >= 0.8) {
+      return '80%';
+    } else if (value/weekNumber >= 0.7) {
+      return '70%';
+    } else if (value/weekNumber >= 0.6) {
+      return '60%';
+    } else if (value/weekNumber >= 0.5) {
+      return '50%';
+    } else if (value/weekNumber >= 0.4) {
+      return '40%';
+    } else if (value/weekNumber >= 0.3) {
+      return '30%';
+    } else if (value/weekNumber >= 0.2) {
+      return '20%';
+    } else if (value/weekNumber >= 0.1) {
+      return '10%';
+    } else {
+      return '0%';
+    }
+  };
+  const colorRank = (rank: number) => {
+    if (rank <= 2) {
+      return '#408416';
+    } else if (rank <= 4) {
+      return '#86B16C';
+    } else if (rank <= 5) {
+      return '#DAC828';
+    } else if (rank <= 6) {
+      return '#E29853';
+    } else if (rank <= 8) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
   return (
     <>
     <div className='user-team'>
@@ -39,13 +83,13 @@ const Userteam = (props:
       </div>
 
       <div className='record-bar-container'>
-        <div className='record-bar-wins'><p className='record-bar-number'>{props.wins}</p></div>
-        <div className='record-bar-losses'><p className='record-bar-number'>{props.losses}</p></div>
+        <div className='record-bar-wins' style={{ width: widthRecord(props.wins)}}><p className='record-bar-number'>{props.wins}</p></div>
+        <div className='record-bar-losses' style={{ width: widthRecord(props.losses)}}><p className='record-bar-number'>{props.losses}</p></div>
       </div>
 
       <div className='home-rank-container'>
         <p className='home-rank-title'>rank</p>
-        <div className='home-rank'>{props.rank}</div>
+        <div className='home-rank' style={{ backgroundColor: colorRank(props.rank) }}>{props.rank}</div>
       </div>
 
     </div>
@@ -107,6 +151,32 @@ const Matchups = (props:
   const currentDate = dayjs();
   const weekNumber = currentDate.diff(startOfWeek1, 'week') + 1;
 
+  const widthRecord = (value: number) => {
+    if (value/weekNumber == 1) {
+      return '100%';
+    } else if (value/weekNumber >= 0.9) {
+      return '90%';
+    } else if (value/weekNumber >= 0.8) {
+      return '80%';
+    } else if (value/weekNumber >= 0.7) {
+      return '70%';
+    } else if (value/weekNumber >= 0.6) {
+      return '60%';
+    } else if (value/weekNumber >= 0.5) {
+      return '50%';
+    } else if (value/weekNumber >= 0.4) {
+      return '40%';
+    } else if (value/weekNumber >= 0.3) {
+      return '30%';
+    } else if (value/weekNumber >= 0.2) {
+      return '20%';
+    } else if (value/weekNumber >= 0.1) {
+      return '10%';
+    } else {
+      return '10%';
+    }
+  };
+
   return (
     <>
       <div className='matchup-week-title'>Week {weekNumber}</div>
@@ -119,8 +189,8 @@ const Matchups = (props:
           </div>
 
           <div className='record-bar-container'>
-            <div className='record-bar-wins'><p className='record-bar-number'>{props.wins}</p></div>
-            <div className='record-bar-losses'><p className='record-bar-number'>{props.losses}</p></div>
+            <div className='record-bar-wins' style={{ width: widthRecord(props.wins)}}><p className='record-bar-number'>{props.wins}</p></div>
+            <div className='record-bar-losses' style={{ width: widthRecord(props.losses)}}><p className='record-bar-number'>{props.losses}</p></div>
           </div>
 
           <div className='home-rank-container'>
@@ -159,8 +229,8 @@ const Matchups = (props:
 
       <div className='next-matchup-container'> 
         <div className='record-bar-container' style={{ width: '300px' }}>
-          <div className='record-bar-wins'><p className='record-bar-number'>{props.next_wins}</p></div>
-          <div className='record-bar-losses'><p className='record-bar-number'>{props.next_losses}</p></div>
+          <div className='record-bar-wins' style={{ width: widthRecord(props.next_wins)}}><p className='record-bar-number'>{props.next_wins}</p></div>
+          <div className='record-bar-losses' style={{ width: widthRecord(props.next_losses)}}><p className='record-bar-number'>{props.next_losses}</p></div>
         </div>
       </div>
 
