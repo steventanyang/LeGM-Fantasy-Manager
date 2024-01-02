@@ -3,21 +3,24 @@ import { slide as Menu } from 'react-burger-menu'
 import { useState, useEffect } from 'react';
 import SearchBar from "material-ui-search-bar";
 import axios from 'axios';
-import Typewriter from 'typewriter-effect/dist/core';
 
 
 export default function SearchAi() {
 
   const [searchTerm, setSearchTerm] = useState("Who's scored the most points this season?");
-  const [searchResult, setSearchResult] = useState(''); // State to store the search result
+  const [searchResult, setSearchResult] = useState(''); 
+  const [isLoading, setIsLoading] = useState(false); // State to track loading
 
   const handleSearch = async () => {
     try {
+      setIsLoading(true);
       const response = await axios.get(`/aisearch?query=${encodeURIComponent(searchTerm)}`);
       setSearchResult(response.data.result);
     } catch (error) {
       console.error('Error fetching data:', error);
       setSearchResult('Error fetching data');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -55,10 +58,13 @@ export default function SearchAi() {
         </div>
         
         <div className='card_container'>
-            {searchResult && 
-              <p className='search-text'>
-                {searchResult}
-            </p>}
+          {isLoading ? 
+            <div className="dot-typing"></div> : 
+            searchResult && 
+            <p className='search-text'>
+              {searchResult}
+            </p>
+          }
         </div>
       </div>
     );

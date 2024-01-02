@@ -75,17 +75,17 @@ const Traditional = (props: { trad:Trad; }) => {
   };
   const widthPts = (value: number) => {
     if (value >= 30) {
-      return '300px';
+      return '350px';
     } else if (value >= 25) {
-      return '250px';
+      return '300px';
     } else if (value >= 20) {
-      return '200px';
+      return '250px';
     } else if (value >= 15) {
-      return '150px';
+      return '200px';
     } else if (value >= 10) {
-      return '100px';
+      return '150px';
     } else {
-      return '50px';
+      return '100px';
     }
   };
 
@@ -106,17 +106,17 @@ const Traditional = (props: { trad:Trad; }) => {
   };
   const widthAstReb = (value: number) => {
     if (value >= 10) {
-      return '300px';
+      return '350px';
     } else if (value >= 8) {
-      return '250px';
+      return '300px';
     } else if (value >= 6) {
-      return '200px';
+      return '250px';
     } else if (value >= 4) {
-      return '150px';
+      return '200px';
     } else if (value >= 2) {
-      return '100px';
+      return '150px';
     } else {
-      return '50px';
+      return '100px';
     }
   };
 
@@ -137,17 +137,17 @@ const Traditional = (props: { trad:Trad; }) => {
   };
   const widthTov = (value: number) => {
     if (value >= 3.8) {
-      return '300px';
+      return '350px';
     } else if (value >= 3.2) {
-      return '250px';
+      return '300px';
     } else if (value >= 2.6) {
-      return '200px';
+      return '250px';
     } else if (value >= 2) {
-      return '150px';
+      return '200px';
     } else if (value >= 1.4) {
-      return '100px';
+      return '150px';
     } else {
-      return '50px';
+      return '100px';
     }
   };
 
@@ -168,23 +168,23 @@ const Traditional = (props: { trad:Trad; }) => {
   };
   const widthStlBlk = (value: number) => {
     if (value >= 2.6) {
-      return '300px';
+      return '350px';
     } else if (value >= 2.1) {
-      return '250px';
+      return '300px';
     } else if (value >= 1.6) {
-      return '200px';
+      return '250px';
     } else if (value >= 1.1) {
-      return '150px';
+      return '200px';
     } else if (value >= 0.6) {
-      return '100px';
+      return '150px';
     } else {
-      return '50px';
+      return '100px';
     }
   };
 
   return (
     <>
-      <div className="trad-container">
+      {/* <div className="trad-container">
         <h2 className="text-header">Per Game Stats</h2>
           <div className='search-stat-container'>
             <span className="stat-label">PTS</span>
@@ -210,7 +210,29 @@ const Traditional = (props: { trad:Trad; }) => {
             <span className="stat-label">BLK</span>
             <span className="search-variable-stat" style={{ backgroundColor: colorStlBlk(props.trad.blk), width: widthStlBlk(props.trad.blk)}}>{props.trad.blk}</span>
           </div>
-      </div>
+      </div> */}
+        <div className='search-stats-container'>
+          <h2 className="search-text-title">Per Game Stats</h2>
+          <div className='search-stats-table-container'>
+              <div className='home-stats-table-titles'>
+                <p className='search-stats-table-titles-text' style={{ marginTop: '22px'}}>PTS</p>
+                <p className='search-stats-table-titles-text'>AST</p>
+                <p className='search-stats-table-titles-text'>REB</p>
+                <p className='search-stats-table-titles-text'>TOV</p>
+                <p className='search-stats-table-titles-text'>STL</p>
+                <p className='search-stats-table-titles-text'>BLK</p>
+              </div>
+
+              <div className='search-stats-table-values'>
+                <p className='search-stats-table-values-text' style={{ backgroundColor: colorPts(props.trad.pts), width: widthPts(props.trad.pts)}}>{props.trad.pts}</p>
+                <p className='search-stats-table-values-text' style={{ backgroundColor: colorAstReb(props.trad.ast), width: widthAstReb(props.trad.ast)}}>{props.trad.ast}</p>
+                <p className='search-stats-table-values-text' style={{ backgroundColor: colorAstReb(props.trad.reb), width: widthAstReb(props.trad.reb)}}>{props.trad.reb}</p>
+                <p className='search-stats-table-values-text' style={{ backgroundColor: colorTov(props.trad.tov), width: widthTov(props.trad.tov)}}>{props.trad.tov}</p>
+                <p className='search-stats-table-values-text' style={{ backgroundColor: colorStlBlk(props.trad.stl), width: widthStlBlk(props.trad.stl)}}>{props.trad.stl}</p>
+                <p className='search-stats-table-values-text' style={{ backgroundColor: colorStlBlk(props.trad.blk), width: widthStlBlk(props.trad.blk)}}>{props.trad.blk}</p>
+              </div>
+          </div>
+        </div>
     </>
   );
 }

@@ -191,6 +191,87 @@ Note: Beware of modifying this element as it can break the animations - you shou
   padding: 5px 20px;
 }
 
+.search-stats-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-text-header {
+  color: #144458;
+  font-family: "Poppins";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-text-title {
+  color: #144458;
+  font-family: "Poppins";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 5px;
+  margin-top: 80px;
+  text-align: center;
+}
+
+.search-stats-table-container {
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 20px;
+  display: flex; 
+  flex-direction: row;
+  height: auto;
+  justify-content: center;
+  margin-top: none;
+  padding: 20px;
+  width: 500px;
+}
+
+.home-stats-table-titles {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-stats-table-titles-text {
+  color: #5C7C8A;
+  font-family: "Poppins";
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  margin-right: 10px;
+  margin-top: 15px; 
+  margin-bottom: 15px;
+}
+
+.home-stats-table-values {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-stats-table-values-text {
+  background-color: #5C7C8A;
+  border-radius: 25px;
+  color: #fff;
+  font-family: "Poppins";
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding: 5px 0px;
+  margin-left: 10px;
+  margin-top: 19px; 
+  margin-bottom: 19px;
+  text-align: center;
+  width: 100px;
+}
+
 /* middle player card */
 
 .player-card {

@@ -3,6 +3,7 @@ from scripts.selenium.statmuse import statmuseSearch
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -149,9 +150,14 @@ def aisearch():
     print(search_query)
     if not search_query:
         return jsonify({"error": "No search query provided."}), 400
+
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-gpu")  # This line might be necessary for older versions of Chrome
+    chrome_options.add_argument("--no-sandbox") 
     
     service = Service(executable_path="./chromedriver")
-    driver = webdriver.Chrome(service=service)
+    driver = webdriver.Chrome(service=service, options=chrome_options)
     website = 'https://www.statmuse.com/nba'
 
     driver.get(website) #this gets the website
@@ -296,38 +302,44 @@ def top_players():
     ]
     return jsonify(top_players_data)
 
-@app.route('/low-posrank')
-def low_posrank_players():
+# @app.route('/low-posrank')
+# def low_posrank_players():
 
-    def get_low_rank(limit=5):
-        score_players = (
-            session.query(Player)
-            .filter(Player.fantasyteam == 1)
-            .order_by(Player.posrank.desc())
-            .limit(limit)
-            .all()
-        )
-        return score_players
+#     def get_low_pos_rank(limit=5):
+#         try:
+#             lowpos_players = (
+#                 session.query(Player)
+#                 .filter(Player.fantasyteam == 1)
+#                 .order_by(Player.posrank.desc())
+#                 .limit(limit)
+#                 .all()
+#             )
+#             return lowpos_players
+#         except Exception as e:
+#             print(f"An error occurred: {e}")
     
-    top_players = get_low_rank()
-    top_players_data = [
-        {"name": player.name, "posrank": player.posrank}
-        for player in top_players
-    ]
-    return jsonify(top_players_data)
+#     top_players = get_low_pos_rank()
+#     top_players_data = [
+#         {"name": player.name, "posrank": player.posrank}
+#         for player in top_players
+#     ]
+#     return jsonify(top_players_data)
 
 @app.route('/low-rank')
 def low_ovrrank_players():
 
     def get_low_rank(limit=5):
-        score_players = (
-            session.query(Player)
-            .filter(Player.fantasyteam == 1)
-            .order_by(Player.ovrrank.desc())
-            .limit(limit)
-            .all()
-        )
-        return score_players
+        try:
+            low_players = (
+                session.query(Player)
+                .filter(Player.fantasyteam == 1)
+                .order_by(Player.ovrrank.desc())
+                .limit(limit)
+                .all()
+            )
+            return low_players
+        except Exception as e:
+            print(f"An error occurred: {e}")
     
     top_players = get_low_rank()
     top_players_data = [

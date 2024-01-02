@@ -58,8 +58,8 @@ export default function Waiver() {
   // ];
 
   const [players, setPlayers] = useState<Playerteam[]>([]);
-  // const [lowRank, setLowRank] = useState<Playerteam[]>([]);
-  // const [lowPosRank, setLowPosRank] = useState<Playerteam[]>([]);
+  const [lowRank, setLowRank] = useState<Playerteam[]>([]);
+  const [lowPosRank, setLowPosRank] = useState<Playerteam[]>([]);
 
   useEffect(() => {
     fetch('/top-players')
@@ -73,29 +73,29 @@ export default function Waiver() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   fetch('/low-rank')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       const lowRankPlayers = data;
-  //       setLowRank(lowRankPlayers);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching players:', error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch('/low-rank')
+      .then(response => response.json())
+      .then(data => {
+        const lowRankPlayers = data;
+        setLowRank(lowRankPlayers);
+      })
+      .catch(error => {
+        console.error('Error fetching players:', error);
+      });
+  }, []);
 
-  // useEffect(() => {
-  //   fetch('/low-posrank')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       const lowPosRankPlayers = data;
-  //       setLowPosRank(lowPosRankPlayers);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching players:', error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch('/low-posrank')
+      .then(response => response.json())
+      .then(data => {
+        const lowPosRankPlayers = data;
+        setLowPosRank(lowPosRankPlayers);
+      })
+      .catch(error => {
+        console.error('Error fetching players:', error);
+      });
+  }, []);
 
   useEffect(() => {
     const element = document.querySelector('.bm-menu') as HTMLElement; // Replace with the actual selector for your element
@@ -126,9 +126,9 @@ export default function Waiver() {
             <div className="waiver-value-title">
               <p className="waiver-title-text">value</p>
             </div>
-              {players.map((player, index) => (
+              {/* {players.map((player, index) => (
               <PlayerValue key={index} name={player.name} value={player.value}/>
-              ))}
+              ))} */}
 
           </div>
 
@@ -139,15 +139,15 @@ export default function Waiver() {
             <div className="waiver-list-title">
               <p className="waiver-title-text">rank</p>
             </div>
-              {/* {lowRank.map((lowRank, index) => (
-              <PlayerScore key={index} name={lowRank.name} rank={lowRank.ovrrank}/>
+              {/* {lowRank.map((player, index) => (
+              <PlayerScore key={index} name={player.name} rank={player.ovrrank}/>
               ))} */}
 
             <div className="waiver-list-title">
               <p className="waiver-title-text">pos rank</p>
             </div>
-              {/* {lowPosRank.map((lowPosRank, index) => (
-              <PlayerScore key={index} name={lowPosRank.name} rank={lowPosRank.posrank}/>
+              {/* {lowPosRank.map((player, index) => (
+              <PlayerScore key={index} name={player.name} rank={player.posrank}/>
               ))} */}
           </div>
         </div>
