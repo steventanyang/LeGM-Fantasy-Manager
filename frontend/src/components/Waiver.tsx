@@ -1,24 +1,30 @@
 import '../static/Waiver.css';
 import { slide as Menu } from 'react-burger-menu'
 import { useState, useEffect } from 'react';
+import dayjs from 'dayjs';
 
-
-const PlayerScore = (props: 
+const PlayerRank = (props: 
   { name: string; rank: number }) => {
 
-  const scoreColor = (rank: number) => {
-    if (rank >= 50) {
-      return 'green';
-    } else if (rank >= 40) {
-      return 'orange';
+  const rankColor = (rank: number) => {
+    if (rank >= 100) {
+      return '#CB3434';
+    } else if (rank >= 85) {
+      return '#D66464';
+    } else if (rank >= 60) {
+      return '#E29853';
+    } else if (rank >= 45) {
+      return '#DAC828';
+    } else if (rank >= 30) {
+      return '#86B16C';
     } else {
-      return 'red';
+      return '#408416';
     }
   };
 
   return (
     <div className="waiver-player-status">
-      <div className="player-score" style={{ backgroundColor: scoreColor(props.rank) }}>{props.rank}</div>
+      <div className="player-score" style={{ backgroundColor: rankColor(props.rank) }}>{props.rank}</div>
       <div className="waiver-player-name">{props.name}</div>
     </div>
   );
@@ -29,18 +35,21 @@ const PlayerValue = (props:
   { name: string; value: number }) => {
 
   const valueColor = (value: number) => {
-    if (value >= 50) {
-      return 'green';
-    } else if (value >= 40) {
-      return 'orange';
+    if (value >= 45) {
+      return '#408416';
+    } else if (value >= 35) {
+      return '#86B16C';
+    } else if (value >= 25) {
+      return '#DAC828';
+    } else if (value >= 15) {
+      return '#E29853';
     } else {
-      return 'red';
+      return '#D66464';
     }
   };
 
   return (
     <div className="waiver-player-status-value">
-      {/* <div className="player-score" style={{ backgroundColor: valueColor(props.value) }}>{props.value}</div> */}
       <div className="waiver-player-name-value">{props.name}</div>
       <div className="player-value" style={{ backgroundColor: valueColor(props.value) }}>{props.value}</div>
     </div>
@@ -52,30 +61,7 @@ export default function Waiver() {
 
   const [players, setPlayers] = useState<Playerteam[]>([]);
   const [lowRank, setLowRank] = useState<Playerteam[]>([]);
-  
-  // useEffect(() => {
-  //   fetch('/top-players')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       const topPlayers = data;
-  //       setPlayers(topPlayers);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching players:', error);
-  //     });
-  // }, []);
-
-  // useEffect(() => {
-  //   fetch('/low-rank')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       const lowRankPlayers = data;
-  //       setLowRank(lowRankPlayers);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching players:', error);
-  //     });
-  // }, []);
+  const currentDate = dayjs().format('dddd MMM Do');
 
   useEffect(() => {
     fetch('/top-players')
@@ -113,7 +99,7 @@ export default function Waiver() {
         </Menu>
         <div className="waiver-top-container">
           <div className="title-text">Waiver Wire</div>
-          <p className="waiver-date">sat Dec 30th</p>
+          <p className="waiver-date">{currentDate}</p>
         </div>
 
         <div className="waiver-main-container">
@@ -137,7 +123,7 @@ export default function Waiver() {
               <p className="waiver-title-text">rank</p>
             </div>
               {lowRank.map((player, index) => (
-              <PlayerScore key={index} name={player.name} rank={player.ovrrank}/>
+              <PlayerRank key={index} name={player.name} rank={player.ovrrank}/>
               ))}
 
             </div>

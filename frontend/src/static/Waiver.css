@@ -204,14 +204,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
     font-weight: 700;
     margin-left: 25px;
     margin-top: none;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .waiver-player-status {
     align-items: center;
     display: flex;
-    margin-top: 12px;
-    margin-bottom: 12px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .player-score {
@@ -219,11 +219,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
     color: #FFF;
     display: flex;
     font-family: "Poppins";
-    font-size: 14px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 700;
     margin-left: 20px;
-    padding: 8px 10px;
+    padding: 8px 20px;
     text-align: center;
     width: 120px;
 }
@@ -233,15 +233,15 @@ Note: Beware of modifying this element as it can break the animations - you shou
     border-radius: 25px;
     color: #FFF;
     font-family: "Poppins";
-    font-size: 14px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
     margin-left: 80px;
-    padding: 8px;
+    padding: 8px 20px;
     position: absolute;
     text-align: center;
-    width: 350px;
+    width: 390px;
 }
 
 .waiver-value-title {
@@ -271,7 +271,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     font-weight: 700;
     justify-content: flex-end;
     margin-left: 340px;
-    padding: 8px 10px;
+    padding: 8px 20px;
     text-align: center;
     width: 120px;
 }
@@ -286,7 +286,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     font-weight: 700;
     line-height: normal;
     margin-right: 80px;
-    padding: 8px;
+    padding: 8px 20px;
     position: absolute;
     text-align: center;
     width: 390px;
