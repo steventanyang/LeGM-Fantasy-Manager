@@ -121,7 +121,7 @@ def main():
     today_points = fetch_player_fantasy_points(today_api)
     tomorrow_points = fetch_player_fantasy_points(tomorrow_api)
 
-    # update_player_values(uncommon_teams, today_points, tomorrow_points)
+    update_player_values(uncommon_teams, today_points, tomorrow_points)
     update_player_values(common_teams, today_points, tomorrow_points)
 
 if __name__ == "__main__":
