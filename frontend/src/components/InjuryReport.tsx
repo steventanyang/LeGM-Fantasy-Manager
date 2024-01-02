@@ -5,6 +5,65 @@ import { useState, useEffect } from 'react';
 const Player = (props: 
   { imageUrl: string; name: string; status: string; stats: Stats;}
   ) => {
+
+  const colorStatus = (value: string) => {
+    if (value == 'ACTIVE') {
+      return '#408416';
+    } else if (value == 'OUT') {
+      return '#CB3434';
+    } else {
+      return '#E29853';
+    }
+  };
+
+  const colorFppg = (value: number) => {
+    if (value >= 55) {
+      return '#408416';
+    } else if (value >= 45) {
+      return '#86B16C';
+    } else if (value >= 35) {
+      return '#86B16C';
+    } else if (value >= 25) {
+      return '#DAC828';
+    } else if (value >= 15) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+
+  const colorScore = (value: number) => {
+    if (value >= 15) {
+      return '#408416';
+    } else if (value >= 10) {
+      return '#86B16C';
+    } else if (value >= 5) {
+      return '#86B16C';
+    } else if (value >= 0) {
+      return '#DAC828';
+    } else if (value >= -5) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+
+  const colorRank = (value: number) => {
+    if (value >= 10) {
+      return '#408416';
+    } else if (value >= 25) {
+      return '#86B16C';
+    } else if (value >= 50) {
+      return '#86B16C';
+    } else if (value >= 75) {
+      return '#DAC828';
+    } else if (value >= 100) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+
   return (
     <div className="injury-player-card">
 
@@ -17,24 +76,26 @@ const Player = (props:
       </div>
 
       <h2 className="player-name">{props.name}</h2>
-      <div className="player-status">{props.status}</div>
+      <div className="player-status" style={{ backgroundColor: colorStatus(props.status)}}>
+        {props.status === 'DAY_TO_DAY' ? 'DAY TO DAY' : props.status}
+      </div>
 
       <div className="player-stats">
         <div className="stat">
           <span className="stat-label">FPPG</span>
-          <span className="stat-value-one">{props.stats.fppg}</span>
+          <span className="stat-value-one" style={{ backgroundColor: colorFppg(props.stats.fppg)}}>{props.stats.fppg}</span>
         </div>
         <div className="stat">
           <span className="stat-label">Score</span>
-          <span className="stat-value-one">{props.stats.legmScore}</span>
+          <span className="stat-value-one" style={{ backgroundColor: colorScore(props.stats.legmScore)}}>{props.stats.legmScore}</span>
         </div>
         <div className="stat">
-          <span className="stat-label">position</span>
-          <span className="stat-value-two">{props.stats.pos}</span>
+          <span className="stat-label">pos rank</span>
+          <span className="stat-value-two" >{props.stats.pos}</span>
         </div>
         <div className="stat">
           <span className="stat-label">ovr rank</span>
-          <span className="stat-value-two">{props.stats.ovrRank}</span>
+          <span className="stat-value-two" style={{ backgroundColor: colorRank(props.stats.ovrRank)}}>{props.stats.ovrRank}</span>
         </div>
       </div>
     </div>
@@ -95,6 +156,7 @@ const News = ({ newsItem, onNewsItemClick }: { newsItem: { Title: string; Conten
 export default function InjuryReport() {
 
   const [selectedPlayer, setSelectedPlayer] = useState<Playercard | null>(null);
+  const [player, setPlayer] = useState<Playerstat | null>(null);
   const handleNewsItemClick = (playerName: string) => {
     fetch('/stats')
       .then(response => response.json())
@@ -128,6 +190,22 @@ export default function InjuryReport() {
   }, [selectedPlayer]);
 
   useEffect(() => {
+    if (selectedPlayer) {
+      fetch('/stats')
+        .then(response => response.json())
+        .then(data => {
+          const stats = data.find((player: Playerstat) => player.Name === selectedPlayer.Name);
+          if (stats) {
+            setPlayer(stats);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching data: ', error);
+        });
+    }
+  }, [selectedPlayer]);
+
+  useEffect(() => {
     const element = document.querySelector('.bm-menu') as HTMLElement;
     if (element) {
       element.style.overflow = 'visible';
@@ -136,12 +214,17 @@ export default function InjuryReport() {
   
 
   const playerName = selectedPlayer?.Name as string;
-  const playerPosition = selectedPlayer?.Position as string;
+
+  const playerGames = player?.Games as number;
+  const totalFPPG = player?.FantasyPoints as number;
+  const fppg = parseFloat((totalFPPG / playerGames).toFixed(1));
 
   const nbaid = playerHead?.headshot_id as number;
   const headshot = nbaid ? `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${nbaid}.png` : '';
-
-
+  const status = playerHead?.status as string;
+  const legmscore = playerHead?.score as number;
+  const position = playerHead?.pos as string;
+  const ovrrank = playerHead?.ovrrank as number;
 
   return (
     <div>
@@ -162,12 +245,12 @@ export default function InjuryReport() {
           <Player
             imageUrl={headshot}
             name={playerName}
-            status="active"
+            status={status}
             stats={{
-              fppg: 42.3,
-              legmScore: 54.3,
-              pos: playerPosition,
-              ovrRank: 54  
+              fppg: fppg,
+              legmScore: legmscore,
+              pos: position,
+              ovrRank: ovrrank 
             }}
           />
         )}

@@ -445,7 +445,6 @@ const Advanced = (props: { adv:Adv }) => {
 
 export default function Search() {
 
-  let name = 'Paul George';
   const [searchTerm, setSearchTerm] = useState('Paul George');
   const [player, setPlayer] = useState<Playerstat | null>(null);
   const [isLoading, setIsLoading] = useState(true); 
@@ -465,7 +464,7 @@ export default function Search() {
           console.error('Error fetching data: ', error);
         });
     }
-  }, [searchTerm]); // Re-run this effect when searchTerm changes
+  }, [searchTerm]);
 
   const [playerHead, setPlayerHead] = useState<Playerhead | null>(null);
 
