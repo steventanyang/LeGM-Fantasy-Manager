@@ -9,16 +9,30 @@ const PlayerStatus = (props:
       onPlayerClick: (title: string) => void;
     }
   ) => {
-  const getStatusClass = () => {
-    switch (props.status) {
-      case 'ACTIVE':
-        return 'status-in';
-      case 'OUT':
-        return 'status-out';
-      case 'DAY_TO_DAY':
-        return 'status-dtd';
-      default:
-        return 'status-unknown';
+
+  const colorScore = (score: number) => {
+    if (score >= 12) {
+      return '#408416';
+    } else if (score >= 8) {
+      return '#86B16C';
+    } else if (score >= 3) {
+      return '#86B16C';
+    } else if (score >= 0) {
+      return '#DAC828';
+    } else if (score >= -3) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+
+  const colorStatus = (value: string) => {
+    if (value == 'ACTIVE') {
+      return '#408416';
+    } else if (value == 'OUT') {
+      return '#CB3434';
+    } else {
+      return '#E29853';
     }
   };
 
@@ -35,17 +49,16 @@ const PlayerStatus = (props:
 
   return (
     <div className="team-player-status">
-      <div className="team-player-score" style={{ backgroundColor: scoreColor(props.score) }}>{props.score}</div>
+      <div className="team-player-score" style={{ backgroundColor: colorScore(props.score) }}>{props.score}</div>
       <div className="team-player-name" onClick={() => props.onPlayerClick(props.name)} >
         {props.name}
       </div>
-      <div className={`team-player-status-indicator ${getStatusClass()}`}>{getDisplayStatus()}</div>
+      <div className={`team-player-status-indicator`} style={{ backgroundColor: colorStatus(props.status)}}>{getDisplayStatus()}</div>
     </div>
   );
 };
 
 const BigPlayerCard = ({ player, playerstats, imageUrl }: BigPlayerCardProps) => {
-
 
   const playerName = player?.Name as string;
   const playerGames = player?.Games as number;
@@ -64,6 +77,208 @@ const BigPlayerCard = ({ player, playerstats, imageUrl }: BigPlayerCardProps) =>
   const stl = parseFloat((totalSteals / playerGames).toFixed(1));
   const blk = parseFloat((totalBlocks / playerGames).toFixed(1));
   const fppg = parseFloat((totalFPPG / playerGames).toFixed(1));
+  
+  const colorStatus = (value: string | undefined) => {
+    if (value == 'ACTIVE') {
+      return '#408416';
+    } else if (value == 'OUT') {
+      return '#CB3434';
+    } else {
+      return '#E29853';
+    }
+  };
+  const colorFppg = (value: number | 0) => {
+    if (value === 0) {
+      return '#144458';
+    } else if (value >= 55) {
+      return '#408416';
+    } else if (value >= 45) {
+      return '#86B16C';
+    } else if (value >= 35) {
+      return '#86B16C';
+    } else if (value >= 25) {
+      return '#DAC828';
+    } else if (value >= 15) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+  const colorScore = (value: number | 0) => {
+    if (value === 0) {
+      return '#144458';
+    } else if (value >= 15) {
+      return '#408416';
+    } else if (value >= 10) {
+      return '#86B16C';
+    } else if (value >= 5) {
+      return '#86B16C';
+    } else if (value >= 0) {
+      return '#DAC828';
+    } else if (value >= -5) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+  const colorRank = (value: number | 0) => {
+    if (value === 0) {
+      return '#144458'; 
+    } else if (value >= 10) {
+      return '#408416';
+    } else if (value >= 25) {
+      return '#86B16C';
+    } else if (value >= 50) {
+      return '#86B16C';
+    } else if (value >= 75) {
+      return '#DAC828';
+    } else if (value >= 100) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+  const colorPosRank = (value: number | 0) => {
+    if (value === 0) {
+      return '#144458'; 
+    } else if (value >= 10) {
+      return '#408416';
+    } else if (value >= 25) {
+      return '#86B16C';
+    } else if (value >= 50) {
+      return '#86B16C';
+    } else if (value >= 75) {
+      return '#DAC828';
+    } else if (value >= 100) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+
+  const colorPts = (value: number) => {
+    if (value >= 30) {
+      return '#408416';
+    } else if (value >= 25) {
+      return '#86B16C';
+    } else if (value >= 20) {
+      return '#86B16C';
+    } else if (value >= 15) {
+      return '#DAC828';
+    } else if (value >= 10) {
+      return '#E29853';
+    } else {
+      return '#D66464';
+    }
+  };
+  const widthPts = (value: number) => {
+    if (value >= 30) {
+      return '350px';
+    } else if (value >= 25) {
+      return '300px';
+    } else if (value >= 20) {
+      return '250px';
+    } else if (value >= 15) {
+      return '200px';
+    } else if (value >= 10) {
+      return '150px';
+    } else {
+      return '100px';
+    }
+  };
+
+  const colorAstReb = (value: number) => {
+    if (value >= 10) {
+      return '#408416';
+    } else if (value >= 8) {
+      return '#86B16C';
+    } else if (value >= 6) {
+      return '#DAC828';
+    } else if (value >= 4) {
+      return '#E29853';
+    } else if (value >= 2) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
+  const widthAstReb = (value: number) => {
+    if (value >= 10) {
+      return '350px';
+    } else if (value >= 8) {
+      return '300px';
+    } else if (value >= 6) {
+      return '250px';
+    } else if (value >= 4) {
+      return '200px';
+    } else if (value >= 2) {
+      return '150px';
+    } else {
+      return '100px';
+    }
+  };
+
+  const colorTov = (value: number) => {
+    if (value <= 1.4) {
+      return '#408416';
+    } else if (value <= 2) {
+      return '#86B16C';
+    } else if (value <= 2.6) {
+      return '#DAC828';
+    } else if (value <= 3.2) {
+      return '#E29853';
+    } else if (value <= 3.8) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
+  const widthTov = (value: number) => {
+    if (value >= 3.8) {
+      return '350px';
+    } else if (value >= 3.2) {
+      return '300px';
+    } else if (value >= 2.6) {
+      return '250px';
+    } else if (value >= 2) {
+      return '200px';
+    } else if (value >= 1.4) {
+      return '150px';
+    } else {
+      return '100px';
+    }
+  };
+
+  const colorStlBlk = (value: number) => {
+    if (value >= 2.1) {
+      return '#408416';
+    } else if (value >= 1.6) {
+      return '#86B16C';
+    } else if (value >= 1.1) {
+      return '#DAC828';
+    } else if (value >= 0.6) {
+      return '#E29853';
+    } else if (value >= 0.2) {
+      return '#D66464';
+    } else {
+      return '#CB3434';
+    }
+  };
+  const widthStlBlk = (value: number) => {
+    if (value >= 2.6) {
+      return '350px';
+    } else if (value >= 2.1) {
+      return '300px';
+    } else if (value >= 1.6) {
+      return '250px';
+    } else if (value >= 1.1) {
+      return '200px';
+    } else if (value >= 0.6) {
+      return '150px';
+    } else {
+      return '100px';
+    }
+  };
 
   return (
     <>
@@ -79,7 +294,7 @@ const BigPlayerCard = ({ player, playerstats, imageUrl }: BigPlayerCardProps) =>
                 className="team-player-image"
               />
             </span>
-            <span className='team-player-card-status'>
+            <span className='team-player-card-status' style={{ backgroundColor: colorStatus(playerstats?.status)}}>
               {playerstats?.status === 'DAY_TO_DAY' ? 'DAY TO DAY' : playerstats?.status}
             </span>
           </span>
@@ -94,11 +309,11 @@ const BigPlayerCard = ({ player, playerstats, imageUrl }: BigPlayerCardProps) =>
             </div>
 
             <div className='home-stats-table-values'>
-              <p className='home-stats-table-values-text'>{fppg}</p>
+              <p className='home-stats-table-values-text' style={{ backgroundColor: colorFppg(fppg)}}>{fppg}</p>
               <p className='home-stats-table-values-text'>{playerstats?.pos}</p>
-              <p className='home-stats-table-values-text'>{playerstats?.score || '?'}</p>
-              <p className='home-stats-table-values-text'>{playerstats?.posrank || '?'}</p>
-              <p className='home-stats-table-values-text'>{playerstats?.ovrrank || '?'}</p>
+              <p className='home-stats-table-values-text' style={{ backgroundColor: colorScore(playerstats?.score || 0)}}>{playerstats?.score || '?'}</p>
+              <p className='home-stats-table-values-text' style={{ backgroundColor: colorRank(playerstats?.posrank || 0)}}>{playerstats?.posrank || '?'}</p>
+              <p className='home-stats-table-values-text' style={{ backgroundColor: colorPosRank(playerstats?.ovrrank || 0)}}>{playerstats?.ovrrank || '?'}</p>
             </div>
           </div>
 
@@ -118,12 +333,12 @@ const BigPlayerCard = ({ player, playerstats, imageUrl }: BigPlayerCardProps) =>
             </div>
 
             <div className='team-stats-table-values'>
-              <p className='team-stats-table-values-text'>{pts}</p>
-              <p className='team-stats-table-values-text'>{ast}</p>
-              <p className='team-stats-table-values-text'>{reb}</p>
-              <p className='team-stats-table-values-text'>{tov}</p>
-              <p className='team-stats-table-values-text'>{stl}</p>
-              <p className='team-stats-table-values-text'>{blk}</p>
+              <p className='team-stats-table-values-text' style={{ backgroundColor: colorPts(pts), width: widthPts(pts)}}>{pts}</p>
+              <p className='team-stats-table-values-text' style={{ backgroundColor: colorAstReb(ast), width: widthAstReb(ast)}}>{ast}</p>
+              <p className='team-stats-table-values-text' style={{ backgroundColor: colorAstReb(reb), width: widthAstReb(reb)}}>{reb}</p>
+              <p className='team-stats-table-values-text' style={{ backgroundColor: colorTov(tov), width: widthTov(tov)}}>{tov}</p>
+              <p className='team-stats-table-values-text' style={{ backgroundColor: colorStlBlk(stl), width: widthStlBlk(stl)}}>{stl}</p>
+              <p className='team-stats-table-values-text' style={{ backgroundColor: colorStlBlk(blk), width: widthStlBlk(blk)}}>{blk}</p>
             </div>
           </div>
         </div>
@@ -131,16 +346,6 @@ const BigPlayerCard = ({ player, playerstats, imageUrl }: BigPlayerCardProps) =>
     </>
   );
 }
-
-const scoreColor = (score: number) => {
-  if (score >= 50) {
-    return 'green';
-  } else if (score >= 40) {
-    return 'orange';
-  } else {
-    return 'red';
-  }
-};
 
 export default function Team() {
 

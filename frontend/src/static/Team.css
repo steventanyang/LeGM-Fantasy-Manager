@@ -192,6 +192,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
   position: absolute;
   text-align: center;
   width: 500px;
+  transition: background-color 0.3s ease;
+}
+
+.team-player-name:hover {
+  background-color: #282c34;
 }
 
 .team-player-status-indicator {
@@ -344,7 +349,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .home-stats-table-values-text {
-  background-color: black;
+  background-color: #144458;
   border-radius: 25px;
   color: #fff;
   font-family: "Poppins";
