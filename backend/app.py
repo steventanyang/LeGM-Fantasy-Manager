@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-from scripts.selenium.statmuse import statmuseSearch
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -11,7 +10,6 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import requests
 import json
-import time
 from datetime import datetime, timedelta
 # from espnapi.basketball import League
 
@@ -68,16 +66,16 @@ class Player(Base):
     first_name = Column(String(50))
     last_name = Column(String(50))
     headshot_id = Column(Integer)
-    name = Column(String(100))  # Assuming the full name can be up to 100 characters
+    name = Column(String(100)) 
     team = Column(String(50))
-    value = Column(Numeric(10, 2))  # Assuming 'value' should be a decimal with precision 10 and scale 2
-    rostered = Column(Integer)  # Assuming 'rostered' should be an integer (0 or 1)
-    score = Column(Numeric(10, 1))  # Assuming 'score' is a decimal with precision 10 and scale 1
+    value = Column(Numeric(10, 2))
+    rostered = Column(Integer)
+    score = Column(Numeric(10, 1))  
     fantasyteam = Column(Integer, ForeignKey('teams.team_id'))
-    status = Column(String(50))  # Assuming 'status' is a string
+    status = Column(String(50)) 
     posrank = Column(Integer)
     ovrrank = Column(Integer)
-    pos = Column(String(10))  # Assuming 'pos' is a string that holds position and won't be longer than 10 characters
+    pos = Column(String(10)) 
 
     def __repr__(self):
         return f"<Player(player_id={self.player_id}, first_name={self.first_name}, last_name={self.last_name}, \

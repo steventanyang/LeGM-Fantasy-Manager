@@ -27,7 +27,7 @@ const Userteam = (props:
   const weekNumber = currentDate.diff(startOfWeek1, 'week') + 1;
 
   const widthRecord = (value: number) => {
-    if (value/weekNumber == 1) {
+    if (value/weekNumber === 1) {
       return '100%';
     } else if (value/weekNumber >= 0.9) {
       return '90%';
@@ -250,7 +250,7 @@ const Matchups = (props:
   const weekNumber = currentDate.diff(startOfWeek1, 'week') + 1;
 
   const widthRecord = (value: number) => {
-    if (value/weekNumber == 1) {
+    if (value/weekNumber === 1) {
       return '100%';
     } else if (value/weekNumber >= 0.9) {
       return '90%';

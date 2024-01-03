@@ -7,9 +7,9 @@ const Player = (props:
   ) => {
 
   const colorStatus = (value: string) => {
-    if (value == 'ACTIVE') {
+    if (value === 'ACTIVE') {
       return '#408416';
-    } else if (value == 'OUT') {
+    } else if (value === 'OUT') {
       return '#CB3434';
     } else {
       return '#E29853';
