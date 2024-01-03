@@ -51,15 +51,15 @@ const Player = (props:
   };
 
   const colorRank = (value: number) => {
-    if (value >= 10) {
+    if (value <= 10) {
       return '#408416';
-    } else if (value >= 25) {
+    } else if (value <= 25) {
       return '#86B16C';
-    } else if (value >= 50) {
+    } else if (value <= 50) {
       return '#86B16C';
-    } else if (value >= 75) {
+    } else if (value <= 75) {
       return '#DAC828';
-    } else if (value >= 100) {
+    } else if (value <= 100) {
       return '#E29853';
     } else {
       return '#D66464';

@@ -124,15 +124,15 @@ const BigPlayerCard = ({ player, playerstats, imageUrl }: BigPlayerCardProps) =>
   const colorRank = (value: number | 0) => {
     if (value === 0) {
       return '#144458'; 
-    } else if (value >= 10) {
+    } else if (value <= 10) {
       return '#408416';
-    } else if (value >= 25) {
+    } else if (value <= 25) {
       return '#86B16C';
-    } else if (value >= 50) {
+    } else if (value <= 50) {
       return '#86B16C';
-    } else if (value >= 75) {
+    } else if (value <= 75) {
       return '#DAC828';
-    } else if (value >= 100) {
+    } else if (value <= 100) {
       return '#E29853';
     } else {
       return '#D66464';
@@ -141,15 +141,15 @@ const BigPlayerCard = ({ player, playerstats, imageUrl }: BigPlayerCardProps) =>
   const colorPosRank = (value: number | 0) => {
     if (value === 0) {
       return '#144458'; 
-    } else if (value >= 10) {
+    } else if (value <= 10) {
       return '#408416';
-    } else if (value >= 25) {
+    } else if (value <= 25) {
       return '#86B16C';
-    } else if (value >= 50) {
+    } else if (value <= 50) {
       return '#86B16C';
-    } else if (value >= 75) {
+    } else if (value <= 75) {
       return '#DAC828';
-    } else if (value >= 100) {
+    } else if (value <= 100) {
       return '#E29853';
     } else {
       return '#D66464';
@@ -310,7 +310,7 @@ const BigPlayerCard = ({ player, playerstats, imageUrl }: BigPlayerCardProps) =>
 
             <div className='home-stats-table-values'>
               <p className='home-stats-table-values-text' style={{ backgroundColor: colorFppg(fppg)}}>{fppg}</p>
-              <p className='home-stats-table-values-text'>{playerstats?.pos}</p>
+              <p className='home-stats-table-values-text'>{playerstats?.pos || 'N/A'}</p>
               <p className='home-stats-table-values-text' style={{ backgroundColor: colorScore(playerstats?.score || 0)}}>{playerstats?.score || '?'}</p>
               <p className='home-stats-table-values-text' style={{ backgroundColor: colorRank(playerstats?.posrank || 0)}}>{playerstats?.posrank || '?'}</p>
               <p className='home-stats-table-values-text' style={{ backgroundColor: colorPosRank(playerstats?.ovrrank || 0)}}>{playerstats?.ovrrank || '?'}</p>
