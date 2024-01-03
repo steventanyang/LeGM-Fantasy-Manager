@@ -146,6 +146,7 @@ def pullEspnLeague(website, email, password, teamName, team):
 
         if db_player:
             db_player.fantasyteam = db_team.team_id
+            db_player.rostered = True
             session.commit()
         else:
             print(f"Player {player_name} not found in database.")
@@ -155,7 +156,10 @@ def pullEspnLeague(website, email, password, teamName, team):
 
     return
 
-pullEspnLeague('https://www.espn.com/fantasy/', 'stevenwatchesyou88@gmail.com', 'blackhawks158819', 'Yang', 'milwaukee brICKS')
+username = 'stevenwatchesyou88@gmail.com'
+password = 'blackhawks158819'
+
+pullEspnLeague('https://www.espn.com/fantasy/', username, password, 'Yang', 'josh giggity-giggity')
 
 
 # idea we can expor this function. Once we have all the team names in the database we can iterate through them and run this once,
