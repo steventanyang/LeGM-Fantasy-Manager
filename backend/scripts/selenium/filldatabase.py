@@ -157,7 +157,7 @@ def pullEspnLeague(website, email, password, teamName, team):
     return
 
 username = 'stevenwatchesyou88@gmail.com'
-password = 'blackhawks158819'
+password = 'samplepassword'
 
 pullEspnLeague('https://www.espn.com/fantasy/', username, password, 'Yang', 'josh giggity-giggity')
 
