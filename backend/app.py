@@ -11,7 +11,6 @@ from selenium.webdriver.support import expected_conditions as EC
 import requests
 import json
 from datetime import datetime, timedelta
-# from espnapi.basketball import League
 
 from sqlalchemy import create_engine, Column, Integer, String, Boolean, ForeignKey, Numeric
 from sqlalchemy.orm import sessionmaker
@@ -328,53 +327,6 @@ def top_players():
     ]
 
     return jsonify({"top_value_players": top_value_players_data, "low_ovrrank_players": low_ovrrank_players_data})
-
-# @app.route('/low-posrank')
-# def low_posrank_players():
-
-#     def get_low_pos_rank(limit=5):
-#         try:
-#             lowpos_players = (
-#                 session.query(Player)
-#                 .filter(Player.fantasyteam == 1)
-#                 .order_by(Player.posrank.desc())
-#                 .limit(limit)
-#                 .all()
-#             )
-#             return lowpos_players
-#         except Exception as e:
-#             print(f"An error occurred: {e}")
-    
-#     top_players = get_low_pos_rank()
-#     top_players_data = [
-#         {"name": player.name, "posrank": player.posrank}
-#         for player in top_players
-#     ]
-#     return jsonify(top_players_data)
-
-# @app.route('/low-rank')
-# def low_ovrrank_players():
-
-#     def get_low_rank(limit=5):
-#         try:
-#             low_players = (
-#                 session.query(Player)
-#                 .filter(Player.fantasyteam == 1)
-#                 .order_by(Player.ovrrank.desc())
-#                 .limit(limit)
-#                 .all()
-#             )
-#             return low_players
-#         except Exception as e:
-#             print(f"An error occurred: {e}")
-    
-#     top_players = get_low_rank()
-#     top_players_data = [
-#         {"name": player.name, "ovrrank": player.ovrrank}
-#         for player in top_players
-#     ]
-#     return jsonify(top_players_data)
-
 
 @app.route('/headshots')
 def headshots():

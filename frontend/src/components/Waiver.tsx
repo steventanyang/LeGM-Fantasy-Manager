@@ -67,11 +67,10 @@ export default function Waiver() {
     fetch('/top-players')
       .then(response => response.json())
       .then(data => {
-        // Extract the top value players and low rank players from the response
+
         const topValuePlayers = data.top_value_players;
         const lowOvrrankPlayers = data.low_ovrrank_players;
-  
-        // Update the state with the fetched data
+
         setPlayers(topValuePlayers);
         setLowRank(lowOvrrankPlayers);
       })
@@ -81,7 +80,7 @@ export default function Waiver() {
   }, []);
 
   useEffect(() => {
-    const element = document.querySelector('.bm-menu') as HTMLElement; // Replace with the actual selector for your element
+    const element = document.querySelector('.bm-menu') as HTMLElement;
     if (element) {
       element.style.overflow = 'visible';
     }

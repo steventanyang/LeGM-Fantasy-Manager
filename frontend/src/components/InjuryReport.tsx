@@ -131,9 +131,9 @@ const News = ({ newsItem, onNewsItemClick }: { newsItem: { Title: string; Conten
   };
 
   const getPlayerNameFromContent = (content: string): string => {
-    const words = content.split(' '); // Split the content by spaces
+    const words = content.split(' '); 
     console.log(words.slice(0, 2).join(' '));
-    return words.slice(0, 2).join(' '); // Take the first two words and join them as the player's name
+    return words.slice(0, 2).join(' ');
   };
   
   return (

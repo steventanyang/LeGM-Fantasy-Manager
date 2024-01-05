@@ -37,7 +37,6 @@ def update_player_teams():
     else:
         print(f"Failed to fetch data: Status Code {response.status_code}")
 
-# Main function to run the update
 def main():
     update_player_teams()
 

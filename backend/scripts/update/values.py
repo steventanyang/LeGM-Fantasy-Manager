@@ -28,10 +28,8 @@ def teams_today():
     if response.status_code == 200:
         games_data = response.json()
 
-        # Lists to store home and away teams
         teams_today = []
 
-        # Iterate through each game object
         for game in games_data:
             home_team = game.get("HomeTeam")
             away_team = game.get("AwayTeam")
@@ -55,10 +53,8 @@ def teams_tmrw():
     if response.status_code == 200:
         games_data = response.json()
 
-        # Lists to store home and away teams
         teams_tmrw = []
-
-        # Iterate through each game object
+        
         for game in games_data:
             home_team = game.get("HomeTeam")
             away_team = game.get("AwayTeam")

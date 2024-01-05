@@ -25,8 +25,7 @@ export default function SearchAi() {
   };
 
   useEffect(() => {
-    // Select the element and override the style
-    const element = document.querySelector('.bm-menu') as HTMLElement; // Type assertion here
+    const element = document.querySelector('.bm-menu') as HTMLElement;
     if (element) {
       element.style.overflow = 'visible';
     }

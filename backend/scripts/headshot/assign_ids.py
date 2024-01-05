@@ -26,7 +26,6 @@ def assign_ids_to_players(players_file, id_file, output_file):
             else:
                 file.write(f'{player}, ID Not Found\n')
 
-# Replace with your actual file paths
 players_file = 'players.txt'
 id_file = 'id.txt'
 output_file = 'playersdone.txt'

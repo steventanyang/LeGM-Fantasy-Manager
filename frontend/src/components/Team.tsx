@@ -397,7 +397,7 @@ export default function Team() {
   }, [selectedPlayer]);
 
   useEffect(() => {
-    const element = document.querySelector('.bm-menu') as HTMLElement; // Replace with the actual selector for your element
+    const element = document.querySelector('.bm-menu') as HTMLElement;
     if (element) {
       element.style.overflow = 'visible';
     }

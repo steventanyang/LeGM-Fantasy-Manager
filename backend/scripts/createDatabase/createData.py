@@ -28,7 +28,7 @@ def read_names_from_file(file_path):
 names = read_names_from_file('players.txt')
 
 for name in names:
-    first, last = name.split(' ')  # Splitting the name into first and last names
+    first, last = name.split(' ') 
     player = Player(first_name=first, last_name=last)
     session.add(player)
 

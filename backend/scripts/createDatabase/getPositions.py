@@ -38,7 +38,7 @@ with open(path, 'r') as file:
 
             db_player = session.query(Player).filter_by(name=fullname).first()
             if db_player:
-                db_player.position = nposition  # Corrected from 'position' to 'nposition'
+                db_player.position = nposition
                 session.commit()
             else:
                 print(f"Player {fullname} not found in the database.")

@@ -22,6 +22,7 @@ class Player(Base):
         return f"<Player(id={self.id}, first_name={self.first_name}, last_name={self.last_name})>"
     
 # Function to update the player's headshot ID
+    
 def update_player_headshot(first_name, last_name, headshot_id):
     player = session.query(Player).filter_by(first_name=first_name, last_name=last_name).first()
     if player:
@@ -31,6 +32,7 @@ def update_player_headshot(first_name, last_name, headshot_id):
         print(f"Player not found: {first_name} {last_name}")
 
 # Read and parse the text file
+        
 with open('playersdone.txt', 'r') as file:
     for line in file:
         name, headshot = line.strip().split(', ')
@@ -38,5 +40,4 @@ with open('playersdone.txt', 'r') as file:
         headshot_id = None if headshot == 'ID Not Found' else int(headshot)
         update_player_headshot(first_name, last_name, headshot_id)
 
-# Close the session
 session.close()
