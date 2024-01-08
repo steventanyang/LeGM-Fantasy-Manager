@@ -9,7 +9,7 @@ dayjs.extend(advancedFormat);
 const Userteam = (props: 
   { 
     imageUrl: string; 
-    name: string; 
+    name: string | undefined; 
     wins: number; 
     losses: number;
     rank: number;
@@ -467,7 +467,7 @@ export default function Home() {
       });
   }, [userteam?.nextmatchup]);
 
-  const teamName = userteam?.name as string;
+  const teamName = userteam?.name;
   const teamWins = userteam?.wins as number;
   const teamLosses = userteam?.losses as number;
   const teamRank = userteam?.projectedrank as number;
